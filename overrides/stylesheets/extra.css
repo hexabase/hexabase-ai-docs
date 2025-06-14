@@ -1,13 +1,13 @@
 /* Hexabase.AI Brand Colors */
 :root {
-  --md-primary-fg-color: #5B47D6;
-  --md-primary-fg-color--light: #7B6AE6;
-  --md-primary-fg-color--dark: #4835C4;
+  --md-primary-fg-color: #00C6AB;
+  --md-primary-fg-color--light: #00E6CB;
+  --md-primary-fg-color--dark: #00A68B;
   --md-primary-bg-color: #FFFFFF;
   --md-primary-bg-color--light: #FFFFFF;
   
-  --md-accent-fg-color: #FF6B6B;
-  --md-accent-fg-color--transparent: rgba(255, 107, 107, 0.1);
+  --md-accent-fg-color: #FF346B;
+  --md-accent-fg-color--transparent: rgba(255, 52, 107, 0.1);
   --md-accent-bg-color: #FFFFFF;
   --md-accent-bg-color--light: #FFFFFF;
   
@@ -20,14 +20,55 @@
 
 /* Dark mode adjustments */
 [data-md-color-scheme="slate"] {
-  --md-primary-fg-color: #7B6AE6;
+  --md-primary-fg-color: #00E6CB;
   --md-primary-bg-color: #1E1E2E;
-  --md-accent-fg-color: #FF8585;
+  --md-accent-fg-color: #FF548B;
 }
 
-/* Custom header styling */
+/* Custom header styling - Black background */
 .md-header {
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  background-color: #000000 !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+/* Ensure header text is visible on black background */
+.md-header__title,
+.md-header__topic,
+.md-header__topic:first-child,
+.md-header-nav__title,
+.md-header-nav__button,
+.md-header__button {
+  color: #FFFFFF !important;
+}
+
+/* Header navigation tabs */
+.md-tabs {
+  background-color: #000000 !important;
+}
+
+.md-tabs__link {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.md-tabs__link--active,
+.md-tabs__link:hover,
+.md-tabs__link:focus {
+  color: #FFFFFF !important;
+}
+
+/* Search styling for black header */
+.md-search__input {
+  background-color: rgba(255, 255, 255, 0.12) !important;
+  color: #FFFFFF !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+.md-search__input::placeholder {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+
+.md-search__input:hover {
+  background-color: rgba(255, 255, 255, 0.18) !important;
 }
 
 /* Card hover effects */

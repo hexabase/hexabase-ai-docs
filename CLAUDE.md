@@ -7,7 +7,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 This is the user-facing documentation repository for Hexabase.AI (HKS - Multi-tenant Kubernetes as a Service with AIOps). The documentation is built using Material for MkDocs and targets four main audiences:
 
 1. **HKS Admin users** - Organization and Workspace administration
-2. **HKS users** - Project deployment and resource management  
+2. **HKS users** - Project deployment and resource management
 3. **Contributors** - Development environment setup and contribution guidelines
 4. **VM deployers** - Infrastructure setup with Proxmox
 
@@ -61,16 +61,19 @@ docs/
 ## Brand Guidelines
 
 Use the following color palette for consistency:
-- Primary: `#5B47D6`
-- Secondary: `#FF6B6B`
-- Success: `#4CAF50`
-- Warning: `#FF9800`
-- Error: `#F44336`
-- Info: `#2196F3`
+
+- Primary Background: #000000
+- Primary: #00C6AB
+- Secondary: #FF346B
+- Success: #4CAF50
+- Warning: #FF9800
+- Error: #F44336
+- Info: #2196F3
 
 ## Related Resources
 
 The main Hexabase.AI repository is located at `/Users/hi/src/hexabase-ai/` and contains:
+
 - Comprehensive technical documentation in `/docs/`
 - API implementation (Go)
 - UI implementation (Next.js)
