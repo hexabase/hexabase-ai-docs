@@ -1,0 +1,103 @@
+/* Hexabase.AI Brand Colors */
+:root {
+  --md-primary-fg-color: #5B47D6;
+  --md-primary-fg-color--light: #7B6AE6;
+  --md-primary-fg-color--dark: #4835C4;
+  --md-primary-bg-color: #FFFFFF;
+  --md-primary-bg-color--light: #FFFFFF;
+  
+  --md-accent-fg-color: #FF6B6B;
+  --md-accent-fg-color--transparent: rgba(255, 107, 107, 0.1);
+  --md-accent-bg-color: #FFFFFF;
+  --md-accent-bg-color--light: #FFFFFF;
+  
+  /* Additional brand colors */
+  --hxb-success: #4CAF50;
+  --hxb-warning: #FF9800;
+  --hxb-error: #F44336;
+  --hxb-info: #2196F3;
+}
+
+/* Dark mode adjustments */
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color: #7B6AE6;
+  --md-primary-bg-color: #1E1E2E;
+  --md-accent-fg-color: #FF8585;
+}
+
+/* Custom header styling */
+.md-header {
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Card hover effects */
+.md-typeset .grid.cards > li:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transition: all 0.3s ease;
+}
+
+/* Code block enhancements */
+.md-typeset pre > code {
+  font-size: 0.85rem;
+}
+
+/* Admonition customization */
+.md-typeset .admonition.success,
+.md-typeset details.success {
+  border-color: var(--hxb-success);
+}
+
+.md-typeset .success > .admonition-title,
+.md-typeset .success > summary {
+  background-color: rgba(76, 175, 80, 0.1);
+  border-color: var(--hxb-success);
+}
+
+.md-typeset .success > .admonition-title::before,
+.md-typeset .success > summary::before {
+  background-color: var(--hxb-success);
+}
+
+/* Navigation enhancement */
+.md-nav__item--active > .md-nav__link {
+  font-weight: 600;
+}
+
+/* Table styling */
+.md-typeset table:not([class]) {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.md-typeset table:not([class]) th {
+  background-color: var(--md-primary-fg-color--light);
+  color: white;
+  font-weight: 600;
+}
+
+/* Footer styling */
+.md-footer {
+  margin-top: 4rem;
+}
+
+/* Search styling */
+.md-search__form {
+  border-radius: 4px;
+}
+
+/* Tab styling */
+.md-typeset .tabbed-labels > label {
+  font-weight: 500;
+}
+
+.md-typeset .tabbed-labels > label:hover {
+  color: var(--md-accent-fg-color);
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 76.1875em) {
+  .md-nav--primary .md-nav__title {
+    background-color: var(--md-primary-fg-color);
+  }
+}
