@@ -2,11 +2,11 @@
 
 Discover how organizations are leveraging Hexabase.AI to transform their Kubernetes operations and accelerate their cloud-native journey.
 
-## Overview
+## 1. Overview
 
 Hexabase.AI serves diverse use cases across industries, from startups deploying their first microservices to enterprises managing complex multi-cluster environments. This section explores common scenarios and best practices for getting the most value from the platform.
 
-## Common Use Cases
+## 2. Key Benefits
 
 <div class="grid cards" markdown>
 
@@ -44,70 +44,7 @@ Hexabase.AI serves diverse use cases across industries, from startups deploying 
 
 </div>
 
-## Industry Solutions
-
-### Software Development Teams
-
-- **Challenge**: Complex Kubernetes setup and maintenance
-- **Solution**: Self-service deployment with built-in best practices
-- **Benefits**: 80% reduction in deployment time, focus on code not infrastructure
-
-### Enterprise IT
-
-- **Challenge**: Managing multiple teams and environments securely
-- **Solution**: Multi-tenant architecture with RBAC and resource quotas
-- **Benefits**: Centralized governance with team autonomy
-
-### SaaS Providers
-
-- **Challenge**: Scaling infrastructure with customer growth
-- **Solution**: AI-powered autoscaling and resource optimization
-- **Benefits**: 40% cost reduction while improving performance
-
-### Educational Institutions
-
-- **Challenge**: Providing isolated environments for students
-- **Solution**: Workspace-based isolation with resource limits
-- **Benefits**: Secure, cost-effective learning environments
-
-## Success Patterns
-
-### 1. Start Small, Scale Smart
-
-Begin with a pilot project in a single workspace, then expand based on learnings.
-
-### 2. Leverage AI Insights
-
-Use AIOps recommendations to optimize resource allocation and reduce costs.
-
-### 3. Automate Everything
-
-Integrate with CI/CD pipelines using our comprehensive APIs.
-
-### 4. Monitor and Iterate
-
-Use built-in observability to continuously improve your deployments.
-
-## Customer Stories
-
-> "Hexabase.AI reduced our Kubernetes learning curve from months to days. Our developers can now deploy applications without deep Kubernetes knowledge."
->
-> — _Tech Startup CTO_
-
-> "The multi-tenant capabilities allow us to give each department their own workspace while maintaining central control and visibility."
->
-> — _Enterprise IT Director_
-
-## Getting Started
-
-Ready to explore how Hexabase.AI can transform your Kubernetes journey?
-
-1. **Identify Your Use Case**: Match your needs with the scenarios above
-2. **Start a Trial**: Experience the platform with a free trial
-3. **Follow Best Practices**: Use our guides for optimal results
-4. **Get Support**: Our team is here to help you succeed
-
-## The Hexabase.AI Journey: Plans for Every Scale
+## 3. Plans to Go
 
 Hexabase.AI is designed to grow with you. Whether you're an individual developer starting a new project or a large enterprise with complex security and governance needs, there's a plan that fits your use case. Follow the journey to see how you can start small and scale up seamlessly.
 
@@ -146,6 +83,59 @@ Hexabase.AI is designed to grow with you. Whether you're an individual developer
   [:octicons-arrow-right-24: See the Enterprise Scenario](enterprise-plan.md)
 
 </div>
+
+## 4. Who are we serving?
+
+### Software Development Teams
+
+- **Challenge**: Complex Kubernetes setup and maintenance
+- **Solution**: Self-service deployment with built-in best practices
+- **Benefits**: 80% reduction in deployment time, focus on code not infrastructure
+
+### Enterprise IT
+
+- **Challenge**: Managing multiple teams and environments securely
+- **Solution**: Multi-tenant architecture with RBAC and resource quotas
+- **Benefits**: Centralized governance with team autonomy
+
+### SaaS Providers
+
+- **Challenge**: Scaling infrastructure with customer growth
+- **Solution**: AI-powered autoscaling and resource optimization
+- **Benefits**: 40% cost reduction while improving performance
+
+### Educational Institutions
+
+- **Challenge**: Providing isolated environments for students
+- **Solution**: Workspace-based isolation with resource limits
+- **Benefits**: Secure, cost-effective learning environments
+
+## 5. Best Practice
+
+### 1. Start Small, Scale Smart
+
+Begin with a pilot project in a single workspace, then expand based on learnings.
+
+### 2. Leverage AI Insights
+
+Use AIOps recommendations to optimize resource allocation and reduce costs.
+
+### 3. Automate Everything
+
+Integrate with CI/CD pipelines using our comprehensive APIs.
+
+### 4. Monitor and Iterate
+
+Use built-in observability to continuously improve your deployments.
+
+## 6. Are you ready?
+
+Ready to explore how Hexabase.AI can transform your Kubernetes journey?
+
+1. **Identify Your Use Case**: Match your needs with the scenarios above
+2. **Start a Trial**: Experience the platform with a free trial
+3. **Follow Best Practices**: Use our guides for optimal results
+4. **Get Support**: Our team is here to help you succeed
 
 ## Related Resources
 
