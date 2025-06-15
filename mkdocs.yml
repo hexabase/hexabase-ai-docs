@@ -1,4 +1,4 @@
-site_name: Hexabase.AI Documentation
+site_name: Hexabase.AI
 site_description: Multi-tenant Kubernetes as a Service with AIOps - User Documentation
 site_url: https://docs.hexabase.ai
 site_author: Hexabase.AI Team
@@ -67,6 +67,7 @@ plugins:
   - git-revision-date-localized:
       enable_creation_date: true
       fallback_to_build_date: true
+      enable_git_follow: false
 
 markdown_extensions:
   - abbr
@@ -177,6 +178,7 @@ nav:
       - Function Development: functions/development.md
       - Deployment Guide: functions/deployment.md
       - AI Agent Functions: functions/ai-agent-functions.md
+      - Runtime Environment: functions/runtime.md
   - Observability:
       - observability/index.md
       - Monitoring Setup: observability/monitoring-setup.md
@@ -217,3 +219,35 @@ nav:
       - Python SDK: sdk/python.md
       - Go SDK: sdk/go.md
       - CLI Tool: sdk/cli.md
+  - User Guides:
+      - CronJobs:
+          - Examples: users/cronjobs/examples.md
+          - Integration Patterns: users/cronjobs/integration-patterns.md
+          - UI Configuration: users/cronjobs/ui-configuration.md
+      - Functions:
+          - AI Agent Functions: users/functions/ai-agent-functions.md
+          - Deployment: users/functions/deployment.md
+          - Development: users/functions/development.md
+          - Runtime: users/functions/runtime.md
+      - Nodes:
+          - Configuration: users/nodes/configuration.md
+          - Health Monitoring: users/nodes/health-monitoring.md
+          - Scaling: users/nodes/scaling.md
+          - VM Management: users/nodes/vm-management.md
+      - Observability:
+          - ClickHouse Analytics: users/observability/clickhouse-analytics.md
+          - Dashboards & Alerts: users/observability/dashboards-alerts.md
+          - Logging: users/observability/logging.md
+          - Tracing: users/observability/tracing.md
+      - RBAC:
+          - Best Practices: users/rbac/best-practices.md
+          - Overview: users/rbac/overview.md
+          - Permission Model: users/rbac/permission-model.md
+          - Role Mappings: users/rbac/role-mappings.md
+      - SDK:
+          - Node.js SDK: users/sdk/nodejs.md
+          - Python SDK: users/sdk/python.md
+  - 日本語:
+      - ホーム: ja/index.md
+      - コンセプト:
+          - 概要: ja/concept/index.md

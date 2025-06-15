@@ -1,0 +1,166 @@
+{% extends "base.html" %}
+
+{% block styles %}
+{{ super() }}
+<style>
+  /* FORCE TOP NAVIGATION TAB COLORS - HIGHEST SPECIFICITY */
+  /* Target all possible tab link elements */
+  .md-header .md-tabs__link,
+  .md-header .md-tabs a,
+  .md-tabs__item a,
+  .md-tabs__list a,
+  .md-tabs .md-tabs__link,
+  .md-header-nav .md-tabs__link,
+  header .md-tabs__link,
+  header .md-tabs a {
+    color: #FFFFFF !important;
+    opacity: 0.8 !important;
+    transition: all 0.2s ease !important;
+  }
+  
+  /* Hover state - green */
+  .md-header .md-tabs__link:hover,
+  .md-header .md-tabs a:hover,
+  .md-tabs__item a:hover,
+  .md-tabs__list a:hover,
+  .md-tabs .md-tabs__link:hover,
+  .md-header-nav .md-tabs__link:hover,
+  header .md-tabs__link:hover,
+  header .md-tabs a:hover,
+  .md-tabs__link:focus {
+    color: #00C6AB !important;
+    opacity: 1 !important;
+    background-color: transparent !important;
+  }
+  
+  /* Active/selected state - green */
+  .md-header .md-tabs__link--active,
+  .md-header .md-tabs__item--active a,
+  .md-tabs__item--active .md-tabs__link,
+  .md-tabs__link--active,
+  .md-tabs__link[data-md-state="active"],
+  header .md-tabs__link--active,
+  header .md-tabs__item--active a {
+    color: #00C6AB !important;
+    opacity: 1 !important;
+    font-weight: 600 !important;
+    background-color: transparent !important;
+  }
+  
+  /* Remove any accent color overrides */
+  .md-tabs__link {
+    --md-accent-fg-color: transparent !important;
+    --md-accent-fg-color--transparent: transparent !important;
+  }
+  
+  /* Active indicator line */
+  .md-tabs__link::after {
+    background-color: transparent !important;
+  }
+  
+  .md-tabs__link--active::after,
+  .md-tabs__item--active .md-tabs__link::after {
+    background-color: #00C6AB !important;
+  }
+  
+  /* LEFT SIDEBAR NAVIGATION */
+  /* Category headers (UseCases, Scenarios, etc) - Bold Black */
+  .md-nav--primary .md-nav__item--nested > .md-nav__link,
+  .md-nav--primary .md-nav__item--section > .md-nav__link,
+  .md-nav__item[data-md-level="1"] > .md-nav__link,
+  .md-nav__title[data-md-level="1"],
+  /* Target the specific structure shown in screenshot */
+  .md-nav__item--nested > label,
+  .md-nav__item--section > label {
+    color: #000000 !important;
+    font-weight: 700 !important;
+    opacity: 1 !important;
+  }
+  
+  /* All regular navigation links - default state */
+  .md-nav--primary .md-nav__link:not(.md-nav__link--active) {
+    color: rgba(0, 0, 0, 0.87) !important;
+    font-weight: 400 !important;
+  }
+  
+  /* Only the exact active/selected page - Pink */
+  .md-nav--primary .md-nav__link--active:not(.md-nav__item--nested > .md-nav__link) {
+    color: #FF346B !important;
+    font-weight: 600 !important;
+  }
+  
+  /* Hover state for non-category items - Pink with transparency */
+  .md-nav--primary .md-nav__link:hover:not(.md-nav__item--nested > .md-nav__link):not(.md-nav__link--active) {
+    color: #FF346B !important;
+    opacity: 0.8 !important;
+  }
+  
+  /* Ensure parent categories stay black even when child is active */
+  .md-nav__item--active.md-nav__item--nested > .md-nav__link,
+  .md-nav__item--active.md-nav__item--section > .md-nav__link,
+  .md-nav__item--active > label {
+    color: #000000 !important;
+    font-weight: 700 !important;
+  }
+  
+  /* Mobile navigation adjustments */
+  @media screen and (max-width: 76.1875em) {
+    .md-nav--primary .md-nav__link {
+      color: rgba(0, 0, 0, 0.87) !important;
+    }
+    
+    .md-nav--primary .md-nav__link--active {
+      color: #FF346B !important;
+    }
+  }
+  
+  /* DARK MODE STYLES - MAXIMUM SPECIFICITY */
+  /* Force all navigation links to be visible in dark mode */
+  body[data-md-color-scheme="slate"] .md-nav__link,
+  html[data-md-color-scheme="slate"] .md-nav__link,
+  [data-md-color-scheme="slate"] .md-sidebar .md-nav__link,
+  [data-md-color-scheme="slate"] .md-sidebar__scrollwrap .md-nav__link,
+  [data-md-color-scheme="slate"] .md-nav--primary .md-nav__link {
+    color: #BDBDBD !important;
+  }
+  
+  /* Category headers - Bold light gray */
+  body[data-md-color-scheme="slate"] .md-nav__item--nested > .md-nav__link,
+  body[data-md-color-scheme="slate"] .md-nav__item--section > .md-nav__link,
+  [data-md-color-scheme="slate"] .md-sidebar .md-nav__item--nested > .md-nav__link,
+  [data-md-color-scheme="slate"] .md-nav--primary .md-nav__item--nested > .md-nav__link {
+    color: #E0E0E0 !important;
+    font-weight: 700 !important;
+  }
+  
+  /* Active/selected page - Light Pink */
+  body[data-md-color-scheme="slate"] .md-nav__link--active,
+  [data-md-color-scheme="slate"] .md-sidebar .md-nav__link--active,
+  [data-md-color-scheme="slate"] .md-nav--primary .md-nav__link--active {
+    color: #FF548B !important;
+    font-weight: 600 !important;
+  }
+  
+  /* Hover state - Light Pink */
+  body[data-md-color-scheme="slate"] .md-nav__link:hover,
+  [data-md-color-scheme="slate"] .md-sidebar .md-nav__link:hover {
+    color: #FF548B !important;
+    opacity: 0.8 !important;
+  }
+  
+  /* Keep categories light gray even on hover */
+  body[data-md-color-scheme="slate"] .md-nav__item--nested > .md-nav__link:hover,
+  [data-md-color-scheme="slate"] .md-nav__item--nested > .md-nav__link:hover {
+    color: #E0E0E0 !important;
+    opacity: 1 !important;
+  }
+  
+  /* Mobile dark mode */
+  @media screen and (max-width: 76.1875em) {
+    body[data-md-color-scheme="slate"] .md-nav__link,
+    [data-md-color-scheme="slate"] .md-nav__link {
+      color: #BDBDBD !important;
+    }
+  }
+</style>
+{% endblock %}

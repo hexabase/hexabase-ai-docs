@@ -1,4 +1,4 @@
-/* Hexabase.AI Brand Colors */
+/* Hexabase.AI Brand Colors - Updated 2024 */
 :root {
   --md-primary-fg-color: #00C6AB;
   --md-primary-fg-color--light: #00E6CB;
@@ -46,14 +46,49 @@
   background-color: #000000 !important;
 }
 
-.md-tabs__link {
-  color: rgba(255, 255, 255, 0.7) !important;
+/* FORCE TOP NAVIGATION TAB COLORS */
+/* Default state - white */
+.md-tabs a,
+.md-tabs .md-tabs__link,
+.md-tabs__item a,
+.md-tabs__list a {
+  color: #FFFFFF !important;
+  opacity: 0.8 !important;
+  transition: all 0.2s ease !important;
 }
 
-.md-tabs__link--active,
-.md-tabs__link:hover,
-.md-tabs__link:focus {
-  color: #FFFFFF !important;
+/* Hover state - Hexabase green */
+.md-tabs a:hover,
+.md-tabs .md-tabs__link:hover,
+.md-tabs__item a:hover,
+.md-tabs__list a:hover,
+.md-tabs a:focus,
+.md-tabs .md-tabs__link:focus {
+  color: #00C6AB !important;
+  opacity: 1 !important;
+}
+
+/* Active/selected state - Hexabase green */
+.md-tabs a[class*="active"],
+.md-tabs .md-tabs__link--active,
+.md-tabs__item--active a,
+.md-tabs__item--active .md-tabs__link,
+[data-md-state="active"] .md-tabs__link {
+  color: #00C6AB !important;
+  opacity: 1 !important;
+  font-weight: 600 !important;
+}
+
+/* Active tab indicator line */
+.md-tabs__link::after {
+  background-color: transparent !important;
+  height: 2px;
+}
+
+.md-tabs__link--active::after,
+.md-tabs__item--active .md-tabs__link::after,
+[data-md-state="active"] .md-tabs__link::after {
+  background-color: #00C6AB !important;
 }
 
 /* Search styling for black header */
@@ -69,6 +104,68 @@
 
 .md-search__input:hover {
   background-color: rgba(255, 255, 255, 0.18) !important;
+}
+
+/* Navigation enhancement */
+/* Sidebar navigation links - default */
+.md-nav__link {
+  color: rgba(0, 0, 0, 0.87);
+  transition: color 0.2s ease;
+}
+
+/* Category labels (like UseCases, Scenarios) - Bold Black */
+.md-nav__item--nested > .md-nav__link,
+.md-nav__item--section > .md-nav__link,
+.md-nav--primary .md-nav__title,
+.md-nav__link[data-md-state="blur"] {
+  color: #000000 !important;
+  font-weight: 700 !important;
+}
+
+/* Only exact active/selected item - Hexabase pink */
+.md-nav__link--active:not(.md-nav__item--nested > .md-nav__link),
+.md-nav__item--active > .md-nav__link:not(.md-nav__item--nested > .md-nav__link) {
+  color: #FF346B !important;
+  font-weight: 600;
+}
+
+/* Hover state - only for non-category items */
+.md-nav__link:hover:not(.md-nav__item--nested > .md-nav__link),
+.md-nav__link:focus:not(.md-nav__item--nested > .md-nav__link) {
+  color: #FF346B !important;
+  opacity: 0.8;
+}
+
+/* Remove pink from parent items when child is selected */
+.md-nav__item--active.md-nav__item--nested > .md-nav__link {
+  color: #000000 !important;
+  font-weight: 700 !important;
+}
+
+/* Dark mode sidebar navigation */
+[data-md-color-scheme="slate"] .md-nav__link {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Dark mode category labels - Bold White */
+[data-md-color-scheme="slate"] .md-nav__item--nested > .md-nav__link,
+[data-md-color-scheme="slate"] .md-nav__item--section > .md-nav__link,
+[data-md-color-scheme="slate"] .md-nav--primary .md-nav__title {
+  color: #FFFFFF !important;
+  font-weight: 700 !important;
+}
+
+/* Dark mode only exact active item - Light pink */
+[data-md-color-scheme="slate"] .md-nav__link--active:not(.md-nav__item--nested > .md-nav__link),
+[data-md-color-scheme="slate"] .md-nav__item--active > .md-nav__link:not(.md-nav__item--nested > .md-nav__link) {
+  color: #FF548B !important;
+}
+
+/* Dark mode hover */
+[data-md-color-scheme="slate"] .md-nav__link:hover:not(.md-nav__item--nested > .md-nav__link),
+[data-md-color-scheme="slate"] .md-nav__link:focus:not(.md-nav__item--nested > .md-nav__link) {
+  color: #FF548B !important;
+  opacity: 0.8;
 }
 
 /* Card hover effects */
@@ -98,11 +195,6 @@
 .md-typeset .success > .admonition-title::before,
 .md-typeset .success > summary::before {
   background-color: var(--hxb-success);
-}
-
-/* Navigation enhancement */
-.md-nav__item--active > .md-nav__link {
-  font-weight: 600;
 }
 
 /* Table styling */
@@ -141,4 +233,38 @@
   .md-nav--primary .md-nav__title {
     background-color: var(--md-primary-fg-color);
   }
+}
+
+/* OVERRIDE ANY THEME DEFAULTS - HIGHEST PRIORITY */
+/* Top navigation specific overrides */
+body .md-header .md-tabs a,
+body .md-header .md-tabs__link,
+body header .md-tabs a,
+body header .md-tabs__link,
+.md-header-nav__parent .md-tabs__link {
+  color: #FFFFFF !important;
+  opacity: 0.8 !important;
+}
+
+body .md-header .md-tabs a:hover,
+body .md-header .md-tabs__link:hover,
+body header .md-tabs a:hover,
+body header .md-tabs__link:hover {
+  color: #00C6AB !important;
+  opacity: 1 !important;
+}
+
+body .md-header .md-tabs a.md-tabs__link--active,
+body .md-header .md-tabs__link--active,
+body .md-header .md-tabs__item--active a,
+body header .md-tabs__link--active,
+body header [data-md-state="active"] a {
+  color: #00C6AB !important;
+  opacity: 1 !important;
+  font-weight: 600 !important;
+}
+
+/* Remove any red/accent color from tabs */
+.md-tabs__link {
+  --md-accent-fg-color: #00C6AB !important;
 }

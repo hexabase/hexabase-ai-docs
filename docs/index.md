@@ -132,7 +132,7 @@
 
     Japanese language documentation
 
-    [:octicons-arrow-right-24: 日本語ドキュメント](ja/)
+    [:octicons-arrow-right-24: 日本語ドキュメント](ja/index.md)
 
 </div>
 
