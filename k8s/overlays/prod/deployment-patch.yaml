@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hexabase-docs
+spec:
+  template:
+    spec:
+      containers:
+      - name: docs
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "200m"
+          limits:
+            memory: "512Mi"
+            cpu: "1000m"
+        env:
+        - name: ENVIRONMENT
+          value: "production"

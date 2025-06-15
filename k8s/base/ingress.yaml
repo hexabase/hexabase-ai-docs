@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: hexabase-docs-ingress
+  labels:
+    app: hexabase-docs
+    component: documentation
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
+spec:
+  tls:
+  - hosts:
+    - docs.hexabase.ai
+    secretName: hexabase-docs-tls
+  rules:
+  - host: docs.hexabase.ai
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: hexabase-docs-service
+            port:
+              number: 80

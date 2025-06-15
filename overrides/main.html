@@ -164,3 +164,99 @@
   }
 </style>
 {% endblock %}
+
+{% block scripts %}
+  {{ super() }}
+  <script>
+    // Minimal navigation toggle functionality for both nested and section items
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initialize Japanese translation if needed
+      initializeJapaneseTranslation();
+      
+      // Add click handlers to navigation items with children (both nested and section)
+      const navItems = document.querySelectorAll('.md-nav__item--nested > .md-nav__link, .md-nav__item--section > .md-nav__link');
+      
+      navItems.forEach(function(item) {
+        const parent = item.parentElement;
+        const toggle = parent.querySelector('.md-nav__toggle');
+        
+        if (toggle) {
+          // Make the entire link clickable to toggle
+          item.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            toggle.checked = !toggle.checked;
+            
+            // Update arrow rotation
+            if (toggle.checked) {
+              item.classList.add('md-nav__link--expanded');
+            } else {
+              item.classList.remove('md-nav__link--expanded');
+            }
+          });
+          
+          // Prevent navigation when clicking on parent items
+          item.removeAttribute('href');
+          item.style.cursor = 'pointer';
+        }
+      });
+      
+      // Auto-expand items with active children (both nested and section)
+      document.querySelectorAll('.md-nav__item--nested, .md-nav__item--section').forEach(function(item) {
+        const hasActiveChild = item.querySelector('.md-nav__link--active');
+        if (hasActiveChild && hasActiveChild !== item.querySelector('> .md-nav__link')) {
+          const toggle = item.querySelector('.md-nav__toggle');
+          if (toggle) {
+            toggle.checked = true;
+            item.querySelector('> .md-nav__link').classList.add('md-nav__link--expanded');
+          }
+        }
+      });
+      
+      function initializeJapaneseTranslation() {
+        // Check if we're on the Japanese version of the site
+        const isJapanese = document.documentElement.lang === 'ja' || 
+                          window.location.pathname.includes('/ja/') ||
+                          document.querySelector('html[lang="ja"]') !== null ||
+                          document.querySelector('meta[name="language"][content="ja"]') !== null;
+        
+        if (isJapanese) {
+          // Define translation mappings for navigation items that might be in English
+          const translations = {
+            'Home': 'ホーム',
+            'Concept': 'コンセプト',
+            'Use Cases': 'ユースケース',
+            'Scenarios': 'シナリオ',
+            'Architecture': 'アーキテクチャ',
+            'ADRs': 'ADRs(アーキテクチャ選定記録)',
+            'RBAC': 'クラスターと権限管理',
+            'Clusters/RBAC': 'クラスターと権限管理',
+            'User Examples': 'ユーザー例',
+            'Nodes': 'ノード(VM)とストレージ',
+            'Nodes/Storages': 'ノード(VM)とストレージ',
+            'Applications': 'アプリケーション',
+            'CI/CD': 'CI/CD',
+            'CronJobs': 'バッチ処理(CronJob)',
+            'Functions': 'Functions',
+            'Observability': 'オブザーバビリティ(監視)',
+            'Backups': 'バックアップ',
+            'Security': 'セキュリティ',
+            'AIOps': 'AIOps',
+            'API Reference': 'APIリファレンス',
+            'SDK': 'SDK'
+          };
+          
+          // Apply translations to navigation links after a short delay to ensure DOM is ready
+          setTimeout(() => {
+            document.querySelectorAll('.md-nav__link').forEach(link => {
+              const text = link.textContent.trim();
+              if (translations[text]) {
+                link.textContent = translations[text];
+              }
+            });
+          }, 100);
+        }
+      }
+    });
+  </script>
+{% endblock %}

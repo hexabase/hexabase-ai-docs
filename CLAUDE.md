@@ -15,21 +15,25 @@ This is the user-facing documentation repository for Hexabase.AI (HKS - Multi-te
 
 ### Documentation Development
 
-The project environment is standard for MkDocs.
+The project environment is standard for MkDocs with multi-language support.
 
 ```bash
-# Install MkDocs with Material theme
-pip install mkdocs-material
+# Setup environment (first time)
+./scripts/setup.sh
 
-# Create virtual environment (recommended)
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-
-# Serve documentation locally
-mkdocs serve
+# Development servers
+./scripts/serve.sh en     # English development server
+./scripts/serve.sh ja     # Japanese development server
+./scripts/serve-all.sh    # Build and serve both languages
 
 # Build documentation
-mkdocs build
+./scripts/build.sh        # Build both English and Japanese sites
+
+# Manual commands (if needed)
+mkdocs serve --config-file mkdocs.yml      # English only
+mkdocs serve --config-file mkdocs.ja.yml   # Japanese only
+mkdocs build --clean                       # English build
+mkdocs build --config-file mkdocs.ja.yml --site-dir site/ja  # Japanese build
 ```
 
 ## Documentation Structure

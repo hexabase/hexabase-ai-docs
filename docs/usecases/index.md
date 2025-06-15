@@ -50,7 +50,7 @@ Hexabase.AI is designed to grow with you. Whether you're an individual developer
 
 <div class="grid cards" markdown>
 
-- :material-account:{ .lg .middle } **Single User Plan**
+- :material-account:{ .lg .middle } **Single User/Hobby Plan**
 
   ***
 
@@ -58,13 +58,13 @@ Hexabase.AI is designed to grow with you. Whether you're an individual developer
 
   [:octicons-arrow-right-24: See the Single User Scenario](single-user-plan.md)
 
-- :material-account-star:{ .lg .middle } **Dedicated Node Upgrade**
+- :material-account-star:{ .lg .middle } **Single User/Pro Plan**
 
   ***
 
-  As your project grows and requires more performance or resource guarantees, you can seamlessly upgrade your Single User Plan to include powerful dedicated nodes for your production workloads.
+  As your project grows and requires more performance or resource guarantees, you can seamlessly upgrade to the Pro Plan with powerful dedicated nodes for your production workloads.
 
-  [:octicons-arrow-right-24: Learn about Dedicated Nodes](../nodes/vm-management.md)
+  [:octicons-arrow-right-24: Learn about Pro Features](single-user-plan.md#pro-plan-features)
 
 - :material-account-group:{ .lg .middle } **Team Plan**
 

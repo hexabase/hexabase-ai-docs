@@ -52,4 +52,4 @@ The goal of the Enterprise Plan is to provide a highly secure, compliant, scalab
 | **Scalability**     | Multi-region, multi-cloud deployments with automated scale-out plans.                           |
 | **Backups & DR**    | Advanced, application-aware backup strategies and automated DR testing.                         |
 | **AIOps**           | Full suite including predictive scaling, automated root cause analysis, and AI-driven security. |
-| **Support**         | Dedicated TAM, premium 24/7 support, and custom SLAs.                                           |
+| **Support**         | Dedicated TAM, premium support, and custom SLAs.                                                |

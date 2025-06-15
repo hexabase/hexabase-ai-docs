@@ -1,6 +1,6 @@
-# Single User Plan Scenario
+# Single User Plan Scenarios
 
-This use case outlines the journey of a single developer using the **Single User Plan** on Hexabase.AI. It's designed for individuals, freelancers, and developers working on personal projects who need a powerful Kubernetes platform without the complexity of managing a full-scale environment.
+This use case outlines the journey of a single developer using Hexabase.AI. We offer two plans for individual developers: **Hobby Plan** for personal projects and learning, and **Pro Plan** for production workloads requiring dedicated resources.
 
 ## Goal
 
@@ -43,15 +43,43 @@ The goal of the Single User Plan is to provide an individual developer with a po
 - The developer can upgrade the plan to include a **dedicated node**.
 - From the UI, a new dedicated node is provisioned and added to the workspace, allowing the production deployment to be moved for higher performance and isolation.
 
-## Summary of Features Used
+## Summary of Features
 
-| Feature           | Single User Plan Usage                                                     |
-| :---------------- | :------------------------------------------------------------------------- |
-| **Workspace**     | 1 personal, isolated workspace.                                            |
-| **Nodes**         | Default access to shared node pool. Option to upgrade for dedicated nodes. |
-| **CI/CD**         | Simple, template-based pipelines for automated build and deploy.           |
-| **Functions**     | Limited number of serverless functions for event-driven tasks.             |
-| **CronJobs**      | Ability to schedule recurring jobs.                                        |
-| **Storage**       | Limited persistent storage for stateful applications like databases.       |
-| **AIOps**         | Core AIOps features: anomaly detection, basic monitoring, and alerts.      |
-| **Multi-tenancy** | User-level isolation within a single-tenant workspace.                     |
+### Hobby Plan Features
+
+| Feature       | Hobby Plan Usage               |
+| :------------ | :----------------------------- |
+| **Workspace** | 1 personal, isolated workspace |
+| **Nodes**     | Shared node pool only          |
+| **CI/CD**     | Basic template-based pipelines |
+| **Functions** | Up to 5 serverless functions   |
+| **CronJobs**  | Up to 10 scheduled jobs        |
+| **Storage**   | 10GB persistent storage        |
+| **AIOps**     | Basic monitoring and alerts    |
+| **Support**   | Community support              |
+
+## Pro Plan Features
+
+When you're ready to take your project to production, upgrade to the Pro Plan for enhanced capabilities:
+
+| Feature       | Pro Plan Usage                                                             |
+| :------------ | :------------------------------------------------------------------------- |
+| **Workspace** | 1 personal workspace with production-grade isolation                       |
+| **Nodes**     | 1 dedicated node included (upgradeable)                                    |
+| **CI/CD**     | Advanced pipelines with parallel builds                                    |
+| **Functions** | Unlimited serverless functions                                             |
+| **CronJobs**  | Unlimited scheduled jobs                                                   |
+| **Storage**   | 100GB high-performance SSD storage                                         |
+| **AIOps**     | Full AIOps suite: anomaly detection, predictive scaling, cost optimization |
+| **Backup**    | Automated daily backups with 7-day retention                               |
+| **Support**   | Priority email support with 24-hour response time                          |
+
+### Upgrading from Hobby to Pro
+
+The upgrade process is seamless:
+
+1. Click "Upgrade to Pro" in your dashboard
+2. Your existing workloads continue running without interruption
+3. A dedicated node is provisioned within minutes
+4. Migrate critical workloads to the dedicated node for better performance
+5. Enjoy enhanced features and support immediately

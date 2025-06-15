@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  docs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:80"
+    environment:
+      - NGINX_PORT=80
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:80/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Development service with live reload
+  docs-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "8001:8000"
+    volumes:
+      - .:/app
+      - /app/venv
+    environment:
+      - MKDOCS_DEV=true
+    profiles:
+      - dev

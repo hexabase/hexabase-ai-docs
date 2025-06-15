@@ -10,7 +10,6 @@ theme:
   features:
     - navigation.tabs
     - navigation.sections
-    - navigation.expand
     - navigation.path
     - navigation.top
     - navigation.footer
@@ -48,6 +47,9 @@ extra:
     - icon: fontawesome/brands/github
       link: https://github.com/KoribanDev/hexabase-ai
   alternate:
+    - name: English
+      link: /
+      lang: en
     - name: 日本語
       link: /ja/
       lang: ja
@@ -136,7 +138,7 @@ nav:
           - ADR-006 Logging & Monitoring: architecture/adr/adr-006-logging-monitoring.md
           - ADR-007 Backup & DR: architecture/adr/adr-007-backup-disaster-recovery.md
           - ADR-008 Domain-Driven Design: architecture/adr/adr-008-domain-driven-design.md
-  - RBAC:
+  - Clusters/RBAC:
       - rbac/index.md
       - RBAC Overview: rbac/overview.md
       - Hexabase RBAC: rbac/hexabase-rbac.md
@@ -149,7 +151,7 @@ nav:
           - Overview: users/rbac/overview.md
           - Permission Model: users/rbac/permission-model.md
           - Role Mappings: users/rbac/role-mappings.md
-  - Nodes:
+  - Nodes/Storages:
       - nodes/index.md
       - Dedicated VM Management: nodes/vm-management.md
       - Node Configuration: nodes/configuration.md
@@ -173,15 +175,6 @@ nav:
       - GitLab Integration: cicd/gitlab-integration.md
       - Build Strategies: cicd/build-strategies.md
       - Deployment Automation: cicd/deployment-automation.md
-  - CronJobs:
-      - cronjobs/index.md
-      - CronJob Management: cronjobs/management.md
-      - UI Configuration: cronjobs/ui-configuration.md
-      - Integration Patterns: cronjobs/integration-patterns.md
-      - Examples: cronjobs/examples.md
-      - User Examples: users/cronjobs/examples.md
-      - User Integration Patterns: users/cronjobs/integration-patterns.md
-      - User UI Configuration: users/cronjobs/ui-configuration.md
   - Functions:
       - functions/index.md
       - HKS Functions Overview: functions/overview.md
@@ -195,6 +188,21 @@ nav:
           - Deployment: users/functions/deployment.md
           - Development: users/functions/development.md
           - Runtime: users/functions/runtime.md
+  - CronJobs:
+      - cronjobs/index.md
+      - CronJob Management: cronjobs/management.md
+      - UI Configuration: cronjobs/ui-configuration.md
+      - Integration Patterns: cronjobs/integration-patterns.md
+      - Examples: cronjobs/examples.md
+      - User Examples: users/cronjobs/examples.md
+      - User Integration Patterns: users/cronjobs/integration-patterns.md
+      - User UI Configuration: users/cronjobs/ui-configuration.md
+  - Backups:
+      - backups/index.md
+      - Backup Strategies: backups/strategies.md
+      - Automated Backups: backups/automated-backups.md
+      - Disaster Recovery: backups/disaster-recovery.md
+      - Restore Procedures: backups/restore-procedures.md
   - Observability:
       - observability/index.md
       - Monitoring Setup: observability/monitoring-setup.md
@@ -207,12 +215,6 @@ nav:
           - Dashboards & Alerts: users/observability/dashboards-alerts.md
           - Logging: users/observability/logging.md
           - Tracing: users/observability/tracing.md
-  - Backups:
-      - backups/index.md
-      - Backup Strategies: backups/strategies.md
-      - Automated Backups: backups/automated-backups.md
-      - Disaster Recovery: backups/disaster-recovery.md
-      - Restore Procedures: backups/restore-procedures.md
   - Security:
       - security/index.md
       - Security Architecture: security/architecture.md
