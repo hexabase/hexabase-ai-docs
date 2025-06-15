@@ -16,7 +16,7 @@ Hexabase.AI provides a sophisticated RBAC system that extends Kubernetes native 
 
     Understand predefined roles and custom permission models
 
-    [:octicons-arrow-right-24: Explore Roles](roles.md)
+    [:octicons-arrow-right-24: Explore Roles](hexabase-rbac.md)
 
 -   :material-account-group:{ .lg .middle } **User Management**
 
@@ -24,7 +24,7 @@ Hexabase.AI provides a sophisticated RBAC system that extends Kubernetes native 
 
     Managing users, groups, and service accounts
 
-    [:octicons-arrow-right-24: User Management Guide](users.md)
+    [:octicons-arrow-right-24: User Management Guide](kubernetes-rbac.md)
 
 -   :material-shield-check:{ .lg .middle } **Policy Configuration**
 
@@ -32,7 +32,7 @@ Hexabase.AI provides a sophisticated RBAC system that extends Kubernetes native 
 
     Configure and customize access policies
 
-    [:octicons-arrow-right-24: Policy Configuration](policies.md)
+    [:octicons-arrow-right-24: Policy Configuration](kubernetes-rbac.md#policies)
 
 -   :material-book-open:{ .lg .middle } **Best Practices**
 
@@ -154,14 +154,14 @@ Hexabase.AI RBAC seamlessly integrates with native Kubernetes RBAC:
 
 ## Next Steps
 
-- **New to RBAC?** Start with [Roles and Permissions](roles.md)
-- **Setting up users?** Follow the [User Management Guide](users.md)
-- **Need custom policies?** Learn about [Policy Configuration](policies.md)
+- **New to RBAC?** Start with [Roles and Permissions](hexabase-rbac.md)
+- **Setting up users?** Follow the [User Management Guide](kubernetes-rbac.md)
+- **Need custom policies?** Learn about [Policy Configuration](kubernetes-rbac.md#policies)
 - **Security focus?** Review [RBAC Best Practices](best-practices.md)
 
 ## Related Documentation
 
-- [Security Architecture](../architecture/security.md)
-- [Core Concepts](../concepts/index.md)
+- [Security Architecture](../architecture/security-architecture.md)
+- [Core Concepts](../concept/index.md)
 - [API Authentication](../api/authentication.md)
-- [Audit Logging](../observability/audit-logs.md)
+- [Audit Logging](../observability/monitoring-setup.md)

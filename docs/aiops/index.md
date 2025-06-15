@@ -16,7 +16,7 @@ Hexabase.AI's AIOps (Artificial Intelligence for IT Operations) transforms how y
 
     Automate complex operational tasks with AI
 
-    [:octicons-arrow-right-24: Explore Automation](automation.md)
+    [:octicons-arrow-right-24: Explore Automation](architecture.md)
 
 -   :material-trending-up:{ .lg .middle } **Predictive Analytics**
 
@@ -24,7 +24,7 @@ Hexabase.AI's AIOps (Artificial Intelligence for IT Operations) transforms how y
 
     Forecast issues and capacity needs
 
-    [:octicons-arrow-right-24: Predictive Features](predictive.md)
+    [:octicons-arrow-right-24: Predictive Features](architecture.md#predictive)
 
 -   :material-auto-fix:{ .lg .middle } **Auto-Remediation**
 
@@ -32,7 +32,7 @@ Hexabase.AI's AIOps (Artificial Intelligence for IT Operations) transforms how y
 
     Automatically fix common issues
 
-    [:octicons-arrow-right-24: Remediation Guide](remediation.md)
+    [:octicons-arrow-right-24: Remediation Guide](architecture.md#remediation)
 
 -   :material-currency-usd:{ .lg .middle } **Cost Optimization**
 
@@ -40,7 +40,7 @@ Hexabase.AI's AIOps (Artificial Intelligence for IT Operations) transforms how y
 
     AI-driven cost reduction strategies
 
-    [:octicons-arrow-right-24: Cost Optimization](cost-optimization.md)
+    [:octicons-arrow-right-24: Cost Optimization](architecture.md#cost-optimization)
 
 </div>
 
@@ -234,14 +234,14 @@ hks aiops metrics --period 30d
 
 ## Next Steps
 
-- **Get Started**: Enable [Intelligent Automation](automation.md)
-- **Predict Issues**: Set up [Predictive Analytics](predictive.md)
-- **Fix Automatically**: Configure [Auto-Remediation](remediation.md)
-- **Save Money**: Implement [Cost Optimization](cost-optimization.md)
+- **Get Started**: Enable [Intelligent Automation](architecture.md)
+- **Predict Issues**: Set up [Predictive Analytics](architecture.md#predictive)
+- **Fix Automatically**: Configure [Auto-Remediation](architecture.md#remediation)
+- **Save Money**: Implement [Cost Optimization](architecture.md#cost-optimization)
 
 ## Related Documentation
 
 - [Observability Platform](../observability/index.md)
 - [Architecture Overview](../architecture/index.md)
-- [API Reference](../api/index.md#aiops)
-- [Best Practices](../users/best-practices.md)
+- [API Reference](../api/index.md)
+- [Best Practices](../security/index.md)

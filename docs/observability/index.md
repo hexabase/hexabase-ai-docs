@@ -16,7 +16,7 @@ Hexabase.AI provides a unified observability platform that combines metrics, log
 
     Real-time metrics collection and visualization
 
-    [:octicons-arrow-right-24: Explore Metrics](metrics.md)
+    [:octicons-arrow-right-24: Explore Metrics](monitoring-setup.md)
 
 -   :material-text-box-search:{ .lg .middle } **Logging**
 
@@ -24,7 +24,7 @@ Hexabase.AI provides a unified observability platform that combines metrics, log
 
     Centralized log aggregation and analysis
 
-    [:octicons-arrow-right-24: Logging Guide](logging.md)
+    [:octicons-arrow-right-24: Logging Guide](monitoring-setup.md#logging)
 
 -   :material-transit-connection-variant:{ .lg .middle } **Distributed Tracing**
 
@@ -32,7 +32,7 @@ Hexabase.AI provides a unified observability platform that combines metrics, log
 
     Track requests across microservices
 
-    [:octicons-arrow-right-24: Tracing Guide](tracing.md)
+    [:octicons-arrow-right-24: Tracing Guide](monitoring-setup.md#tracing)
 
 -   :material-bell-alert:{ .lg .middle } **Alerting**
 
@@ -40,7 +40,7 @@ Hexabase.AI provides a unified observability platform that combines metrics, log
 
     Intelligent alerts and incident management
 
-    [:octicons-arrow-right-24: Alerting Setup](alerting.md)
+    [:octicons-arrow-right-24: Alerting Setup](monitoring-setup.md#alerting)
 
 </div>
 
@@ -243,14 +243,14 @@ func init() {
 
 ## Next Steps
 
-- **Metrics**: Set up [Metrics & Monitoring](metrics.md)
-- **Logs**: Configure [Centralized Logging](logging.md)
-- **Traces**: Implement [Distributed Tracing](tracing.md)
-- **Alerts**: Create [Intelligent Alerts](alerting.md)
+- **Metrics**: Set up [Metrics & Monitoring](monitoring-setup.md)
+- **Logs**: Configure [Centralized Logging](monitoring-setup.md#logging)
+- **Traces**: Implement [Distributed Tracing](monitoring-setup.md#tracing)
+- **Alerts**: Create [Intelligent Alerts](monitoring-setup.md#alerting)
 
 ## Related Documentation
 
 - [AIOps Features](../aiops/index.md)
 - [Architecture Overview](../architecture/index.md)
-- [API Reference](../api/index.md#observability)
-- [Best Practices](../users/best-practices.md)
+- [API Reference](../api/index.md)
+- [Best Practices](../security/index.md)

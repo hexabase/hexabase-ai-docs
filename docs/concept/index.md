@@ -16,7 +16,7 @@ Hexabase.AI is built on several key concepts that work together to provide a pow
 
     Top-level entities that represent companies or teams using Hexabase.AI
 
-    [:octicons-arrow-right-24: Learn about Organizations](organizations.md)
+    [:octicons-arrow-right-24: Learn about Organizations](multi-tenancy.md)
 
 -   :material-view-dashboard:{ .lg .middle } **Workspaces**
 
@@ -24,7 +24,7 @@ Hexabase.AI is built on several key concepts that work together to provide a pow
 
     Isolated environments within organizations for different teams or projects
 
-    [:octicons-arrow-right-24: Learn about Workspaces](workspaces.md)
+    [:octicons-arrow-right-24: Learn about Workspaces](multi-tenancy.md#workspaces)
 
 -   :material-folder-multiple:{ .lg .middle } **Projects**
 
@@ -32,7 +32,7 @@ Hexabase.AI is built on several key concepts that work together to provide a pow
 
     Deployable units that contain your applications and configurations
 
-    [:octicons-arrow-right-24: Learn about Projects](projects.md)
+    [:octicons-arrow-right-24: Learn about Projects](core-concepts.md#projects)
 
 -   :material-kubernetes:{ .lg .middle } **Clusters**
 
@@ -40,7 +40,7 @@ Hexabase.AI is built on several key concepts that work together to provide a pow
 
     Kubernetes clusters managed by Hexabase.AI for running your workloads
 
-    [:octicons-arrow-right-24: Learn about Clusters](clusters.md)
+    [:octicons-arrow-right-24: Learn about Clusters](technology-stack.md)
 
 </div>
 
@@ -80,13 +80,13 @@ This structure provides:
 
 ## Next Steps
 
-- **New to Hexabase.AI?** Start with [Organizations](organizations.md) to understand the top-level structure
-- **Setting up a team?** Learn about [Workspaces](workspaces.md) and how to organize your environments
-- **Ready to deploy?** Understand [Projects](projects.md) and how to package your applications
-- **Managing infrastructure?** Explore [Clusters](clusters.md) and their capabilities
+- **New to Hexabase.AI?** Start with [Organizations](multi-tenancy.md) to understand the top-level structure
+- **Setting up a team?** Learn about [Workspaces](multi-tenancy.md#workspaces) and how to organize your environments
+- **Ready to deploy?** Understand [Projects](core-concepts.md#projects) and how to package your applications
+- **Managing infrastructure?** Explore [Clusters](technology-stack.md) and their capabilities
 
 ## Related Documentation
 
-- [Getting Started Guide](../users/getting-started.md)
+- [Overview](overview.md)
 - [Architecture Overview](../architecture/index.md)
 - [API Reference](../api/index.md)

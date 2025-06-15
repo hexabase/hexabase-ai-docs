@@ -16,7 +16,7 @@ CronJobs in Hexabase.AI provide a reliable way to run scheduled tasks in your Ku
 
     Learn the basics of creating and deploying CronJobs
 
-    [:octicons-arrow-right-24: CronJob Basics](getting-started.md)
+    [:octicons-arrow-right-24: CronJob Basics](management.md)
 
 -   :material-calendar-clock:{ .lg .middle } **Scheduling Patterns**
 
@@ -24,7 +24,7 @@ CronJobs in Hexabase.AI provide a reliable way to run scheduled tasks in your Ku
 
     Master cron expressions and scheduling strategies
 
-    [:octicons-arrow-right-24: Scheduling Guide](scheduling.md)
+    [:octicons-arrow-right-24: Scheduling Guide](management.md#scheduling)
 
 -   :material-cog-sync:{ .lg .middle } **Advanced Configuration**
 
@@ -32,7 +32,7 @@ CronJobs in Hexabase.AI provide a reliable way to run scheduled tasks in your Ku
 
     Configure job policies, resources, and dependencies
 
-    [:octicons-arrow-right-24: Advanced Config](configuration.md)
+    [:octicons-arrow-right-24: Advanced Config](management.md#configuration)
 
 -   :material-monitor-dashboard:{ .lg .middle } **Monitoring & Debugging**
 
@@ -40,7 +40,7 @@ CronJobs in Hexabase.AI provide a reliable way to run scheduled tasks in your Ku
 
     Track job execution and troubleshoot failures
 
-    [:octicons-arrow-right-24: Monitoring Guide](monitoring.md)
+    [:octicons-arrow-right-24: Monitoring Guide](../observability/monitoring-setup.md)
 
 </div>
 
@@ -212,14 +212,14 @@ hks cronjob history daily-backup --last 10
 
 ## Next Steps
 
-- **New to CronJobs?** Start with [Getting Started](getting-started.md)
-- **Need scheduling help?** Check [Scheduling Patterns](scheduling.md)
-- **Advanced usage?** Explore [Configuration Options](configuration.md)
-- **Having issues?** See [Monitoring & Debugging](monitoring.md)
+- **New to CronJobs?** Start with [Getting Started](management.md)
+- **Need scheduling help?** Check [Scheduling Patterns](management.md#scheduling)
+- **Advanced usage?** Explore [Configuration Options](management.md#configuration)
+- **Having issues?** See [Monitoring & Debugging](../observability/monitoring-setup.md)
 
 ## Related Documentation
 
 - [Kubernetes Jobs Documentation](https://kubernetes.io/docs/concepts/workloads/controllers/job/)
 - [Functions](../functions/index.md) for event-driven tasks
 - [Observability](../observability/index.md) for monitoring
-- [API Reference](../api/index.md#cronjobs) for programmatic access
+- [API Reference](../api/index.md) for programmatic access

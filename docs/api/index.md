@@ -24,7 +24,7 @@ The Hexabase.AI API provides comprehensive programmatic access to all platform f
 
     RESTful endpoints for all resources
 
-    [:octicons-arrow-right-24: REST Reference](rest.md)
+    [:octicons-arrow-right-24: REST Reference](rest-api.md)
 
 -   :material-graphql:{ .lg .middle } **GraphQL API**
 
@@ -32,7 +32,7 @@ The Hexabase.AI API provides comprehensive programmatic access to all platform f
 
     Flexible queries for complex data needs
 
-    [:octicons-arrow-right-24: GraphQL Schema](graphql.md)
+    [:octicons-arrow-right-24: GraphQL Schema](websocket-api.md)
 
 -   :material-code-json:{ .lg .middle } **SDKs & Tools**
 
@@ -40,7 +40,7 @@ The Hexabase.AI API provides comprehensive programmatic access to all platform f
 
     Client libraries and developer tools
 
-    [:octicons-arrow-right-24: SDK Documentation](sdks.md)
+    [:octicons-arrow-right-24: SDK Documentation](../sdk/index.md)
 
 </div>
 
@@ -334,13 +334,12 @@ hks api mock --port 8080
 ## Next Steps
 
 - **Get Started**: Set up [Authentication](authentication.md)
-- **REST API**: Explore [REST Endpoints](rest.md)
-- **GraphQL**: Learn [GraphQL Queries](graphql.md)
-- **Integration**: Download [SDKs & Tools](sdks.md)
+- **REST API**: Explore [REST Endpoints](rest-api.md)
+- **GraphQL**: Learn [GraphQL Queries](websocket-api.md)
+- **Integration**: Download [SDKs & Tools](../sdk/index.md)
 
 ## Related Documentation
 
-- [CLI Reference](../users/cli.md)
-- [Webhooks Guide](webhooks.md)
-- [API Changelog](changelog.md)
+- [Function API](function-api.md)
+- [Error Codes](error-codes.md)
 - [OpenAPI Specification](https://api.hexabase.ai/openapi.json)

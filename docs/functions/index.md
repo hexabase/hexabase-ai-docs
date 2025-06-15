@@ -16,7 +16,7 @@ Hexabase.AI Functions brings serverless computing to your Kubernetes infrastruct
 
     Deploy your first function in minutes
 
-    [:octicons-arrow-right-24: Get Started](quickstart.md)
+    [:octicons-arrow-right-24: Get Started](overview.md)
 
 -   :material-function:{ .lg .middle } **Function Types**
 
@@ -24,7 +24,7 @@ Hexabase.AI Functions brings serverless computing to your Kubernetes infrastruct
 
     HTTP endpoints, event handlers, and scheduled functions
 
-    [:octicons-arrow-right-24: Function Types](types.md)
+    [:octicons-arrow-right-24: Function Types](architecture.md)
 
 -   :material-code-braces:{ .lg .middle } **Development Guide**
 
@@ -32,7 +32,7 @@ Hexabase.AI Functions brings serverless computing to your Kubernetes infrastruct
 
     Writing, testing, and debugging functions
 
-    [:octicons-arrow-right-24: Development](development.md)
+    [:octicons-arrow-right-24: Development](overview.md#development)
 
 -   :material-rocket-launch-outline:{ .lg .middle } **Deployment & Scaling**
 
@@ -40,7 +40,7 @@ Hexabase.AI Functions brings serverless computing to your Kubernetes infrastruct
 
     Deploy functions and configure auto-scaling
 
-    [:octicons-arrow-right-24: Deployment Guide](deployment.md)
+    [:octicons-arrow-right-24: Deployment Guide](architecture.md#deployment)
 
 </div>
 
@@ -214,14 +214,14 @@ Use secrets management for sensitive data
 
 ## Next Steps
 
-- **Get Started**: Deploy your first function with our [Quick Start](quickstart.md)
-- **Learn More**: Explore different [Function Types](types.md)
-- **Build**: Follow our [Development Guide](development.md)
-- **Deploy**: Master [Deployment & Scaling](deployment.md)
+- **Get Started**: Deploy your first function with our [Quick Start](overview.md)
+- **Learn More**: Explore different [Function Types](architecture.md)
+- **Build**: Follow our [Development Guide](overview.md#development)
+- **Deploy**: Master [Deployment & Scaling](architecture.md#deployment)
 
 ## Related Documentation
 
 - [CronJobs](../cronjobs/index.md) for scheduled batch jobs
-- [API Gateway](../api/gateway.md) for API management
+- [API Reference](../api/function-api.md) for function API
 - [Observability](../observability/index.md) for monitoring
-- [Security Best Practices](../architecture/security.md)
+- [Security Best Practices](../security/index.md)

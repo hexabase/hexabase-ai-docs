@@ -16,7 +16,7 @@ Hexabase.AI is built on a modern, cloud-native architecture that combines the po
 
     High-level architecture and component relationships
 
-    [:octicons-arrow-right-24: View System Architecture](overview.md)
+    [:octicons-arrow-right-24: View System Architecture](system-architecture.md)
 
 -   :material-layers:{ .lg .middle } **Platform Components**
 
@@ -24,7 +24,7 @@ Hexabase.AI is built on a modern, cloud-native architecture that combines the po
 
     Detailed breakdown of control plane and data plane components
 
-    [:octicons-arrow-right-24: Explore Components](components.md)
+    [:octicons-arrow-right-24: Explore Components](technical-design.md)
 
 -   :material-network:{ .lg .middle } **Networking**
 
@@ -32,7 +32,7 @@ Hexabase.AI is built on a modern, cloud-native architecture that combines the po
 
     Network architecture, service mesh, and traffic management
 
-    [:octicons-arrow-right-24: Networking Details](networking.md)
+    [:octicons-arrow-right-24: Networking Details](technical-design.md#networking)
 
 -   :material-security:{ .lg .middle } **Security Architecture**
 
@@ -40,7 +40,7 @@ Hexabase.AI is built on a modern, cloud-native architecture that combines the po
 
     Security layers, authentication, and compliance features
 
-    [:octicons-arrow-right-24: Security Architecture](security.md)
+    [:octicons-arrow-right-24: Security Architecture](security-architecture.md)
 
 </div>
 
@@ -133,14 +133,14 @@ We maintain Architecture Decision Records (ADRs) to document significant archite
 
 ## Next Steps
 
-- **Deep Dive**: Explore [Platform Components](components.md) for detailed technical information
-- **Security Focus**: Review [Security Architecture](security.md) for compliance requirements
+- **Deep Dive**: Explore [Platform Components](technical-design.md) for detailed technical information
+- **Security Focus**: Review [Security Architecture](security-architecture.md) for compliance requirements
 - **Design Decisions**: Browse [ADRs](adr/index.md) to understand our architectural choices
 - **Integration**: Check [API Documentation](../api/index.md) for integration options
 
 ## Related Documentation
 
-- [Core Concepts](../concepts/index.md)
-- [Kubernetes RBAC](../kubernetes-rbac/index.md)
+- [Core Concepts](../concept/index.md)
+- [Kubernetes RBAC](../rbac/index.md)
 - [Observability](../observability/index.md)
 - [API Reference](../api/index.md)

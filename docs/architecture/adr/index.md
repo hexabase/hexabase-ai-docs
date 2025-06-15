@@ -24,33 +24,25 @@ ADRs can have the following statuses:
 
 | ADR | Title | Status | Date |
 |-----|-------|--------|------|
-| [ADR-001](adr-001-record-architecture-decisions.md) | Record Architecture Decisions | Accepted | 2024-01-15 |
-| [ADR-002](adr-002-multi-tenant-architecture.md) | Multi-tenant Architecture Design | Accepted | 2024-01-20 |
-| [ADR-003](adr-003-kubernetes-as-foundation.md) | Use Kubernetes as Foundation | Accepted | 2024-01-22 |
+| [ADR-001](adr-001-multi-tenant-platform.md) | Multi-tenant Platform | Accepted | 2024-01-15 |
+| [ADR-002](adr-002-oauth2-oidc-security.md) | OAuth2/OIDC Security | Accepted | 2024-01-20 |
+| [ADR-003](adr-003-faas-architecture.md) | FaaS Architecture | Accepted | 2024-01-22 |
 
 ### API and Integration
 
 | ADR | Title | Status | Date |
 |-----|-------|--------|------|
-| [ADR-004](adr-004-api-first-design.md) | API-First Design Approach | Accepted | 2024-02-01 |
-| [ADR-005](adr-005-graphql-for-complex-queries.md) | GraphQL for Complex Queries | Accepted | 2024-02-10 |
-| [ADR-006](adr-006-webhook-event-system.md) | Webhook-based Event System | Accepted | 2024-02-15 |
+| [ADR-004](adr-004-ai-operations.md) | AI Operations | Accepted | 2024-02-01 |
+| [ADR-005](adr-005-cicd-architecture.md) | CI/CD Architecture | Accepted | 2024-02-10 |
+| [ADR-006](adr-006-logging-monitoring.md) | Logging & Monitoring | Accepted | 2024-02-15 |
 
 ### Security and Compliance
 
 | ADR | Title | Status | Date |
 |-----|-------|--------|------|
-| [ADR-007](adr-007-zero-trust-security.md) | Zero Trust Security Model | Accepted | 2024-03-01 |
-| [ADR-008](adr-008-rbac-implementation.md) | RBAC Implementation Strategy | Accepted | 2024-03-05 |
-| [ADR-009](adr-009-secrets-management.md) | Secrets Management Approach | Accepted | 2024-03-10 |
+| [ADR-007](adr-007-backup-disaster-recovery.md) | Backup & DR | Accepted | 2024-03-01 |
+| [ADR-008](adr-008-domain-driven-design.md) | Domain-Driven Design | Accepted | 2024-03-05 |
 
-### AI/ML Integration
-
-| ADR | Title | Status | Date |
-|-----|-------|--------|------|
-| [ADR-010](adr-010-aiops-architecture.md) | AIOps Architecture Design | Accepted | 2024-04-01 |
-| [ADR-011](adr-011-ml-model-deployment.md) | ML Model Deployment Strategy | Accepted | 2024-04-15 |
-| [ADR-012](adr-012-predictive-scaling.md) | Predictive Scaling Implementation | Proposed | 2024-05-01 |
 
 ## How to Use ADRs
 
@@ -73,7 +65,7 @@ ADRs can have the following statuses:
 
 To propose a new architectural decision:
 
-1. **Copy the template**: Use [template.md](template.md) as a starting point
+1. **Copy the template**: Use the template below as a starting point
 2. **Number sequentially**: Use the next available ADR number
 3. **Follow naming convention**: `adr-XXX-brief-description.md`
 4. **Submit for review**: Create a pull request with your proposed ADR
@@ -115,6 +107,6 @@ What becomes easier or more difficult after this change?
 ## Related Resources
 
 - [Architecture Overview](../index.md)
-- [System Design Documentation](../overview.md)
-- [Contributing Guidelines](../../contributors/index.md)
+- [System Design Documentation](../system-architecture.md)
+- [Technical Design](../technical-design.md)
 - [Michael Nygard's ADR Article](https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions)

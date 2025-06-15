@@ -10,7 +10,7 @@
 
     Learn how to manage organizations and workspaces in Hexabase.AI
 
-    [:octicons-arrow-right-24: Admin Guide](admin/index.md)
+    [:octicons-arrow-right-24: Admin Guide](rbac/index.md)
 
 -   :material-rocket-launch:{ .lg .middle } **HKS Users**
 
@@ -18,7 +18,7 @@
 
     Deploy projects and manage resources in your Kubernetes environments
 
-    [:octicons-arrow-right-24: User Guide](users/index.md)
+    [:octicons-arrow-right-24: User Guide](concept/index.md)
 
 -   :material-code-tags:{ .lg .middle } **Contributors**
 
@@ -26,7 +26,7 @@
 
     Set up your development environment and contribute to Hexabase.AI
 
-    [:octicons-arrow-right-24: Contributor Guide](contributors/index.md)
+    [:octicons-arrow-right-24: Contributor Guide](architecture/index.md)
 
 -   :material-server:{ .lg .middle } **VM Deployers**
 
@@ -34,7 +34,7 @@
 
     Deploy and configure infrastructure with Proxmox
 
-    [:octicons-arrow-right-24: Deployment Guide](vm-deploy/index.md)
+    [:octicons-arrow-right-24: Deployment Guide](nodes/index.md)
 
 </div>
 
@@ -48,7 +48,7 @@
 
     Understand the fundamental concepts of Hexabase.AI
 
-    [:octicons-arrow-right-24: Learn Concepts](concepts/index.md)
+    [:octicons-arrow-right-24: Learn Concepts](concept/index.md)
 
 -   :material-briefcase:{ .lg .middle } **Use Cases**
 
@@ -56,7 +56,7 @@
 
     Explore how organizations use Hexabase.AI
 
-    [:octicons-arrow-right-24: View Use Cases](use-cases/index.md)
+    [:octicons-arrow-right-24: View Use Cases](usecases/index.md)
 
 -   :material-sitemap:{ .lg .middle } **Architecture**
 
@@ -72,7 +72,7 @@
 
     Role-based access control and security
 
-    [:octicons-arrow-right-24: RBAC Guide](kubernetes-rbac/index.md)
+    [:octicons-arrow-right-24: RBAC Guide](rbac/index.md)
 
 </div>
 
@@ -132,7 +132,7 @@
 
     Japanese language documentation
 
-    [:octicons-arrow-right-24: 日本語ドキュメント](ja/index.md)
+    [:octicons-arrow-right-24: 日本語ドキュメント](ja/)
 
 </div>
 
@@ -156,9 +156,9 @@ Hexabase.AI (HKS) is a **Multi-tenant Kubernetes as a Service platform with AIOp
 
     ---
 
-    - [Admin Quick Start](admin/getting-started.md)
-    - [User Quick Start](users/getting-started.md)
-    - [Development Setup](contributors/setup.md)
+    - [Admin Quick Start](rbac/index.md)
+    - [User Quick Start](concept/overview.md)
+    - [Development Setup](architecture/index.md)
 
 -   **Resources**
 
