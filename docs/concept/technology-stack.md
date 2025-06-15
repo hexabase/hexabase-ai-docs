@@ -9,6 +9,7 @@ HXB Platform is built on a modern, cloud-native technology stack that combines b
 ### Container Orchestration
 
 #### Kubernetes
+
 - **Version**: 1.28+
 - **Distribution**: Compatible with EKS, GKE, AKS, and vanilla Kubernetes
 - **Components**:
@@ -19,11 +20,13 @@ HXB Platform is built on a modern, cloud-native technology stack that combines b
 ### Container Runtime
 
 #### containerd
+
 - High-performance container runtime
 - OCI-compliant
 - Integrated with Kubernetes CRI
 
 #### Docker
+
 - Development environment support
 - Image building and management
 - Registry integration
@@ -31,6 +34,7 @@ HXB Platform is built on a modern, cloud-native technology stack that combines b
 ### Service Mesh
 
 #### Istio
+
 - Traffic management
 - Security policies
 - Observability
@@ -39,12 +43,14 @@ HXB Platform is built on a modern, cloud-native technology stack that combines b
 ### Ingress Controllers
 
 #### NGINX Ingress Controller
+
 - HTTP/HTTPS routing
 - SSL/TLS termination
 - Load balancing
 - WebSocket support
 
 #### Traefik
+
 - Dynamic configuration
 - Let's Encrypt integration
 - Middleware support
@@ -52,11 +58,13 @@ HXB Platform is built on a modern, cloud-native technology stack that combines b
 ### Storage
 
 #### Persistent Storage
+
 - **CSI Drivers**: Support for major cloud providers
 - **Rook/Ceph**: On-premises distributed storage
 - **MinIO**: S3-compatible object storage
 
 #### Databases
+
 - **PostgreSQL**: Primary relational database
 - **Redis**: Caching and session management
 - **ClickHouse**: Analytics and time-series data
@@ -64,27 +72,32 @@ HXB Platform is built on a modern, cloud-native technology stack that combines b
 ### Observability Stack
 
 #### Metrics
+
 - **Prometheus**: Metrics collection and storage
 - **Grafana**: Visualization and dashboards
 - **AlertManager**: Alert routing and management
 
 #### Logging
+
 - **Fluentd/Fluent Bit**: Log collection and forwarding
 - **Elasticsearch**: Log storage and search
 - **Kibana**: Log visualization and analysis
 
 #### Tracing
+
 - **OpenTelemetry**: Distributed tracing
 - **Jaeger**: Trace storage and visualization
 
 ### CI/CD and GitOps
 
 #### ArgoCD
+
 - GitOps continuous delivery
 - Application synchronization
 - Multi-cluster support
 
 #### Tekton
+
 - Cloud-native CI/CD pipelines
 - Kubernetes-native workflows
 - Extensible task library
@@ -92,11 +105,13 @@ HXB Platform is built on a modern, cloud-native technology stack that combines b
 ### Security
 
 #### Policy Management
+
 - **Open Policy Agent (OPA)**: Policy as code
 - **Gatekeeper**: Kubernetes admission controller
 - **Falco**: Runtime security monitoring
 
 #### Secret Management
+
 - **Kubernetes Secrets**: Native secret storage
 - **Sealed Secrets**: Encrypted secrets in Git
 - **External Secrets Operator**: Integration with external vaults
@@ -104,11 +119,13 @@ HXB Platform is built on a modern, cloud-native technology stack that combines b
 ### AI/ML Infrastructure
 
 #### Model Serving
+
 - **KServe**: Serverless inference
 - **Seldon Core**: ML deployment platform
 - **NVIDIA Triton**: High-performance inference
 
 #### LLM Integration
+
 - **LangChain**: LLM application framework
 - **Vector Databases**: Chroma, Pinecone, Weaviate
 - **Model Registries**: MLflow, Kubeflow
@@ -116,12 +133,14 @@ HXB Platform is built on a modern, cloud-native technology stack that combines b
 ### Development Tools
 
 #### Languages and Frameworks
+
 - **Go**: Core platform components
 - **Python**: AI/ML services and scripts
 - **TypeScript/React**: Web UI
 - **Rust**: High-performance components
 
 #### APIs
+
 - **gRPC**: Internal service communication
 - **GraphQL**: Frontend API gateway
 - **REST**: External integrations
@@ -129,6 +148,7 @@ HXB Platform is built on a modern, cloud-native technology stack that combines b
 ## Architecture Layers
 
 ### Infrastructure Layer
+
 ```
 ┌─────────────────────────────────────┐
 │         Cloud Providers             │
@@ -141,6 +161,7 @@ HXB Platform is built on a modern, cloud-native technology stack that combines b
 ```
 
 ### Platform Layer
+
 ```
 ┌─────────────────────────────────────┐
 │      Service Mesh (Istio)          │
@@ -153,6 +174,7 @@ HXB Platform is built on a modern, cloud-native technology stack that combines b
 ```
 
 ### Application Layer
+
 ```
 ┌─────────────────────────────────────┐
 │        HXB Platform Services        │
@@ -166,12 +188,14 @@ HXB Platform is built on a modern, cloud-native technology stack that combines b
 ## Integration Points
 
 ### External Services
+
 - **Cloud Provider APIs**: AWS, GCP, Azure
 - **Version Control**: GitHub, GitLab, Bitbucket
 - **Container Registries**: Docker Hub, ECR, GCR
 - **Identity Providers**: OIDC, SAML, LDAP
 
 ### Communication Protocols
+
 - **HTTP/HTTPS**: External APIs
 - **gRPC**: Internal services
 - **WebSocket**: Real-time updates
@@ -180,18 +204,21 @@ HXB Platform is built on a modern, cloud-native technology stack that combines b
 ## Performance Characteristics
 
 ### Scalability
+
 - Horizontal pod autoscaling
 - Vertical pod autoscaling
 - Cluster autoscaling
 - Multi-region deployment
 
 ### High Availability
+
 - Multi-master control plane
 - Cross-zone replication
 - Automated failover
 - Disaster recovery
 
 ### Performance Optimization
+
 - Resource quotas and limits
 - Pod priority and preemption
 - Node affinity and anti-affinity
@@ -200,6 +227,7 @@ HXB Platform is built on a modern, cloud-native technology stack that combines b
 ## Development Workflow
 
 ### Local Development
+
 ```bash
 # Development tools
 - kubectl
@@ -209,12 +237,14 @@ HXB Platform is built on a modern, cloud-native technology stack that combines b
 ```
 
 ### Testing
+
 - Unit testing frameworks
 - Integration testing
 - End-to-end testing
 - Chaos engineering
 
 ### Deployment
+
 - Blue-green deployments
 - Canary releases
 - Feature flags
@@ -223,6 +253,7 @@ HXB Platform is built on a modern, cloud-native technology stack that combines b
 ## Roadmap
 
 ### Upcoming Technologies
+
 - **WebAssembly**: WASM-based functions
 - **eBPF**: Advanced networking and observability
 - **Crossplane**: Infrastructure as Code
@@ -230,6 +261,6 @@ HXB Platform is built on a modern, cloud-native technology stack that combines b
 
 ## Related Topics
 
-- [Architecture Overview](../architecture/overview.md)
-- [Multi-Tenancy](./multi-tenancy.md)
-- [Deployment Guide](../deployment/quick-start.md)
+- **[Hexabase AI Architecture Overview](../architecture/index.md)**: Deep dive into the platform's design.
+- **[Multi-Tenancy](./multi-tenancy.md)**: Learn how HKS isolates workspaces.
+- **[Join our Community](https://discord.gg/hexabase)**: Get help and connect with other users.

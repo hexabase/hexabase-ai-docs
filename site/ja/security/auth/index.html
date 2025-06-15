@@ -1,0 +1,288 @@
+<!doctype html><html lang=ja class=no-js> <head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="AI-Ops を搭載したマルチテナント Kubernetes as a Service"><meta name=author content="Hexabase.AI Team"><link href=https://docs.hexabase.ai/ja/security/auth/ rel=canonical><link rel=icon href=../../assets/images/favicon.png><meta name=generator content="mkdocs-1.6.1, mkdocs-material-9.6.14"><title>Authentication and Authorization - Hexabase.AI</title><link rel=stylesheet href=../../assets/stylesheets/main.342714a4.min.css><link rel=stylesheet href=../../assets/stylesheets/palette.06af60db.min.css><style>
+  /* FORCE TOP NAVIGATION TAB COLORS - HIGHEST SPECIFICITY */
+  /* Target all possible tab link elements */
+  .md-header .md-tabs__link,
+  .md-header .md-tabs a,
+  .md-tabs__item a,
+  .md-tabs__list a,
+  .md-tabs .md-tabs__link,
+  .md-header-nav .md-tabs__link,
+  header .md-tabs__link,
+  header .md-tabs a {
+    color: #FFFFFF !important;
+    opacity: 0.8 !important;
+    transition: all 0.2s ease !important;
+  }
+  
+  /* Hover state - green */
+  .md-header .md-tabs__link:hover,
+  .md-header .md-tabs a:hover,
+  .md-tabs__item a:hover,
+  .md-tabs__list a:hover,
+  .md-tabs .md-tabs__link:hover,
+  .md-header-nav .md-tabs__link:hover,
+  header .md-tabs__link:hover,
+  header .md-tabs a:hover,
+  .md-tabs__link:focus {
+    color: #00C6AB !important;
+    opacity: 1 !important;
+    background-color: transparent !important;
+  }
+  
+  /* Active/selected state - green */
+  .md-header .md-tabs__link--active,
+  .md-header .md-tabs__item--active a,
+  .md-tabs__item--active .md-tabs__link,
+  .md-tabs__link--active,
+  .md-tabs__link[data-md-state="active"],
+  header .md-tabs__link--active,
+  header .md-tabs__item--active a {
+    color: #00C6AB !important;
+    opacity: 1 !important;
+    font-weight: 600 !important;
+    background-color: transparent !important;
+  }
+  
+  /* Remove any accent color overrides */
+  .md-tabs__link {
+    --md-accent-fg-color: transparent !important;
+    --md-accent-fg-color--transparent: transparent !important;
+  }
+  
+  /* Active indicator line */
+  .md-tabs__link::after {
+    background-color: transparent !important;
+  }
+  
+  .md-tabs__link--active::after,
+  .md-tabs__item--active .md-tabs__link::after {
+    background-color: #00C6AB !important;
+  }
+  
+  /* LEFT SIDEBAR NAVIGATION */
+  /* Category headers (UseCases, Scenarios, etc) - Bold Black */
+  .md-nav--primary .md-nav__item--nested > .md-nav__link,
+  .md-nav--primary .md-nav__item--section > .md-nav__link,
+  .md-nav__item[data-md-level="1"] > .md-nav__link,
+  .md-nav__title[data-md-level="1"],
+  /* Target the specific structure shown in screenshot */
+  .md-nav__item--nested > label,
+  .md-nav__item--section > label {
+    color: #000000 !important;
+    font-weight: 700 !important;
+    opacity: 1 !important;
+  }
+  
+  /* All regular navigation links - default state */
+  .md-nav--primary .md-nav__link:not(.md-nav__link--active) {
+    color: rgba(0, 0, 0, 0.87) !important;
+    font-weight: 400 !important;
+  }
+  
+  /* Only the exact active/selected page - Pink */
+  .md-nav--primary .md-nav__link--active:not(.md-nav__item--nested > .md-nav__link) {
+    color: #FF346B !important;
+    font-weight: 600 !important;
+  }
+  
+  /* Hover state for non-category items - Pink with transparency */
+  .md-nav--primary .md-nav__link:hover:not(.md-nav__item--nested > .md-nav__link):not(.md-nav__link--active) {
+    color: #FF346B !important;
+    opacity: 0.8 !important;
+  }
+  
+  /* Ensure parent categories stay black even when child is active */
+  .md-nav__item--active.md-nav__item--nested > .md-nav__link,
+  .md-nav__item--active.md-nav__item--section > .md-nav__link,
+  .md-nav__item--active > label {
+    color: #000000 !important;
+    font-weight: 700 !important;
+  }
+  
+  /* Mobile navigation adjustments */
+  @media screen and (max-width: 76.1875em) {
+    .md-nav--primary .md-nav__link {
+      color: rgba(0, 0, 0, 0.87) !important;
+    }
+    
+    .md-nav--primary .md-nav__link--active {
+      color: #FF346B !important;
+    }
+  }
+  
+  /* DARK MODE STYLES - MAXIMUM SPECIFICITY */
+  /* Force all navigation links to be visible in dark mode */
+  body[data-md-color-scheme="slate"] .md-nav__link,
+  html[data-md-color-scheme="slate"] .md-nav__link,
+  [data-md-color-scheme="slate"] .md-sidebar .md-nav__link,
+  [data-md-color-scheme="slate"] .md-sidebar__scrollwrap .md-nav__link,
+  [data-md-color-scheme="slate"] .md-nav--primary .md-nav__link {
+    color: #BDBDBD !important;
+  }
+  
+  /* Category headers - Bold light gray */
+  body[data-md-color-scheme="slate"] .md-nav__item--nested > .md-nav__link,
+  body[data-md-color-scheme="slate"] .md-nav__item--section > .md-nav__link,
+  [data-md-color-scheme="slate"] .md-sidebar .md-nav__item--nested > .md-nav__link,
+  [data-md-color-scheme="slate"] .md-nav--primary .md-nav__item--nested > .md-nav__link {
+    color: #E0E0E0 !important;
+    font-weight: 700 !important;
+  }
+  
+  /* Active/selected page - Light Pink */
+  body[data-md-color-scheme="slate"] .md-nav__link--active,
+  [data-md-color-scheme="slate"] .md-sidebar .md-nav__link--active,
+  [data-md-color-scheme="slate"] .md-nav--primary .md-nav__link--active {
+    color: #FF548B !important;
+    font-weight: 600 !important;
+  }
+  
+  /* Hover state - Light Pink */
+  body[data-md-color-scheme="slate"] .md-nav__link:hover,
+  [data-md-color-scheme="slate"] .md-sidebar .md-nav__link:hover {
+    color: #FF548B !important;
+    opacity: 0.8 !important;
+  }
+  
+  /* Keep categories light gray even on hover */
+  body[data-md-color-scheme="slate"] .md-nav__item--nested > .md-nav__link:hover,
+  [data-md-color-scheme="slate"] .md-nav__item--nested > .md-nav__link:hover {
+    color: #E0E0E0 !important;
+    opacity: 1 !important;
+  }
+  
+  /* Mobile dark mode */
+  @media screen and (max-width: 76.1875em) {
+    body[data-md-color-scheme="slate"] .md-nav__link,
+    [data-md-color-scheme="slate"] .md-nav__link {
+      color: #BDBDBD !important;
+    }
+  }
+</style><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback"><style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style><link rel=stylesheet href=../../stylesheets/extra.css><script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script></head> <body dir=ltr data-md-color-scheme=default data-md-color-primary=custom data-md-color-accent=custom> <input class=md-toggle data-md-toggle=drawer type=checkbox id=__drawer autocomplete=off> <input class=md-toggle data-md-toggle=search type=checkbox id=__search autocomplete=off> <label class=md-overlay for=__drawer></label> <div data-md-component=skip> <a href=#authentication-and-authorization class=md-skip> コンテンツにスキップ </a> </div> <div data-md-component=announce> </div> <header class=md-header data-md-component=header> <nav class="md-header__inner md-grid" aria-label=ヘッダー> <a href=../.. title=Hexabase.AI class="md-header__button md-logo" aria-label=Hexabase.AI data-md-component=logo> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M13.95 13.5h-.23c-.18.11-.26.32-.18.5l.86 2.11c.83-.53 1.46-1.32 1.79-2.25l-2.23-.36zm-3.45.29a.415.415 0 0 0-.38-.29h-.08l-2.22.37c.33.92.96 1.7 1.79 2.23l.85-2.07V14c.04-.05.04-.14.04-.21m1.83.81a.38.38 0 0 0-.51-.15c-.07.05-.12.08-.15.15h-.01l-1.09 1.97c.78.26 1.62.31 2.43.12.14-.03.29-.07.43-.12l-1.09-1.97zm3.45-4.57L14.1 11.5l.01.03a.37.37 0 0 0-.04.53q.075.09.18.12l.01.01 2.17.62c.07-.97-.14-1.95-.65-2.78m-3.11.16c.01.21.18.37.39.36.08 0 .15-.02.21-.05h.01l1.83-1.31a4.45 4.45 0 0 0-2.57-1.24zm-1.94.31c.17.11.4.08.52-.09.05-.06.07-.13.08-.21h.01l.12-2.25c-.15.02-.3.05-.46.08-.8.18-1.54.58-2.12 1.16l1.84 1.31zm-.99 1.69c.2-.05.32-.26.26-.46 0-.08-.05-.14-.11-.19v-.01L8.21 10c-.52.86-.74 1.84-.63 2.82l2.16-.62zm1.64.66.62.3.62-.3.15-.67-.43-.53h-.69l-.43.53zm10.89 1.32L20.5 6.5c-.09-.42-.37-.76-.74-.94l-7.17-3.43c-.37-.17-.81-.17-1.19 0L4.24 5.56c-.37.18-.65.52-.74.94l-1.77 7.67c-.05.2-.05.4 0 .59.01.06.03.12.05.18.03.09.08.19.13.27.03.04.05.08.09.11l4.95 6.18c.02 0 .05.04.05.06.1.09.19.16.28.22.12.08.26.14.4.17.11.05.23.05.32.05h8.12c.07 0 .14-.03.2-.05.05-.01.1-.03.14-.04.04-.02.07-.03.11-.05.05-.02.1-.05.15-.08.12-.08.23-.18.33-.28l.15-.2 4.8-5.98c.1-.12.17-.25.22-.38.02-.06.04-.12.05-.18.05-.19.05-.4 0-.59m-7.43 2.99c.02.06.04.12.07.17-.04.08-.06.17-.03.26.12.24.23.46.38.68.08.11.16.23.24.34 0 .03.03.08.04.12.12.2.06.46-.15.59s-.47.05-.59-.15c-.01-.03-.02-.05-.03-.08-.02-.03-.04-.09-.06-.09-.05-.15-.09-.28-.12-.41-.09-.25-.17-.49-.3-.72a.38.38 0 0 0-.21-.14l-.08-.16c-1.29.48-2.7.48-3.97-.01l-.1.18c-.07.01-.14.04-.19.09-.14.24-.24.49-.33.77-.03.13-.07.26-.12.4-.02 0-.04.07-.06.1a.43.43 0 0 1-.81-.29c.01-.03.03-.05.04-.08.04-.03.04-.08.04-.11.09-.12.16-.23.24-.35.16-.21.29-.45.39-.69a.54.54 0 0 0-.03-.25l.07-.18a5.6 5.6 0 0 1-2.47-3.09l-.2.03a.4.4 0 0 0-.23-.09c-.27.05-.51.13-.77.22-.11.06-.24.11-.37.15-.03.01-.07.02-.13.03a.44.44 0 0 1-.54-.27c-.07-.23.04-.47.28-.55.02 0 .05-.01.08-.01v-.01h.01l.11-.02c.14-.04.28-.04.41-.04.26 0 .52-.06.77-.12.08-.05.14-.11.19-.19l.19-.05c-.21-1.36.1-2.73.86-3.87l-.14-.12c0-.09-.03-.18-.08-.25-.2-.17-.41-.32-.64-.45q-.18-.09-.36-.21c-.02-.02-.06-.05-.08-.07l-.01-.01c-.2-.16-.25-.42-.11-.63.09-.1.21-.15.35-.15q.165.015.3.12l.09.07c.1.09.19.2.28.3.18.19.37.37.58.52.08.04.17.05.26.03l.15.11c.75-.8 1.73-1.36 2.8-1.6.25-.06.52-.1.78-.12l.01-.18a.45.45 0 0 0 .14-.23c.01-.26-.01-.52-.05-.77-.03-.13-.05-.27-.06-.41V5.1c-.02-.24.15-.45.39-.48s.44.15.47.38v.22c-.01.14-.03.28-.06.41-.04.25-.06.51-.05.77.02.1.07.17.14.22l.01.19c1.36.12 2.62.73 3.56 1.72l.16-.12c.09.02.18.01.26-.03.21-.15.41-.33.58-.52.09-.1.18-.2.28-.3.03-.02.07-.06.1-.06.17-.18.44-.18.59 0 .19.16.18.43 0 .6 0 .02-.03.04-.06.06a2.495 2.495 0 0 1-.44.28c-.23.13-.45.28-.64.45-.06.07-.09.15-.08.24l-.16.14a5.44 5.44 0 0 1 .88 3.86l.19.05c.04.08.11.14.19.18.25.07.51.11.77.14h.41c.03.03.08.04.12.05.24.03.4.25.37.49-.05.23-.24.4-.48.37-.03-.01-.07-.01-.07-.02v-.01c-.06 0-.1-.01-.14-.02q-.195-.06-.36-.15c-.26-.1-.5-.17-.77-.21-.09 0-.17 0-.23.08-.07-.01-.13-.02-.19-.03-.41 1.31-1.31 2.41-2.47 3.11"/></svg> </a> <label class="md-header__button md-icon" for=__drawer> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg> </label> <div class=md-header__title data-md-component=header-title> <div class=md-header__ellipsis> <div class=md-header__topic> <span class=md-ellipsis> Hexabase.AI </span> </div> <div class=md-header__topic data-md-component=header-topic> <span class=md-ellipsis> Authentication and Authorization </span> </div> </div> </div> <form class=md-header__option data-md-component=palette> <input class=md-option data-md-color-media data-md-color-scheme=default data-md-color-primary=custom data-md-color-accent=custom aria-label=ダークモードに切り替え type=radio name=__palette id=__palette_0> <label class="md-header__button md-icon" title=ダークモードに切り替え for=__palette_1 hidden> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg> </label> <input class=md-option data-md-color-media data-md-color-scheme=slate data-md-color-primary=custom data-md-color-accent=custom aria-label=ライトモードに切り替え type=radio name=__palette id=__palette_1> <label class="md-header__button md-icon" title=ライトモードに切り替え for=__palette_0 hidden> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg> </label> </form> <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script> <div class=md-header__option> <div class=md-select> <button class="md-header__button md-icon" aria-label=言語切り替え> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg> </button> <div class=md-select__inner> <ul class=md-select__list> <li class=md-select__item> <a href=/ja/ hreflang=ja class=md-select__link> 日本語 </a> </li> <li class=md-select__item> <a href=/ hreflang=en class=md-select__link> English </a> </li> </ul> </div> </div> </div> <label class="md-header__button md-icon" for=__search> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg> </label> <div class=md-search data-md-component=search role=dialog> <label class=md-search__overlay for=__search></label> <div class=md-search__inner role=search> <form class=md-search__form name=search> <input type=text class=md-search__input name=query aria-label=検索 placeholder=検索 autocapitalize=off autocorrect=off autocomplete=off spellcheck=false data-md-component=search-query required> <label class="md-search__icon md-icon" for=__search> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg> </label> <nav class=md-search__options aria-label=検索> <button type=reset class="md-search__icon md-icon" title=クリア aria-label=クリア tabindex=-1> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg> </button> </nav> <div class=md-search__suggest data-md-component=search-suggest></div> </form> <div class=md-search__output> <div class=md-search__scrollwrap tabindex=0 data-md-scrollfix> <div class=md-search-result data-md-component=search-result> <div class=md-search-result__meta> 検索を初期化 </div> <ol class=md-search-result__list role=presentation></ol> </div> </div> </div> </div> </div> </nav> </header> <div class=md-container data-md-component=container> <nav class=md-tabs aria-label=タブ data-md-component=tabs> <div class=md-grid> <ul class=md-tabs__list> <li class=md-tabs__item> <a href=../../ja/ class=md-tabs__link> ホーム </a> </li> <li class=md-tabs__item> <a href=../../ja/architecture/index.md class=md-tabs__link> アーキテクチャ </a> </li> <li class=md-tabs__item> <a href=../../ja/rbac/ class=md-tabs__link> クラスターと権限管理 </a> </li> <li class=md-tabs__item> <a href=../../ja/nodes/ class=md-tabs__link> ノード(VM)とストレージ </a> </li> <li class=md-tabs__item> <a href=../../ja/applications/ class=md-tabs__link> アプリケーション </a> </li> <li class=md-tabs__item> <a href=../../ja/cicd/index.md class=md-tabs__link> CI/CD </a> </li> <li class=md-tabs__item> <a href=../../ja/functions/index.md class=md-tabs__link> Functions </a> </li> <li class=md-tabs__item> <a href=../../ja/cronjobs/index.md class=md-tabs__link> バッチ処理(CronJob) </a> </li> <li class=md-tabs__item> <a href=../../ja/backups/index.md class=md-tabs__link> バックアップ </a> </li> <li class=md-tabs__item> <a href=../../ja/observability/index.md class=md-tabs__link> オブザーバビリティ(監視) </a> </li> <li class=md-tabs__item> <a href=../../ja/security/index.md class=md-tabs__link> セキュリティ </a> </li> <li class=md-tabs__item> <a href=../../ja/aiops/index.md class=md-tabs__link> AIOps </a> </li> <li class=md-tabs__item> <a href=../../ja/api/index.md class=md-tabs__link> APIリファレンス </a> </li> <li class=md-tabs__item> <a href=../../ja/sdk/index.md class=md-tabs__link> SDK </a> </li> </ul> </div> </nav> <main class=md-main data-md-component=main> <div class="md-main__inner md-grid"> <div class="md-sidebar md-sidebar--primary" data-md-component=sidebar data-md-type=navigation> <div class=md-sidebar__scrollwrap> <div class=md-sidebar__inner> <nav class="md-nav md-nav--primary md-nav--lifted" aria-label=ナビゲーション data-md-level=0> <label class=md-nav__title for=__drawer> <a href=../.. title=Hexabase.AI class="md-nav__button md-logo" aria-label=Hexabase.AI data-md-component=logo> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M13.95 13.5h-.23c-.18.11-.26.32-.18.5l.86 2.11c.83-.53 1.46-1.32 1.79-2.25l-2.23-.36zm-3.45.29a.415.415 0 0 0-.38-.29h-.08l-2.22.37c.33.92.96 1.7 1.79 2.23l.85-2.07V14c.04-.05.04-.14.04-.21m1.83.81a.38.38 0 0 0-.51-.15c-.07.05-.12.08-.15.15h-.01l-1.09 1.97c.78.26 1.62.31 2.43.12.14-.03.29-.07.43-.12l-1.09-1.97zm3.45-4.57L14.1 11.5l.01.03a.37.37 0 0 0-.04.53q.075.09.18.12l.01.01 2.17.62c.07-.97-.14-1.95-.65-2.78m-3.11.16c.01.21.18.37.39.36.08 0 .15-.02.21-.05h.01l1.83-1.31a4.45 4.45 0 0 0-2.57-1.24zm-1.94.31c.17.11.4.08.52-.09.05-.06.07-.13.08-.21h.01l.12-2.25c-.15.02-.3.05-.46.08-.8.18-1.54.58-2.12 1.16l1.84 1.31zm-.99 1.69c.2-.05.32-.26.26-.46 0-.08-.05-.14-.11-.19v-.01L8.21 10c-.52.86-.74 1.84-.63 2.82l2.16-.62zm1.64.66.62.3.62-.3.15-.67-.43-.53h-.69l-.43.53zm10.89 1.32L20.5 6.5c-.09-.42-.37-.76-.74-.94l-7.17-3.43c-.37-.17-.81-.17-1.19 0L4.24 5.56c-.37.18-.65.52-.74.94l-1.77 7.67c-.05.2-.05.4 0 .59.01.06.03.12.05.18.03.09.08.19.13.27.03.04.05.08.09.11l4.95 6.18c.02 0 .05.04.05.06.1.09.19.16.28.22.12.08.26.14.4.17.11.05.23.05.32.05h8.12c.07 0 .14-.03.2-.05.05-.01.1-.03.14-.04.04-.02.07-.03.11-.05.05-.02.1-.05.15-.08.12-.08.23-.18.33-.28l.15-.2 4.8-5.98c.1-.12.17-.25.22-.38.02-.06.04-.12.05-.18.05-.19.05-.4 0-.59m-7.43 2.99c.02.06.04.12.07.17-.04.08-.06.17-.03.26.12.24.23.46.38.68.08.11.16.23.24.34 0 .03.03.08.04.12.12.2.06.46-.15.59s-.47.05-.59-.15c-.01-.03-.02-.05-.03-.08-.02-.03-.04-.09-.06-.09-.05-.15-.09-.28-.12-.41-.09-.25-.17-.49-.3-.72a.38.38 0 0 0-.21-.14l-.08-.16c-1.29.48-2.7.48-3.97-.01l-.1.18c-.07.01-.14.04-.19.09-.14.24-.24.49-.33.77-.03.13-.07.26-.12.4-.02 0-.04.07-.06.1a.43.43 0 0 1-.81-.29c.01-.03.03-.05.04-.08.04-.03.04-.08.04-.11.09-.12.16-.23.24-.35.16-.21.29-.45.39-.69a.54.54 0 0 0-.03-.25l.07-.18a5.6 5.6 0 0 1-2.47-3.09l-.2.03a.4.4 0 0 0-.23-.09c-.27.05-.51.13-.77.22-.11.06-.24.11-.37.15-.03.01-.07.02-.13.03a.44.44 0 0 1-.54-.27c-.07-.23.04-.47.28-.55.02 0 .05-.01.08-.01v-.01h.01l.11-.02c.14-.04.28-.04.41-.04.26 0 .52-.06.77-.12.08-.05.14-.11.19-.19l.19-.05c-.21-1.36.1-2.73.86-3.87l-.14-.12c0-.09-.03-.18-.08-.25-.2-.17-.41-.32-.64-.45q-.18-.09-.36-.21c-.02-.02-.06-.05-.08-.07l-.01-.01c-.2-.16-.25-.42-.11-.63.09-.1.21-.15.35-.15q.165.015.3.12l.09.07c.1.09.19.2.28.3.18.19.37.37.58.52.08.04.17.05.26.03l.15.11c.75-.8 1.73-1.36 2.8-1.6.25-.06.52-.1.78-.12l.01-.18a.45.45 0 0 0 .14-.23c.01-.26-.01-.52-.05-.77-.03-.13-.05-.27-.06-.41V5.1c-.02-.24.15-.45.39-.48s.44.15.47.38v.22c-.01.14-.03.28-.06.41-.04.25-.06.51-.05.77.02.1.07.17.14.22l.01.19c1.36.12 2.62.73 3.56 1.72l.16-.12c.09.02.18.01.26-.03.21-.15.41-.33.58-.52.09-.1.18-.2.28-.3.03-.02.07-.06.1-.06.17-.18.44-.18.59 0 .19.16.18.43 0 .6 0 .02-.03.04-.06.06a2.495 2.495 0 0 1-.44.28c-.23.13-.45.28-.64.45-.06.07-.09.15-.08.24l-.16.14a5.44 5.44 0 0 1 .88 3.86l.19.05c.04.08.11.14.19.18.25.07.51.11.77.14h.41c.03.03.08.04.12.05.24.03.4.25.37.49-.05.23-.24.4-.48.37-.03-.01-.07-.01-.07-.02v-.01c-.06 0-.1-.01-.14-.02q-.195-.06-.36-.15c-.26-.1-.5-.17-.77-.21-.09 0-.17 0-.23.08-.07-.01-.13-.02-.19-.03-.41 1.31-1.31 2.41-2.47 3.11"/></svg> </a> Hexabase.AI </label> <ul class=md-nav__list data-md-scrollfix> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../ja/ class=md-nav__link> <span class=md-ellipsis> ホーム </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../ja/architecture/index.md class=md-nav__link> <span class=md-ellipsis> アーキテクチャ </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../ja/rbac/ class=md-nav__link> <span class=md-ellipsis> クラスターと権限管理 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../ja/nodes/ class=md-nav__link> <span class=md-ellipsis> ノード(VM)とストレージ </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../ja/applications/ class=md-nav__link> <span class=md-ellipsis> アプリケーション </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../ja/cicd/index.md class=md-nav__link> <span class=md-ellipsis> CI/CD </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../ja/functions/index.md class=md-nav__link> <span class=md-ellipsis> Functions </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../ja/cronjobs/index.md class=md-nav__link> <span class=md-ellipsis> バッチ処理(CronJob) </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../ja/backups/index.md class=md-nav__link> <span class=md-ellipsis> バックアップ </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../ja/observability/index.md class=md-nav__link> <span class=md-ellipsis> オブザーバビリティ(監視) </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../ja/security/index.md class=md-nav__link> <span class=md-ellipsis> セキュリティ </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../ja/aiops/index.md class=md-nav__link> <span class=md-ellipsis> AIOps </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../ja/api/index.md class=md-nav__link> <span class=md-ellipsis> APIリファレンス </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../ja/sdk/index.md class=md-nav__link> <span class=md-ellipsis> SDK </span> <span class="md-nav__icon md-icon"></span> </a> </li> </ul> </nav> </div> </div> </div> <div class="md-sidebar md-sidebar--secondary" data-md-component=sidebar data-md-type=toc> <div class=md-sidebar__scrollwrap> <div class=md-sidebar__inner> <nav class="md-nav md-nav--secondary" aria-label=目次> <label class=md-nav__title for=__toc> <span class="md-nav__icon md-icon"></span> 目次 </label> <ul class=md-nav__list data-md-component=toc data-md-scrollfix> <li class=md-nav__item> <a href=#authentication-authn-who-are-you class=md-nav__link> <span class=md-ellipsis> Authentication (AuthN) - Who are you? </span> </a> <nav class=md-nav aria-label="Authentication (AuthN) - Who are you?"> <ul class=md-nav__list> <li class=md-nav__item> <a href=#1-user-authentication-via-oauth-20-and-oidc class=md-nav__link> <span class=md-ellipsis> 1. User Authentication via OAuth 2.0 and OIDC </span> </a> </li> <li class=md-nav__item> <a href=#2-service-account-authentication-for-machines class=md-nav__link> <span class=md-ellipsis> 2. Service Account Authentication (for Machines) </span> </a> </li> </ul> </nav> </li> <li class=md-nav__item> <a href=#authorization-authz-what-can-you-do class=md-nav__link> <span class=md-ellipsis> Authorization (AuthZ) - What can you do? </span> </a> <nav class=md-nav aria-label="Authorization (AuthZ) - What can you do?"> <ul class=md-nav__list> <li class=md-nav__item> <a href=#the-hks-rbac-model class=md-nav__link> <span class=md-ellipsis> The HKS RBAC Model </span> </a> </li> <li class=md-nav__item> <a href=#how-authorization-works class=md-nav__link> <span class=md-ellipsis> How Authorization Works </span> </a> </li> <li class=md-nav__item> <a href=#kubernetes-rbac-integration class=md-nav__link> <span class=md-ellipsis> Kubernetes RBAC Integration </span> </a> </li> </ul> </nav> </li> <li class=md-nav__item> <a href=#security-best-practices class=md-nav__link> <span class=md-ellipsis> Security Best Practices </span> </a> </li> </ul> </nav> </div> </div> </div> <div class=md-content data-md-component=content> <article class="md-content__inner md-typeset"> <h1 id=authentication-and-authorization>Authentication and Authorization<a class=headerlink href=#authentication-and-authorization title="Permanent link">&para;</a></h1> <p>Security is paramount in a multi-tenant environment. Hexabase.AI implements robust, standards-based authentication and authorization mechanisms to ensure that only legitimate users and services can access your resources.</p> <h2 id=authentication-authn-who-are-you>Authentication (AuthN) - Who are you?<a class=headerlink href=#authentication-authn-who-are-you title="Permanent link">&para;</a></h2> <p>Authentication is the process of verifying the identity of a user or service. HKS supports multiple authentication methods.</p> <h3 id=1-user-authentication-via-oauth-20-and-oidc>1. User Authentication via OAuth 2.0 and OIDC<a class=headerlink href=#1-user-authentication-via-oauth-20-and-oidc title="Permanent link">&para;</a></h3> <ul> <li><strong>Mechanism</strong>: All user-facing interactions with HKS (UI and CLI) are authenticated using the OAuth 2.0 Authorization Code Flow with PKCE. HKS acts as an OAuth 2.0 client, and it integrates with an OIDC (OpenID Connect) provider for identity verification.</li> <li><strong>Default Provider</strong>: Hexabase.AI provides a built-in OIDC provider for new organizations.</li> <li><strong>Single Sign-On (SSO)</strong>: For Enterprise plans, you can integrate your own identity provider (IdP) like <strong>Okta, Azure Active Directory, or Google Workspace</strong>. This allows your users to log in using their existing corporate credentials.</li> </ul> <p><strong>SSO Configuration Example (for Org Admins):</strong></p> <div class="language-yaml highlight"><pre><span></span><code><span id=__span-0-1><a id=__codelineno-0-1 name=__codelineno-0-1 href=#__codelineno-0-1></a><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">hks.io/v1</span>
+</span><span id=__span-0-2><a id=__codelineno-0-2 name=__codelineno-0-2 href=#__codelineno-0-2></a><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">AuthProvider</span>
+</span><span id=__span-0-3><a id=__codelineno-0-3 name=__codelineno-0-3 href=#__codelineno-0-3></a><span class=nt>metadata</span><span class=p>:</span>
+</span><span id=__span-0-4><a id=__codelineno-0-4 name=__codelineno-0-4 href=#__codelineno-0-4></a><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">okta-sso</span>
+</span><span id=__span-0-5><a id=__codelineno-0-5 name=__codelineno-0-5 href=#__codelineno-0-5></a><span class=nt>spec</span><span class=p>:</span>
+</span><span id=__span-0-6><a id=__codelineno-0-6 name=__codelineno-0-6 href=#__codelineno-0-6></a><span class=w>  </span><span class=nt>type</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">oidc</span>
+</span><span id=__span-0-7><a id=__codelineno-0-7 name=__codelineno-0-7 href=#__codelineno-0-7></a><span class=w>  </span><span class=nt>config</span><span class=p>:</span>
+</span><span id=__span-0-8><a id=__codelineno-0-8 name=__codelineno-0-8 href=#__codelineno-0-8></a><span class=w>    </span><span class=nt>issuerUrl</span><span class=p>:</span><span class=w> </span><span class=s>&quot;https://my-org.okta.com&quot;</span>
+</span><span id=__span-0-9><a id=__codelineno-0-9 name=__codelineno-0-9 href=#__codelineno-0-9></a><span class=w>    </span><span class=nt>clientId</span><span class=p>:</span><span class=w> </span><span class=s>&quot;hks-client-id&quot;</span>
+</span><span id=__span-0-10><a id=__codelineno-0-10 name=__codelineno-0-10 href=#__codelineno-0-10></a><span class=w>    </span><span class=nt>clientSecretRef</span><span class=p>:</span>
+</span><span id=__span-0-11><a id=__codelineno-0-11 name=__codelineno-0-11 href=#__codelineno-0-11></a><span class=w>      </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">okta-secret</span>
+</span><span id=__span-0-12><a id=__codelineno-0-12 name=__codelineno-0-12 href=#__codelineno-0-12></a><span class=w>      </span><span class=nt>key</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">clientSecret</span>
+</span><span id=__span-0-13><a id=__codelineno-0-13 name=__codelineno-0-13 href=#__codelineno-0-13></a><span class=w>    </span><span class=nt>scopes</span><span class=p>:</span>
+</span><span id=__span-0-14><a id=__codelineno-0-14 name=__codelineno-0-14 href=#__codelineno-0-14></a><span class=w>      </span><span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">openid</span>
+</span><span id=__span-0-15><a id=__codelineno-0-15 name=__codelineno-0-15 href=#__codelineno-0-15></a><span class=w>      </span><span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">profile</span>
+</span><span id=__span-0-16><a id=__codelineno-0-16 name=__codelineno-0-16 href=#__codelineno-0-16></a><span class=w>      </span><span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">email</span>
+</span><span id=__span-0-17><a id=__codelineno-0-17 name=__codelineno-0-17 href=#__codelineno-0-17></a><span class=w>      </span><span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">groups</span>
+</span><span id=__span-0-18><a id=__codelineno-0-18 name=__codelineno-0-18 href=#__codelineno-0-18></a><span class=w>    </span><span class=nt>groupClaim</span><span class=p>:</span><span class=w> </span><span class=s>&quot;groups&quot;</span>
+</span></code></pre></div> <h3 id=2-service-account-authentication-for-machines>2. Service Account Authentication (for Machines)<a class=headerlink href=#2-service-account-authentication-for-machines title="Permanent link">&para;</a></h3> <ul> <li><strong>Mechanism</strong>: For programmatic access (e.g., in CI/CD pipelines or scripts), HKS uses Service Accounts. These are non-user accounts that can be granted specific permissions.</li> <li><strong>Authentication Method</strong>: Service Accounts authenticate using signed JSON Web Tokens (JWTs). These tokens are short-lived for enhanced security.</li> </ul> <p><strong>Creating a Service Account and API Key:</strong></p> <div class="language-bash highlight"><pre><span></span><code><span id=__span-1-1><a id=__codelineno-1-1 name=__codelineno-1-1 href=#__codelineno-1-1></a><span class=c1># Create a service account</span>
+</span><span id=__span-1-2><a id=__codelineno-1-2 name=__codelineno-1-2 href=#__codelineno-1-2></a>hks<span class=w> </span>create<span class=w> </span>service-account<span class=w> </span>cicd-agent<span class=w> </span>--description<span class=w> </span><span class=s2>&quot;For CI/CD pipeline&quot;</span>
+</span><span id=__span-1-3><a id=__codelineno-1-3 name=__codelineno-1-3 href=#__codelineno-1-3></a>
+</span><span id=__span-1-4><a id=__codelineno-1-4 name=__codelineno-1-4 href=#__codelineno-1-4></a><span class=c1># Create an API key (JWT) for the service account</span>
+</span><span id=__span-1-5><a id=__codelineno-1-5 name=__codelineno-1-5 href=#__codelineno-1-5></a>hks<span class=w> </span>create<span class=w> </span>api-key<span class=w> </span>--service-account<span class=w> </span>cicd-agent<span class=w> </span>--duration<span class=w> </span>24h
+</span></code></pre></div> <p>The output of this command is a JWT that can be used as a Bearer token in API requests.</p> <h2 id=authorization-authz-what-can-you-do>Authorization (AuthZ) - What can you do?<a class=headerlink href=#authorization-authz-what-can-you-do title="Permanent link">&para;</a></h2> <p>Authorization is the process of determining what an authenticated user or service is allowed to do. HKS uses a sophisticated Role-Based Access Control (RBAC) model.</p> <h3 id=the-hks-rbac-model>The HKS RBAC Model<a class=headerlink href=#the-hks-rbac-model title="Permanent link">&para;</a></h3> <p>The authorization model has two main layers:</p> <ol> <li><strong>Organization RBAC</strong>: Defines roles at the organization level (<code>org_admin</code>, <code>org_user</code>). Org Admins can manage billing, users, and workspaces.</li> <li><strong>Workspace RBAC</strong>: Defines roles within a specific workspace (<code>workspace_admin</code>, <code>developer</code>, <code>viewer</code>). These roles grant permissions to interact with Kubernetes resources (Deployments, Pods, etc.) within that workspace.</li> </ol> <p>For more details, see the dedicated <a href=../../rbac/ >RBAC documentation</a>.</p> <h3 id=how-authorization-works>How Authorization Works<a class=headerlink href=#how-authorization-works title="Permanent link">&para;</a></h3> <ol> <li>A user or service makes a request to the HKS API with a valid JWT.</li> <li>The API gateway validates the token.</li> <li>The AuthZ service extracts the user/service identity and their associated roles/groups from the token.</li> <li>It checks the requested action (e.g., <code>create Deployment in 'prod-workspace'</code>) against the RBAC policies defined for that user/role.</li> <li>If the policy allows the action, the request is forwarded to the appropriate backend service.</li> <li>If not, a <code>403 Forbidden</code> error is returned.</li> </ol> <h3 id=kubernetes-rbac-integration>Kubernetes RBAC Integration<a class=headerlink href=#kubernetes-rbac-integration title="Permanent link">&para;</a></h3> <ul> <li>HKS RBAC seamlessly integrates with the underlying Kubernetes RBAC.</li> <li>When you assign a user the <code>developer</code> role in a workspace, HKS automatically creates a corresponding <code>Role</code> and <code>RoleBinding</code> in the underlying Kubernetes namespace for that workspace.</li> <li>This ensures that when the user interacts with the Kubernetes API server directly (e.g., via <code>kubectl</code>), the same permissions are enforced.</li> </ul> <p><strong>Example of a generated Kubernetes Role:</strong></p> <div class="language-yaml highlight"><pre><span></span><code><span id=__span-2-1><a id=__codelineno-2-1 name=__codelineno-2-1 href=#__codelineno-2-1></a><span class=c1># This role is automatically created and managed by HKS</span>
+</span><span id=__span-2-2><a id=__codelineno-2-2 name=__codelineno-2-2 href=#__codelineno-2-2></a><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">rbac.authorization.k8s.io/v1</span>
+</span><span id=__span-2-3><a id=__codelineno-2-3 name=__codelineno-2-3 href=#__codelineno-2-3></a><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">Role</span>
+</span><span id=__span-2-4><a id=__codelineno-2-4 name=__codelineno-2-4 href=#__codelineno-2-4></a><span class=nt>metadata</span><span class=p>:</span>
+</span><span id=__span-2-5><a id=__codelineno-2-5 name=__codelineno-2-5 href=#__codelineno-2-5></a><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">hks-developer-role</span>
+</span><span id=__span-2-6><a id=__codelineno-2-6 name=__codelineno-2-6 href=#__codelineno-2-6></a><span class=w>  </span><span class=nt>namespace</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">prod-workspace-ns</span>
+</span><span id=__span-2-7><a id=__codelineno-2-7 name=__codelineno-2-7 href=#__codelineno-2-7></a><span class=nt>rules</span><span class=p>:</span>
+</span><span id=__span-2-8><a id=__codelineno-2-8 name=__codelineno-2-8 href=#__codelineno-2-8></a><span class=w>  </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>apiGroups</span><span class=p>:</span><span class=w> </span><span class="p p-Indicator">[</span><span class=s>&quot;&quot;</span><span class="p p-Indicator">,</span><span class=w> </span><span class=s>&quot;apps&quot;</span><span class="p p-Indicator">,</span><span class=w> </span><span class=s>&quot;batch&quot;</span><span class="p p-Indicator">]</span>
+</span><span id=__span-2-9><a id=__codelineno-2-9 name=__codelineno-2-9 href=#__codelineno-2-9></a><span class=w>    </span><span class=nt>resources</span><span class=p>:</span><span class=w> </span><span class="p p-Indicator">[</span><span class=s>&quot;pods&quot;</span><span class="p p-Indicator">,</span><span class=w> </span><span class=s>&quot;deployments&quot;</span><span class="p p-Indicator">,</span><span class=w> </span><span class=s>&quot;services&quot;</span><span class="p p-Indicator">,</span><span class=w> </span><span class=s>&quot;jobs&quot;</span><span class="p p-Indicator">,</span><span class=w> </span><span class=s>&quot;cronjobs&quot;</span><span class="p p-Indicator">]</span>
+</span><span id=__span-2-10><a id=__codelineno-2-10 name=__codelineno-2-10 href=#__codelineno-2-10></a><span class=w>    </span><span class=nt>verbs</span><span class=p>:</span><span class=w> </span><span class="p p-Indicator">[</span><span class=s>&quot;get&quot;</span><span class="p p-Indicator">,</span><span class=w> </span><span class=s>&quot;list&quot;</span><span class="p p-Indicator">,</span><span class=w> </span><span class=s>&quot;watch&quot;</span><span class="p p-Indicator">,</span><span class=w> </span><span class=s>&quot;create&quot;</span><span class="p p-Indicator">,</span><span class=w> </span><span class=s>&quot;update&quot;</span><span class="p p-Indicator">,</span><span class=w> </span><span class=s>&quot;patch&quot;</span><span class="p p-Indicator">,</span><span class=w> </span><span class=s>&quot;delete&quot;</span><span class="p p-Indicator">]</span>
+</span><span id=__span-2-11><a id=__codelineno-2-11 name=__codelineno-2-11 href=#__codelineno-2-11></a><span class=w>  </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>apiGroups</span><span class=p>:</span><span class=w> </span><span class="p p-Indicator">[</span><span class=s>&quot;&quot;</span><span class="p p-Indicator">]</span>
+</span><span id=__span-2-12><a id=__codelineno-2-12 name=__codelineno-2-12 href=#__codelineno-2-12></a><span class=w>    </span><span class=nt>resources</span><span class=p>:</span><span class=w> </span><span class="p p-Indicator">[</span><span class=s>&quot;pods/log&quot;</span><span class="p p-Indicator">]</span>
+</span><span id=__span-2-13><a id=__codelineno-2-13 name=__codelineno-2-13 href=#__codelineno-2-13></a><span class=w>    </span><span class=nt>verbs</span><span class=p>:</span><span class=w> </span><span class="p p-Indicator">[</span><span class=s>&quot;get&quot;</span><span class="p p-Indicator">,</span><span class=w> </span><span class=s>&quot;list&quot;</span><span class="p p-Indicator">,</span><span class=w> </span><span class=s>&quot;watch&quot;</span><span class="p p-Indicator">]</span>
+</span></code></pre></div> <h2 id=security-best-practices>Security Best Practices<a class=headerlink href=#security-best-practices title="Permanent link">&para;</a></h2> <ol> <li><strong>Principle of Least Privilege</strong>: Always grant users and service accounts the minimum permissions they need to perform their jobs. Avoid using highly privileged roles like <code>workspace_admin</code> for daily tasks.</li> <li><strong>Use SSO</strong>: For organizations, always integrate your corporate IdP using SSO. This centralizes user management and enforces your company's authentication policies (like MFA).</li> <li><strong>Short-Lived Tokens</strong>: For service accounts, generate short-lived API keys (e.g., <code>1h</code> or <code>8h</code>) specific to the task at hand, especially in automated environments like CI/CD.</li> <li><strong>Regularly Audit Permissions</strong>: Org Admins should regularly review user roles and permissions to remove stale access.</li> <li><strong>Secure <code>clientSecret</code></strong>: When configuring an SSO provider, store the <code>clientSecret</code> in a secure Kubernetes secret, not in plain text.</li> </ol> <aside class=md-source-file> <span class=md-source-file__fact> <span class=md-icon title=最終更新日> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg> </span> <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2025年6月15日 01:40:41 UTC">2025年6月15日</span> </span> <span class=md-source-file__fact> <span class=md-icon title=作成日> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg> </span> <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2025年6月15日 01:35:20 UTC">2025年6月15日</span> </span> </aside> </article> </div> <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script> <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script> </div> <button type=button class="md-top md-icon" data-md-component=top hidden> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg> ページトップへ戻る </button> </main> <footer class=md-footer> <div class="md-footer-meta md-typeset"> <div class="md-footer-meta__inner md-grid"> <div class=md-copyright> Made with <a href=https://squidfunk.github.io/mkdocs-material/ target=_blank rel=noopener> Material for MkDocs </a> </div> <div class=md-social> <a href=https://github.com/KoribanDev/hexabase-ai target=_blank rel=noopener title=github.com class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 496 512"><!-- Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg> </a> </div> </div> </div> </footer> </div> <div class=md-dialog data-md-component=dialog> <div class="md-dialog__inner md-typeset"></div> </div> <div class=md-progress data-md-component=progress role=progressbar></div> <script id=__config type=application/json>{"base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.path", "navigation.top", "navigation.footer", "navigation.indexes", "navigation.instant", "navigation.instant.prefetch", "navigation.instant.progress", "navigation.tracking", "navigation.prune", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotate", "content.code.copy", "content.tooltips", "toc.follow"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "\u30b3\u30d4\u30fc\u3057\u307e\u3057\u305f", "clipboard.copy": "\u30af\u30ea\u30c3\u30d7\u30dc\u30fc\u30c9\u3078\u30b3\u30d4\u30fc", "search.result.more.one": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3082\u30461\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.other": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3042\u3068#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.none": "\u4f55\u3082\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f", "search.result.one": "1\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.other": "#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.placeholder": "\u691c\u7d22\u30ad\u30fc\u30ef\u30fc\u30c9\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044", "search.result.term.missing": "\u691c\u7d22\u306b\u542b\u307e\u308c\u306a\u3044", "select.version": "\u30d0\u30fc\u30b8\u30e7\u30f3\u5207\u308a\u66ff\u3048"}, "version": null}</script> <script src=../../assets/javascripts/bundle.13a4f30d.min.js></script> <script>
+    // Minimal navigation toggle functionality for both nested and section items
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initialize Japanese translation if needed
+      initializeJapaneseTranslation();
+      
+      // Add click handlers to navigation items with children (both nested and section)
+      const navItems = document.querySelectorAll('.md-nav__item--nested > .md-nav__link, .md-nav__item--section > .md-nav__link');
+      
+      navItems.forEach(function(item) {
+        const parent = item.parentElement;
+        const toggle = parent.querySelector('.md-nav__toggle');
+        
+        if (toggle) {
+          // Make the entire link clickable to toggle
+          item.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            toggle.checked = !toggle.checked;
+            
+            // Update arrow rotation
+            if (toggle.checked) {
+              item.classList.add('md-nav__link--expanded');
+            } else {
+              item.classList.remove('md-nav__link--expanded');
+            }
+          });
+          
+          // Prevent navigation when clicking on parent items
+          item.removeAttribute('href');
+          item.style.cursor = 'pointer';
+        }
+      });
+      
+      // Auto-expand items with active children (both nested and section)
+      document.querySelectorAll('.md-nav__item--nested, .md-nav__item--section').forEach(function(item) {
+        const hasActiveChild = item.querySelector('.md-nav__link--active');
+        if (hasActiveChild && hasActiveChild !== item.querySelector('> .md-nav__link')) {
+          const toggle = item.querySelector('.md-nav__toggle');
+          if (toggle) {
+            toggle.checked = true;
+            item.querySelector('> .md-nav__link').classList.add('md-nav__link--expanded');
+          }
+        }
+      });
+      
+      function initializeJapaneseTranslation() {
+        // Check if we're on the Japanese version of the site
+        const isJapanese = document.documentElement.lang === 'ja' || 
+                          window.location.pathname.includes('/ja/') ||
+                          document.querySelector('html[lang="ja"]') !== null ||
+                          document.querySelector('meta[name="language"][content="ja"]') !== null;
+        
+        if (isJapanese) {
+          // Define translation mappings for navigation items that might be in English
+          const translations = {
+            'Home': 'ホーム',
+            'Concept': 'コンセプト',
+            'Use Cases': 'ユースケース',
+            'Scenarios': 'シナリオ',
+            'Architecture': 'アーキテクチャ',
+            'ADRs': 'ADRs(アーキテクチャ選定記録)',
+            'RBAC': 'クラスターと権限管理',
+            'Clusters/RBAC': 'クラスターと権限管理',
+            'User Examples': 'ユーザー例',
+            'Nodes': 'ノード(VM)とストレージ',
+            'Nodes/Storages': 'ノード(VM)とストレージ',
+            'Applications': 'アプリケーション',
+            'CI/CD': 'CI/CD',
+            'CronJobs': 'バッチ処理(CronJob)',
+            'Functions': 'Functions',
+            'Observability': 'オブザーバビリティ(監視)',
+            'Backups': 'バックアップ',
+            'Security': 'セキュリティ',
+            'AIOps': 'AIOps',
+            'API Reference': 'APIリファレンス',
+            'SDK': 'SDK'
+          };
+          
+          // Apply translations to navigation links after a short delay to ensure DOM is ready
+          setTimeout(() => {
+            document.querySelectorAll('.md-nav__link').forEach(link => {
+              const text = link.textContent.trim();
+              if (translations[text]) {
+                link.textContent = translations[text];
+              }
+            });
+          }, 100);
+        }
+      }
+    });
+  </script> </body> </html>

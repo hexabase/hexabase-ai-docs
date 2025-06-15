@@ -1,0 +1,253 @@
+site_name: Hexabase.AI
+site_description: Multi-tenant Kubernetes as a Service with AIOps - User Documentation
+site_url: https://docs.hexabase.ai
+site_author: Hexabase.AI Team
+
+theme:
+  name: material
+  custom_dir: overrides
+  language: en
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.path
+    - navigation.top
+    - navigation.footer
+    - navigation.indexes
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.instant.progress
+    - navigation.tracking
+    - navigation.prune
+    - search.suggest
+    - search.highlight
+    - content.tabs.link
+    - content.code.annotate
+    - content.code.copy
+    - content.tooltips
+    - toc.follow
+  palette:
+    - scheme: default
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  font:
+    text: Inter
+    code: JetBrains Mono
+  icon:
+    logo: material/kubernetes
+
+extra_css:
+  - stylesheets/extra.css
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/KoribanDev/hexabase-ai
+  alternate:
+    - name: English
+      link: /
+      lang: en
+    - name: 日本語
+      link: /ja/
+      lang: ja
+
+plugins:
+  - search:
+      lang:
+        - en
+        - ja
+  - awesome-pages
+  - redirects
+  - minify:
+      minify_html: true
+  - git-revision-date-localized:
+      enable_creation_date: true
+      fallback_to_build_date: true
+      enable_git_follow: false
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+nav:
+  - Home:
+      - Overview: index.md
+      - Concept:
+          - concept/index.md
+          - Platform Overview: concept/overview.md
+          - Core Concepts: concept/core-concepts.md
+          - Multi-tenancy: concept/multi-tenancy.md
+          - Technology Stack: concept/technology-stack.md
+      - Use Cases:
+          - usecases/index.md
+          - Scenarios:
+              - Single User Plan: usecases/single-user-plan.md
+              - Team Plan: usecases/team-plan.md
+              - Enterprise Plan: usecases/enterprise-plan.md
+          - Enterprise Kubernetes: usecases/enterprise-kubernetes.md
+          - AI-Powered DevOps: usecases/ai-powered-devops.md
+  - Architecture:
+      - architecture/index.md
+      - System Architecture: architecture/system-architecture.md
+      - Technical Design: architecture/technical-design.md
+      - Security Architecture: architecture/security-architecture.md
+      - ADRs:
+          - architecture/adr/index.md
+          - ADR-001 Multi-tenant Platform: architecture/adr/adr-001-multi-tenant-platform.md
+          - ADR-002 OAuth2/OIDC Security: architecture/adr/adr-002-oauth2-oidc-security.md
+          - ADR-003 FaaS Architecture: architecture/adr/adr-003-faas-architecture.md
+          - ADR-004 AI Operations: architecture/adr/adr-004-ai-operations.md
+          - ADR-005 CI/CD Architecture: architecture/adr/adr-005-cicd-architecture.md
+          - ADR-006 Logging & Monitoring: architecture/adr/adr-006-logging-monitoring.md
+          - ADR-007 Backup & DR: architecture/adr/adr-007-backup-disaster-recovery.md
+          - ADR-008 Domain-Driven Design: architecture/adr/adr-008-domain-driven-design.md
+  - Clusters/RBAC:
+      - rbac/index.md
+      - RBAC Overview: rbac/overview.md
+      - Hexabase RBAC: rbac/hexabase-rbac.md
+      - Kubernetes RBAC: rbac/kubernetes-rbac.md
+      - Role Mappings: rbac/role-mappings.md
+      - Permission Model: rbac/permission-model.md
+      - Best Practices: rbac/best-practices.md
+      - User Examples:
+          - Best Practices: users/rbac/best-practices.md
+          - Overview: users/rbac/overview.md
+          - Permission Model: users/rbac/permission-model.md
+          - Role Mappings: users/rbac/role-mappings.md
+  - Nodes/Storages:
+      - nodes/index.md
+      - Dedicated VM Management: nodes/vm-management.md
+      - Node Configuration: nodes/configuration.md
+      - Scaling Strategies: nodes/scaling.md
+      - Health Monitoring: nodes/health-monitoring.md
+      - User Configuration Examples:
+          - Configuration: users/nodes/configuration.md
+          - Health Monitoring: users/nodes/health-monitoring.md
+          - Scaling: users/nodes/scaling.md
+          - VM Management: users/nodes/vm-management.md
+  - Applications:
+      - applications/index.md
+      - Resource Management: applications/resource-management.md
+      - Deployment Strategies: applications/deployment.md
+      - Service Discovery: applications/service-discovery.md
+      - Load Balancing: applications/load-balancing.md
+  - CI/CD:
+      - cicd/index.md
+      - Pipeline Configuration: cicd/pipeline-configuration.md
+      - GitHub Integration: cicd/github-integration.md
+      - GitLab Integration: cicd/gitlab-integration.md
+      - Build Strategies: cicd/build-strategies.md
+      - Deployment Automation: cicd/deployment-automation.md
+  - Functions:
+      - functions/index.md
+      - HKS Functions Overview: functions/overview.md
+      - Function Architecture: functions/architecture.md
+      - Function Development: functions/development.md
+      - Deployment Guide: functions/deployment.md
+      - AI Agent Functions: functions/ai-agent-functions.md
+      - Runtime Environment: functions/runtime.md
+      - User Examples:
+          - AI Agent Functions: users/functions/ai-agent-functions.md
+          - Deployment: users/functions/deployment.md
+          - Development: users/functions/development.md
+          - Runtime: users/functions/runtime.md
+  - CronJobs:
+      - cronjobs/index.md
+      - CronJob Management: cronjobs/management.md
+      - UI Configuration: cronjobs/ui-configuration.md
+      - Integration Patterns: cronjobs/integration-patterns.md
+      - Examples: cronjobs/examples.md
+      - User Examples: users/cronjobs/examples.md
+      - User Integration Patterns: users/cronjobs/integration-patterns.md
+      - User UI Configuration: users/cronjobs/ui-configuration.md
+  - Backups:
+      - backups/index.md
+      - Backup Strategies: backups/strategies.md
+      - Automated Backups: backups/automated-backups.md
+      - Disaster Recovery: backups/disaster-recovery.md
+      - Restore Procedures: backups/restore-procedures.md
+  - Observability:
+      - observability/index.md
+      - Monitoring Setup: observability/monitoring-setup.md
+      - Logging Architecture: observability/logging.md
+      - Distributed Tracing: observability/tracing.md
+      - Dashboards & Alerts: observability/dashboards-alerts.md
+      - ClickHouse Analytics: observability/clickhouse-analytics.md
+      - User Examples:
+          - ClickHouse Analytics: users/observability/clickhouse-analytics.md
+          - Dashboards & Alerts: users/observability/dashboards-alerts.md
+          - Logging: users/observability/logging.md
+          - Tracing: users/observability/tracing.md
+  - Security:
+      - security/index.md
+      - Security Architecture: security/architecture.md
+      - Authentication & Authorization: security/auth.md
+      - Network Security: security/network-security.md
+      - Compliance: security/compliance.md
+      - Security Best Practices: security/best-practices.md
+  - AIOps:
+      - aiops/index.md
+      - Architecture Overview: aiops/architecture.md
+      - Agent Hierarchy: aiops/agent-hierarchy.md
+      - LLM Integration: aiops/llm-integration.md
+      - Secure Sandbox: aiops/secure-sandbox.md
+      - Use Cases: aiops/use-cases.md
+  - API Reference:
+      - api/index.md
+      - Authentication: api/authentication.md
+      - REST API: api/rest-api.md
+      - WebSocket API: api/websocket-api.md
+      - Function API: api/function-api.md
+      - Error Handling: api/error-codes.md
+  - SDK:
+      - sdk/index.md
+      - JavaScript SDK: sdk/javascript.md
+      - Python SDK: sdk/python.md
+      - Go SDK: sdk/go.md
+      - CLI Tool: sdk/cli.md
+      - User Examples:
+          - Node.js SDK: users/sdk/nodejs.md
+          - Python SDK: users/sdk/python.md

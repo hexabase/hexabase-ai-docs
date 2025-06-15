@@ -1,0 +1,313 @@
+<!doctype html><html lang=ja class=no-js> <head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="AI-Ops を搭載したマルチテナント Kubernetes as a Service"><meta name=author content="Hexabase.AI Team"><link href=https://docs.hexabase.ai/ja/aiops/architecture/ rel=canonical><link rel=icon href=../../assets/images/favicon.png><meta name=generator content="mkdocs-1.6.1, mkdocs-material-9.6.14"><title>AIOps Architecture and Implementation Summary - Hexabase.AI</title><link rel=stylesheet href=../../assets/stylesheets/main.342714a4.min.css><link rel=stylesheet href=../../assets/stylesheets/palette.06af60db.min.css><style>
+  /* FORCE TOP NAVIGATION TAB COLORS - HIGHEST SPECIFICITY */
+  /* Target all possible tab link elements */
+  .md-header .md-tabs__link,
+  .md-header .md-tabs a,
+  .md-tabs__item a,
+  .md-tabs__list a,
+  .md-tabs .md-tabs__link,
+  .md-header-nav .md-tabs__link,
+  header .md-tabs__link,
+  header .md-tabs a {
+    color: #FFFFFF !important;
+    opacity: 0.8 !important;
+    transition: all 0.2s ease !important;
+  }
+  
+  /* Hover state - green */
+  .md-header .md-tabs__link:hover,
+  .md-header .md-tabs a:hover,
+  .md-tabs__item a:hover,
+  .md-tabs__list a:hover,
+  .md-tabs .md-tabs__link:hover,
+  .md-header-nav .md-tabs__link:hover,
+  header .md-tabs__link:hover,
+  header .md-tabs a:hover,
+  .md-tabs__link:focus {
+    color: #00C6AB !important;
+    opacity: 1 !important;
+    background-color: transparent !important;
+  }
+  
+  /* Active/selected state - green */
+  .md-header .md-tabs__link--active,
+  .md-header .md-tabs__item--active a,
+  .md-tabs__item--active .md-tabs__link,
+  .md-tabs__link--active,
+  .md-tabs__link[data-md-state="active"],
+  header .md-tabs__link--active,
+  header .md-tabs__item--active a {
+    color: #00C6AB !important;
+    opacity: 1 !important;
+    font-weight: 600 !important;
+    background-color: transparent !important;
+  }
+  
+  /* Remove any accent color overrides */
+  .md-tabs__link {
+    --md-accent-fg-color: transparent !important;
+    --md-accent-fg-color--transparent: transparent !important;
+  }
+  
+  /* Active indicator line */
+  .md-tabs__link::after {
+    background-color: transparent !important;
+  }
+  
+  .md-tabs__link--active::after,
+  .md-tabs__item--active .md-tabs__link::after {
+    background-color: #00C6AB !important;
+  }
+  
+  /* LEFT SIDEBAR NAVIGATION */
+  /* Category headers (UseCases, Scenarios, etc) - Bold Black */
+  .md-nav--primary .md-nav__item--nested > .md-nav__link,
+  .md-nav--primary .md-nav__item--section > .md-nav__link,
+  .md-nav__item[data-md-level="1"] > .md-nav__link,
+  .md-nav__title[data-md-level="1"],
+  /* Target the specific structure shown in screenshot */
+  .md-nav__item--nested > label,
+  .md-nav__item--section > label {
+    color: #000000 !important;
+    font-weight: 700 !important;
+    opacity: 1 !important;
+  }
+  
+  /* All regular navigation links - default state */
+  .md-nav--primary .md-nav__link:not(.md-nav__link--active) {
+    color: rgba(0, 0, 0, 0.87) !important;
+    font-weight: 400 !important;
+  }
+  
+  /* Only the exact active/selected page - Pink */
+  .md-nav--primary .md-nav__link--active:not(.md-nav__item--nested > .md-nav__link) {
+    color: #FF346B !important;
+    font-weight: 600 !important;
+  }
+  
+  /* Hover state for non-category items - Pink with transparency */
+  .md-nav--primary .md-nav__link:hover:not(.md-nav__item--nested > .md-nav__link):not(.md-nav__link--active) {
+    color: #FF346B !important;
+    opacity: 0.8 !important;
+  }
+  
+  /* Ensure parent categories stay black even when child is active */
+  .md-nav__item--active.md-nav__item--nested > .md-nav__link,
+  .md-nav__item--active.md-nav__item--section > .md-nav__link,
+  .md-nav__item--active > label {
+    color: #000000 !important;
+    font-weight: 700 !important;
+  }
+  
+  /* Mobile navigation adjustments */
+  @media screen and (max-width: 76.1875em) {
+    .md-nav--primary .md-nav__link {
+      color: rgba(0, 0, 0, 0.87) !important;
+    }
+    
+    .md-nav--primary .md-nav__link--active {
+      color: #FF346B !important;
+    }
+  }
+  
+  /* DARK MODE STYLES - MAXIMUM SPECIFICITY */
+  /* Force all navigation links to be visible in dark mode */
+  body[data-md-color-scheme="slate"] .md-nav__link,
+  html[data-md-color-scheme="slate"] .md-nav__link,
+  [data-md-color-scheme="slate"] .md-sidebar .md-nav__link,
+  [data-md-color-scheme="slate"] .md-sidebar__scrollwrap .md-nav__link,
+  [data-md-color-scheme="slate"] .md-nav--primary .md-nav__link {
+    color: #BDBDBD !important;
+  }
+  
+  /* Category headers - Bold light gray */
+  body[data-md-color-scheme="slate"] .md-nav__item--nested > .md-nav__link,
+  body[data-md-color-scheme="slate"] .md-nav__item--section > .md-nav__link,
+  [data-md-color-scheme="slate"] .md-sidebar .md-nav__item--nested > .md-nav__link,
+  [data-md-color-scheme="slate"] .md-nav--primary .md-nav__item--nested > .md-nav__link {
+    color: #E0E0E0 !important;
+    font-weight: 700 !important;
+  }
+  
+  /* Active/selected page - Light Pink */
+  body[data-md-color-scheme="slate"] .md-nav__link--active,
+  [data-md-color-scheme="slate"] .md-sidebar .md-nav__link--active,
+  [data-md-color-scheme="slate"] .md-nav--primary .md-nav__link--active {
+    color: #FF548B !important;
+    font-weight: 600 !important;
+  }
+  
+  /* Hover state - Light Pink */
+  body[data-md-color-scheme="slate"] .md-nav__link:hover,
+  [data-md-color-scheme="slate"] .md-sidebar .md-nav__link:hover {
+    color: #FF548B !important;
+    opacity: 0.8 !important;
+  }
+  
+  /* Keep categories light gray even on hover */
+  body[data-md-color-scheme="slate"] .md-nav__item--nested > .md-nav__link:hover,
+  [data-md-color-scheme="slate"] .md-nav__item--nested > .md-nav__link:hover {
+    color: #E0E0E0 !important;
+    opacity: 1 !important;
+  }
+  
+  /* Mobile dark mode */
+  @media screen and (max-width: 76.1875em) {
+    body[data-md-color-scheme="slate"] .md-nav__link,
+    [data-md-color-scheme="slate"] .md-nav__link {
+      color: #BDBDBD !important;
+    }
+  }
+</style><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback"><style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style><link rel=stylesheet href=../../stylesheets/extra.css><script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script></head> <body dir=ltr data-md-color-scheme=default data-md-color-primary=custom data-md-color-accent=custom> <input class=md-toggle data-md-toggle=drawer type=checkbox id=__drawer autocomplete=off> <input class=md-toggle data-md-toggle=search type=checkbox id=__search autocomplete=off> <label class=md-overlay for=__drawer></label> <div data-md-component=skip> <a href=#aiops-architecture-and-implementation-summary class=md-skip> コンテンツにスキップ </a> </div> <div data-md-component=announce> </div> <header class=md-header data-md-component=header> <nav class="md-header__inner md-grid" aria-label=ヘッダー> <a href=../.. title=Hexabase.AI class="md-header__button md-logo" aria-label=Hexabase.AI data-md-component=logo> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M13.95 13.5h-.23c-.18.11-.26.32-.18.5l.86 2.11c.83-.53 1.46-1.32 1.79-2.25l-2.23-.36zm-3.45.29a.415.415 0 0 0-.38-.29h-.08l-2.22.37c.33.92.96 1.7 1.79 2.23l.85-2.07V14c.04-.05.04-.14.04-.21m1.83.81a.38.38 0 0 0-.51-.15c-.07.05-.12.08-.15.15h-.01l-1.09 1.97c.78.26 1.62.31 2.43.12.14-.03.29-.07.43-.12l-1.09-1.97zm3.45-4.57L14.1 11.5l.01.03a.37.37 0 0 0-.04.53q.075.09.18.12l.01.01 2.17.62c.07-.97-.14-1.95-.65-2.78m-3.11.16c.01.21.18.37.39.36.08 0 .15-.02.21-.05h.01l1.83-1.31a4.45 4.45 0 0 0-2.57-1.24zm-1.94.31c.17.11.4.08.52-.09.05-.06.07-.13.08-.21h.01l.12-2.25c-.15.02-.3.05-.46.08-.8.18-1.54.58-2.12 1.16l1.84 1.31zm-.99 1.69c.2-.05.32-.26.26-.46 0-.08-.05-.14-.11-.19v-.01L8.21 10c-.52.86-.74 1.84-.63 2.82l2.16-.62zm1.64.66.62.3.62-.3.15-.67-.43-.53h-.69l-.43.53zm10.89 1.32L20.5 6.5c-.09-.42-.37-.76-.74-.94l-7.17-3.43c-.37-.17-.81-.17-1.19 0L4.24 5.56c-.37.18-.65.52-.74.94l-1.77 7.67c-.05.2-.05.4 0 .59.01.06.03.12.05.18.03.09.08.19.13.27.03.04.05.08.09.11l4.95 6.18c.02 0 .05.04.05.06.1.09.19.16.28.22.12.08.26.14.4.17.11.05.23.05.32.05h8.12c.07 0 .14-.03.2-.05.05-.01.1-.03.14-.04.04-.02.07-.03.11-.05.05-.02.1-.05.15-.08.12-.08.23-.18.33-.28l.15-.2 4.8-5.98c.1-.12.17-.25.22-.38.02-.06.04-.12.05-.18.05-.19.05-.4 0-.59m-7.43 2.99c.02.06.04.12.07.17-.04.08-.06.17-.03.26.12.24.23.46.38.68.08.11.16.23.24.34 0 .03.03.08.04.12.12.2.06.46-.15.59s-.47.05-.59-.15c-.01-.03-.02-.05-.03-.08-.02-.03-.04-.09-.06-.09-.05-.15-.09-.28-.12-.41-.09-.25-.17-.49-.3-.72a.38.38 0 0 0-.21-.14l-.08-.16c-1.29.48-2.7.48-3.97-.01l-.1.18c-.07.01-.14.04-.19.09-.14.24-.24.49-.33.77-.03.13-.07.26-.12.4-.02 0-.04.07-.06.1a.43.43 0 0 1-.81-.29c.01-.03.03-.05.04-.08.04-.03.04-.08.04-.11.09-.12.16-.23.24-.35.16-.21.29-.45.39-.69a.54.54 0 0 0-.03-.25l.07-.18a5.6 5.6 0 0 1-2.47-3.09l-.2.03a.4.4 0 0 0-.23-.09c-.27.05-.51.13-.77.22-.11.06-.24.11-.37.15-.03.01-.07.02-.13.03a.44.44 0 0 1-.54-.27c-.07-.23.04-.47.28-.55.02 0 .05-.01.08-.01v-.01h.01l.11-.02c.14-.04.28-.04.41-.04.26 0 .52-.06.77-.12.08-.05.14-.11.19-.19l.19-.05c-.21-1.36.1-2.73.86-3.87l-.14-.12c0-.09-.03-.18-.08-.25-.2-.17-.41-.32-.64-.45q-.18-.09-.36-.21c-.02-.02-.06-.05-.08-.07l-.01-.01c-.2-.16-.25-.42-.11-.63.09-.1.21-.15.35-.15q.165.015.3.12l.09.07c.1.09.19.2.28.3.18.19.37.37.58.52.08.04.17.05.26.03l.15.11c.75-.8 1.73-1.36 2.8-1.6.25-.06.52-.1.78-.12l.01-.18a.45.45 0 0 0 .14-.23c.01-.26-.01-.52-.05-.77-.03-.13-.05-.27-.06-.41V5.1c-.02-.24.15-.45.39-.48s.44.15.47.38v.22c-.01.14-.03.28-.06.41-.04.25-.06.51-.05.77.02.1.07.17.14.22l.01.19c1.36.12 2.62.73 3.56 1.72l.16-.12c.09.02.18.01.26-.03.21-.15.41-.33.58-.52.09-.1.18-.2.28-.3.03-.02.07-.06.1-.06.17-.18.44-.18.59 0 .19.16.18.43 0 .6 0 .02-.03.04-.06.06a2.495 2.495 0 0 1-.44.28c-.23.13-.45.28-.64.45-.06.07-.09.15-.08.24l-.16.14a5.44 5.44 0 0 1 .88 3.86l.19.05c.04.08.11.14.19.18.25.07.51.11.77.14h.41c.03.03.08.04.12.05.24.03.4.25.37.49-.05.23-.24.4-.48.37-.03-.01-.07-.01-.07-.02v-.01c-.06 0-.1-.01-.14-.02q-.195-.06-.36-.15c-.26-.1-.5-.17-.77-.21-.09 0-.17 0-.23.08-.07-.01-.13-.02-.19-.03-.41 1.31-1.31 2.41-2.47 3.11"/></svg> </a> <label class="md-header__button md-icon" for=__drawer> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg> </label> <div class=md-header__title data-md-component=header-title> <div class=md-header__ellipsis> <div class=md-header__topic> <span class=md-ellipsis> Hexabase.AI </span> </div> <div class=md-header__topic data-md-component=header-topic> <span class=md-ellipsis> AIOps Architecture and Implementation Summary </span> </div> </div> </div> <form class=md-header__option data-md-component=palette> <input class=md-option data-md-color-media data-md-color-scheme=default data-md-color-primary=custom data-md-color-accent=custom aria-label=ダークモードに切り替え type=radio name=__palette id=__palette_0> <label class="md-header__button md-icon" title=ダークモードに切り替え for=__palette_1 hidden> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg> </label> <input class=md-option data-md-color-media data-md-color-scheme=slate data-md-color-primary=custom data-md-color-accent=custom aria-label=ライトモードに切り替え type=radio name=__palette id=__palette_1> <label class="md-header__button md-icon" title=ライトモードに切り替え for=__palette_0 hidden> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg> </label> </form> <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script> <div class=md-header__option> <div class=md-select> <button class="md-header__button md-icon" aria-label=言語切り替え> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg> </button> <div class=md-select__inner> <ul class=md-select__list> <li class=md-select__item> <a href=/ja/ hreflang=ja class=md-select__link> 日本語 </a> </li> <li class=md-select__item> <a href=/ hreflang=en class=md-select__link> English </a> </li> </ul> </div> </div> </div> <label class="md-header__button md-icon" for=__search> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg> </label> <div class=md-search data-md-component=search role=dialog> <label class=md-search__overlay for=__search></label> <div class=md-search__inner role=search> <form class=md-search__form name=search> <input type=text class=md-search__input name=query aria-label=検索 placeholder=検索 autocapitalize=off autocorrect=off autocomplete=off spellcheck=false data-md-component=search-query required> <label class="md-search__icon md-icon" for=__search> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg> </label> <nav class=md-search__options aria-label=検索> <button type=reset class="md-search__icon md-icon" title=クリア aria-label=クリア tabindex=-1> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg> </button> </nav> <div class=md-search__suggest data-md-component=search-suggest></div> </form> <div class=md-search__output> <div class=md-search__scrollwrap tabindex=0 data-md-scrollfix> <div class=md-search-result data-md-component=search-result> <div class=md-search-result__meta> 検索を初期化 </div> <ol class=md-search-result__list role=presentation></ol> </div> </div> </div> </div> </div> </nav> </header> <div class=md-container data-md-component=container> <nav class=md-tabs aria-label=タブ data-md-component=tabs> <div class=md-grid> <ul class=md-tabs__list> <li class=md-tabs__item> <a href=../../ja/ class=md-tabs__link> ホーム </a> </li> <li class=md-tabs__item> <a href=../../ja/architecture/index.md class=md-tabs__link> アーキテクチャ </a> </li> <li class=md-tabs__item> <a href=../../ja/rbac/ class=md-tabs__link> クラスターと権限管理 </a> </li> <li class=md-tabs__item> <a href=../../ja/nodes/ class=md-tabs__link> ノード(VM)とストレージ </a> </li> <li class=md-tabs__item> <a href=../../ja/applications/ class=md-tabs__link> アプリケーション </a> </li> <li class=md-tabs__item> <a href=../../ja/cicd/index.md class=md-tabs__link> CI/CD </a> </li> <li class=md-tabs__item> <a href=../../ja/functions/index.md class=md-tabs__link> Functions </a> </li> <li class=md-tabs__item> <a href=../../ja/cronjobs/index.md class=md-tabs__link> バッチ処理(CronJob) </a> </li> <li class=md-tabs__item> <a href=../../ja/backups/index.md class=md-tabs__link> バックアップ </a> </li> <li class=md-tabs__item> <a href=../../ja/observability/index.md class=md-tabs__link> オブザーバビリティ(監視) </a> </li> <li class=md-tabs__item> <a href=../../ja/security/index.md class=md-tabs__link> セキュリティ </a> </li> <li class=md-tabs__item> <a href=../../ja/aiops/index.md class=md-tabs__link> AIOps </a> </li> <li class=md-tabs__item> <a href=../../ja/api/index.md class=md-tabs__link> APIリファレンス </a> </li> <li class=md-tabs__item> <a href=../../ja/sdk/index.md class=md-tabs__link> SDK </a> </li> </ul> </div> </nav> <main class=md-main data-md-component=main> <div class="md-main__inner md-grid"> <div class="md-sidebar md-sidebar--primary" data-md-component=sidebar data-md-type=navigation> <div class=md-sidebar__scrollwrap> <div class=md-sidebar__inner> <nav class="md-nav md-nav--primary md-nav--lifted" aria-label=ナビゲーション data-md-level=0> <label class=md-nav__title for=__drawer> <a href=../.. title=Hexabase.AI class="md-nav__button md-logo" aria-label=Hexabase.AI data-md-component=logo> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M13.95 13.5h-.23c-.18.11-.26.32-.18.5l.86 2.11c.83-.53 1.46-1.32 1.79-2.25l-2.23-.36zm-3.45.29a.415.415 0 0 0-.38-.29h-.08l-2.22.37c.33.92.96 1.7 1.79 2.23l.85-2.07V14c.04-.05.04-.14.04-.21m1.83.81a.38.38 0 0 0-.51-.15c-.07.05-.12.08-.15.15h-.01l-1.09 1.97c.78.26 1.62.31 2.43.12.14-.03.29-.07.43-.12l-1.09-1.97zm3.45-4.57L14.1 11.5l.01.03a.37.37 0 0 0-.04.53q.075.09.18.12l.01.01 2.17.62c.07-.97-.14-1.95-.65-2.78m-3.11.16c.01.21.18.37.39.36.08 0 .15-.02.21-.05h.01l1.83-1.31a4.45 4.45 0 0 0-2.57-1.24zm-1.94.31c.17.11.4.08.52-.09.05-.06.07-.13.08-.21h.01l.12-2.25c-.15.02-.3.05-.46.08-.8.18-1.54.58-2.12 1.16l1.84 1.31zm-.99 1.69c.2-.05.32-.26.26-.46 0-.08-.05-.14-.11-.19v-.01L8.21 10c-.52.86-.74 1.84-.63 2.82l2.16-.62zm1.64.66.62.3.62-.3.15-.67-.43-.53h-.69l-.43.53zm10.89 1.32L20.5 6.5c-.09-.42-.37-.76-.74-.94l-7.17-3.43c-.37-.17-.81-.17-1.19 0L4.24 5.56c-.37.18-.65.52-.74.94l-1.77 7.67c-.05.2-.05.4 0 .59.01.06.03.12.05.18.03.09.08.19.13.27.03.04.05.08.09.11l4.95 6.18c.02 0 .05.04.05.06.1.09.19.16.28.22.12.08.26.14.4.17.11.05.23.05.32.05h8.12c.07 0 .14-.03.2-.05.05-.01.1-.03.14-.04.04-.02.07-.03.11-.05.05-.02.1-.05.15-.08.12-.08.23-.18.33-.28l.15-.2 4.8-5.98c.1-.12.17-.25.22-.38.02-.06.04-.12.05-.18.05-.19.05-.4 0-.59m-7.43 2.99c.02.06.04.12.07.17-.04.08-.06.17-.03.26.12.24.23.46.38.68.08.11.16.23.24.34 0 .03.03.08.04.12.12.2.06.46-.15.59s-.47.05-.59-.15c-.01-.03-.02-.05-.03-.08-.02-.03-.04-.09-.06-.09-.05-.15-.09-.28-.12-.41-.09-.25-.17-.49-.3-.72a.38.38 0 0 0-.21-.14l-.08-.16c-1.29.48-2.7.48-3.97-.01l-.1.18c-.07.01-.14.04-.19.09-.14.24-.24.49-.33.77-.03.13-.07.26-.12.4-.02 0-.04.07-.06.1a.43.43 0 0 1-.81-.29c.01-.03.03-.05.04-.08.04-.03.04-.08.04-.11.09-.12.16-.23.24-.35.16-.21.29-.45.39-.69a.54.54 0 0 0-.03-.25l.07-.18a5.6 5.6 0 0 1-2.47-3.09l-.2.03a.4.4 0 0 0-.23-.09c-.27.05-.51.13-.77.22-.11.06-.24.11-.37.15-.03.01-.07.02-.13.03a.44.44 0 0 1-.54-.27c-.07-.23.04-.47.28-.55.02 0 .05-.01.08-.01v-.01h.01l.11-.02c.14-.04.28-.04.41-.04.26 0 .52-.06.77-.12.08-.05.14-.11.19-.19l.19-.05c-.21-1.36.1-2.73.86-3.87l-.14-.12c0-.09-.03-.18-.08-.25-.2-.17-.41-.32-.64-.45q-.18-.09-.36-.21c-.02-.02-.06-.05-.08-.07l-.01-.01c-.2-.16-.25-.42-.11-.63.09-.1.21-.15.35-.15q.165.015.3.12l.09.07c.1.09.19.2.28.3.18.19.37.37.58.52.08.04.17.05.26.03l.15.11c.75-.8 1.73-1.36 2.8-1.6.25-.06.52-.1.78-.12l.01-.18a.45.45 0 0 0 .14-.23c.01-.26-.01-.52-.05-.77-.03-.13-.05-.27-.06-.41V5.1c-.02-.24.15-.45.39-.48s.44.15.47.38v.22c-.01.14-.03.28-.06.41-.04.25-.06.51-.05.77.02.1.07.17.14.22l.01.19c1.36.12 2.62.73 3.56 1.72l.16-.12c.09.02.18.01.26-.03.21-.15.41-.33.58-.52.09-.1.18-.2.28-.3.03-.02.07-.06.1-.06.17-.18.44-.18.59 0 .19.16.18.43 0 .6 0 .02-.03.04-.06.06a2.495 2.495 0 0 1-.44.28c-.23.13-.45.28-.64.45-.06.07-.09.15-.08.24l-.16.14a5.44 5.44 0 0 1 .88 3.86l.19.05c.04.08.11.14.19.18.25.07.51.11.77.14h.41c.03.03.08.04.12.05.24.03.4.25.37.49-.05.23-.24.4-.48.37-.03-.01-.07-.01-.07-.02v-.01c-.06 0-.1-.01-.14-.02q-.195-.06-.36-.15c-.26-.1-.5-.17-.77-.21-.09 0-.17 0-.23.08-.07-.01-.13-.02-.19-.03-.41 1.31-1.31 2.41-2.47 3.11"/></svg> </a> Hexabase.AI </label> <ul class=md-nav__list data-md-scrollfix> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../ja/ class=md-nav__link> <span class=md-ellipsis> ホーム </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../ja/architecture/index.md class=md-nav__link> <span class=md-ellipsis> アーキテクチャ </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../ja/rbac/ class=md-nav__link> <span class=md-ellipsis> クラスターと権限管理 </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../ja/nodes/ class=md-nav__link> <span class=md-ellipsis> ノード(VM)とストレージ </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../ja/applications/ class=md-nav__link> <span class=md-ellipsis> アプリケーション </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../ja/cicd/index.md class=md-nav__link> <span class=md-ellipsis> CI/CD </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../ja/functions/index.md class=md-nav__link> <span class=md-ellipsis> Functions </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../ja/cronjobs/index.md class=md-nav__link> <span class=md-ellipsis> バッチ処理(CronJob) </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../ja/backups/index.md class=md-nav__link> <span class=md-ellipsis> バックアップ </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../ja/observability/index.md class=md-nav__link> <span class=md-ellipsis> オブザーバビリティ(監視) </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../ja/security/index.md class=md-nav__link> <span class=md-ellipsis> セキュリティ </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../ja/aiops/index.md class=md-nav__link> <span class=md-ellipsis> AIOps </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../ja/api/index.md class=md-nav__link> <span class=md-ellipsis> APIリファレンス </span> <span class="md-nav__icon md-icon"></span> </a> </li> <li class="md-nav__item md-nav__item--pruned md-nav__item--nested"> <a href=../../ja/sdk/index.md class=md-nav__link> <span class=md-ellipsis> SDK </span> <span class="md-nav__icon md-icon"></span> </a> </li> </ul> </nav> </div> </div> </div> <div class="md-sidebar md-sidebar--secondary" data-md-component=sidebar data-md-type=toc> <div class=md-sidebar__scrollwrap> <div class=md-sidebar__inner> <nav class="md-nav md-nav--secondary" aria-label=目次> <label class=md-nav__title for=__toc> <span class="md-nav__icon md-icon"></span> 目次 </label> <ul class=md-nav__list data-md-component=toc data-md-scrollfix> <li class=md-nav__item> <a href=#1-architectural-vision class=md-nav__link> <span class=md-ellipsis> 1. Architectural Vision </span> </a> </li> <li class=md-nav__item> <a href=#2-system-components-and-deployment class=md-nav__link> <span class=md-ellipsis> 2. System Components and Deployment </span> </a> <nav class=md-nav aria-label="2. System Components and Deployment"> <ul class=md-nav__list> <li class=md-nav__item> <a href=#21-agent-based-architecture class=md-nav__link> <span class=md-ellipsis> 2.1 Agent-based Architecture </span> </a> </li> </ul> </nav> </li> <li class=md-nav__item> <a href=#3-llm-configuration-and-management class=md-nav__link> <span class=md-ellipsis> 3. LLM Configuration and Management </span> </a> <nav class=md-nav aria-label="3. LLM Configuration and Management"> <ul class=md-nav__list> <li class=md-nav__item> <a href=#31-llm-providers class=md-nav__link> <span class=md-ellipsis> 3.1 LLM Providers </span> </a> </li> <li class=md-nav__item> <a href=#32-configuration-hierarchy class=md-nav__link> <span class=md-ellipsis> 3.2 Configuration Hierarchy </span> </a> </li> </ul> </nav> </li> <li class=md-nav__item> <a href=#4-security-model-aiops-sandbox-and-session-management class=md-nav__link> <span class=md-ellipsis> 4. Security Model: AIOps Sandbox and Session Management </span> </a> <nav class=md-nav aria-label="4. Security Model: AIOps Sandbox and Session Management"> <ul class=md-nav__list> <li class=md-nav__item> <a href=#41-authorization-flow class=md-nav__link> <span class=md-ellipsis> 4.1 Authorization Flow </span> </a> </li> <li class=md-nav__item> <a href=#42-session-management class=md-nav__link> <span class=md-ellipsis> 4.2 Session Management </span> </a> </li> </ul> </nav> </li> <li class=md-nav__item> <a href=#5-llmops-and-observability class=md-nav__link> <span class=md-ellipsis> 5. LLMOps and Observability </span> </a> </li> <li class=md-nav__item> <a href=#6-development-and-repository-structure class=md-nav__link> <span class=md-ellipsis> 6. Development and Repository Structure </span> </a> </li> </ul> </nav> </div> </div> </div> <div class=md-content data-md-component=content> <article class="md-content__inner md-typeset"> <h1 id=aiops-architecture-and-implementation-summary>AIOps Architecture and Implementation Summary<a class=headerlink href=#aiops-architecture-and-implementation-summary title="Permanent link">&para;</a></h1> <p>This document provides a detailed overview of the Hexabase KaaS AIOps system, covering its architecture, technology stack, integration with the main control plane, and security model.</p> <h2 id=1-architectural-vision>1. Architectural Vision<a class=headerlink href=#1-architectural-vision title="Permanent link">&para;</a></h2> <p>The AIOps system is designed as a distinct, Python-based subsystem that operates alongside the Go-based Hexabase Control Plane. This separation allows for leveraging the rich Python AI/ML ecosystem while maintaining a clear boundary between the core KaaS operations and the AI-driven intelligence layer.</p> <p><strong>Core Principles:</strong></p> <ul> <li><strong>Decoupled Systems</strong>: The AIOps system is a separate deployment, communicating with the Control Plane via internal, secured APIs.</li> <li><strong>Optimized Tech Stack</strong>: Utilizes Python, FastAPI, LangChain/LlamaIndex, and Ollama for rapid development and access to state-of-the-art AI tooling.</li> <li><strong>Hierarchical Agents</strong>: Employs a multi-layered agent architecture, from a user-facing chat agent to a central orchestrator and specialized worker agents, to efficiently manage tasks and analysis.</li> <li><strong>Secure by Design</strong>: Inherits user permissions via a short-lived JWT model, with all actions ultimately authorized and executed by the Control Plane.</li> <li><strong>Extensible LLM Support</strong>: Provides a flexible model for using both internally-hosted open-source LLMs and external commercial LLM APIs, with configuration available at both the organization and workspace levels.</li> <li><strong>Observable and Traceable</strong>: All agent interactions are designed to be logged and traced, providing clear visibility into the system's reasoning and actions for debugging and analysis.</li> </ul> <h2 id=2-system-components-and-deployment>2. System Components and Deployment<a class=headerlink href=#2-system-components-and-deployment title="Permanent link">&para;</a></h2> <pre class=mermaid><code>graph TD
+    subgraph "Hexabase Namespace"
+        direction LR
+        HKS_Control_Plane[HKS Control Plane (Go)]
+        HKS_Service[hks-control-plane-svc]
+        HKS_Control_Plane -- exposes --&gt; HKS_Service
+    end
+
+    subgraph "AIOps Namespace"
+        direction LR
+        AIOps_System[AIOps API (Python/FastAPI)]
+        AIOps_Service[ai-ops-svc]
+        AIOps_System -- exposes --&gt; AIOps_Service
+    end
+
+    subgraph "AIOps LLM Namespace"
+        direction LR
+        Ollama_DaemonSet[Ollama DaemonSet]
+        Ollama_Service[ollama-svc]
+        OLLAMA_NODE[GPU/CPU Node&lt;br/&gt;(label: node-role=private-llm)]
+        Ollama_DaemonSet -- runs on --&gt; OLLAMA_NODE
+        Ollama_DaemonSet -- exposes --&gt; Ollama_Service
+    end
+
+    HKS_Control_Plane -- "Internal API Call w/ JWT" --&gt; AIOps_Service
+    AIOps_System -- "Internal Ops API Call w/ JWT" --&gt; HKS_Service
+    AIOps_System -- "LLM Inference" --&gt; Ollama_Service</code></pre> <h3 id=21-agent-based-architecture>2.1 Agent-based Architecture<a class=headerlink href=#21-agent-based-architecture title="Permanent link">&para;</a></h3> <p>The AIOps system employs a hierarchical, multi-agent architecture to manage user requests and interact with the HKS platform. This separation of concerns allows for specialized agents, better maintainability, and more complex reasoning capabilities.</p> <pre class=mermaid><code>graph TD
+    subgraph "User Interaction Layer"
+        User[HKS User]
+        ChatClient[Chat Client &lt;br/&gt; (UI, Slack, Teams, etc.)]
+        User -- Interacts with --&gt; ChatClient
+    end
+
+    subgraph "AIOps System (Python)"
+        direction LR
+        UserChatAgent[UserChatAgent]
+        OrchestrationAgent[Orchestration Agent]
+        WorkerAgents[Worker Agents &lt;br/&gt; - Kubernetes Agent &lt;br/&gt; - Prometheus Agent &lt;br/&gt; - ClickHouse Agent &lt;br/&gt; - Storage Agent &lt;br/&gt; - Helm Agent &lt;br/&gt; - etc.]
+
+        UserChatAgent -- "User Query" --&gt; OrchestrationAgent
+        OrchestrationAgent -- "Sub-task" --&gt; WorkerAgents
+        WorkerAgents -- "Tool Output" --&gt; OrchestrationAgent
+        OrchestrationAgent -- "Synthesized Response" --&gt; UserChatAgent
+    end
+
+    subgraph "HKS Control Plane (Go)"
+        HKS_InternalAPI[HKS Internal Ops API]
+        HKS_DB[HKS Database]
+        HKS_InternalAPI -- Accesses --&gt; HKS_DB
+    end
+
+    subgraph "LLM Services"
+        Ollama[Private LLM (Ollama)]
+        LLM_APIs[External LLM APIs &lt;br/&gt; (OpenAI, Anthropic, etc.)]
+    end
+
+    ChatClient -- "API Call w/ User Auth" --&gt; HKS_Control_Plane
+    HKS_Control_Plane -- "Generates JWT, forwards to" --&gt; UserChatAgent
+    UserChatAgent -- "Conversational Logic" --&gt; LLM_APIs
+    WorkerAgents -- "Executes Actions via" --&gt; HKS_InternalAPI
+    WorkerAgents -- "Inference (optional)" --&gt; Ollama</code></pre> <ul> <li> <p><strong>UserChatAgent</strong>: The primary point of contact for the end-user.</p> </li> <li> <p>Responsible for managing the conversation flow, maintaining session state, and providing a user-friendly experience.</p> </li> <li>To handle nuanced human conversation, this agent is designed to use powerful external, commercial LLMs (e.g., GPT-4, Claude 3).</li> <li> <p>It forwards the user's core intent to the Orchestration Agent.</p> </li> <li> <p><strong>Orchestration Agent</strong>: The central "brain" or router of the AIOps system.</p> </li> <li> <p>It receives a task from the <code>UserChatAgent</code>, breaks it down into smaller, executable steps, and dispatches those steps to the appropriate <code>Worker Agent(s)</code>.</p> </li> <li> <p>It synthesizes the results from the workers into a coherent final answer for the <code>UserChatAgent</code>.</p> </li> <li> <p><strong>Worker Agents</strong>: A collection of specialized, tool-using agents.</p> </li> <li>Each worker is an expert on a specific domain (e.g., interacting with the Kubernetes API, querying Prometheus, analyzing logs in ClickHouse, monitoring storage, managing Helm releases).</li> <li>They execute concrete tasks using predefined tools and APIs. These agents may use smaller, local LLMs for simple data processing but often do not require an LLM for their core function.</li> <li>All actions that modify the HKS state are performed by making secure calls to the HKS Internal Operations API, never directly.</li> </ul> <p>This structure allows for future integration with various chat clients (Slack, Teams, Discord) and even as a backend for tools like Cursor, as the <code>UserChatAgent</code> abstracts the interaction logic.</p> <ul> <li><strong>HKS Control Plane (Go)</strong>: The existing main application.</li> <li><strong>AIOps System (Python)</strong>: A new deployment in a separate <code>ai-ops</code> namespace. It consists of:</li> <li><strong>API Server</strong>: A FastAPI application that serves as the entry point for the HKS Control Plane.</li> <li><strong>Orchestrators &amp; Agents</strong>: Implemented in Python using frameworks like LlamaIndex or LangChain.</li> <li><strong>Private LLM Server (Ollama)</strong>: Deployed as a <code>DaemonSet</code> onto dedicated nodes (labeled <code>node-role: private-llm</code>) in an <code>ai-ops-llm</code> namespace. This ensures LLM workloads are isolated.</li> </ul> <h2 id=3-llm-configuration-and-management>3. LLM Configuration and Management<a class=headerlink href=#3-llm-configuration-and-management title="Permanent link">&para;</a></h2> <p>The AIOps system supports a flexible approach to LLM usage, accommodating both private, self-hosted models for internal tasks and powerful commercial models for user-facing interactions.</p> <h3 id=31-llm-providers>3.1 LLM Providers<a class=headerlink href=#31-llm-providers title="Permanent link">&para;</a></h3> <ul> <li> <p><strong>Private LLMs (Ollama)</strong>: We use Ollama to simplify the deployment and management of open-source LLMs (e.g., Llama 3, Phi-3). These are used for internal tasks like routing, data extraction, or simple analysis where data residency is critical. The setup involves:</p> </li> <li> <p><strong>Provisioning Nodes</strong>: Designating Kubernetes nodes with the label <code>node-role: private-llm</code>.</p> </li> <li><strong>Deploying Ollama</strong>: Using a <code>DaemonSet</code> with a <code>nodeSelector</code> for <code>node-role: private-llm</code>.</li> <li><strong>Exposing Service</strong>: Creating a <code>Service</code> (<code>ollama-service</code>) as a stable internal endpoint.</li> <li><strong>Pre-pulling Models</strong>: Using an <code>initContainer</code> or a <code>Job</code> to pull required models into Ollama.</li> <li> <p><strong>Integration</strong>: The Python code points to <code>http://ollama-service.ai-ops-llm.svc.cluster.local</code> for inference.</p> </li> <li> <p><strong>External LLMs</strong>: For the <code>UserChatAgent</code>, which requires advanced conversational abilities, the system will integrate with external commercial LLM providers (e.g., OpenAI, Google, Anthropic). API keys and model preferences are managed securely.</p> </li> </ul> <h3 id=32-configuration-hierarchy>3.2 Configuration Hierarchy<a class=headerlink href=#32-configuration-hierarchy title="Permanent link">&para;</a></h3> <p>To provide flexibility, LLM settings can be configured at two levels:</p> <ol> <li><strong>Organization Level (Default)</strong>: A default LLM configuration (e.g., for the <code>UserChatAgent</code>) is set for the entire HKS organization. This configuration is managed via environment variables in the AIOps system's deployment.</li> <li><strong>Workspace Level (Override)</strong>: Workspace Admins can override the default LLM settings for their specific workspace. This allows them to choose a different model or provide their own API key. This requires:<ul> <li>An API endpoint in the HKS Control Plane to store and retrieve workspace-specific LLM settings.</li> <li>A corresponding UI for Workspace Admins to manage these settings.</li> <li>The AIOps system will first check for a workspace-specific configuration and fall back to the organization-level default if none is found.</li> </ul> </li> </ol> <h2 id=4-security-model-aiops-sandbox-and-session-management>4. Security Model: AIOps Sandbox and Session Management<a class=headerlink href=#4-security-model-aiops-sandbox-and-session-management title="Permanent link">&para;</a></h2> <p>The security model is critical and is based on user impersonation via short-lived, scoped tokens. The AIOps system acts as a sandboxed advisor, with the HKS Control Plane as the sole enforcer of permissions.</p> <h3 id=41-authorization-flow>4.1 Authorization Flow<a class=headerlink href=#41-authorization-flow title="Permanent link">&para;</a></h3> <ol> <li>A user initiates a chat session via a client (HKS UI, Slack, etc.).</li> <li>The HKS Control Plane authenticates the user and generates a short-lived <strong>Internal JWT</strong>. This JWT contains the user's ID, their roles, and the scope of their request (e.g., <code>workspace_id</code>).</li> <li>The Control Plane calls the <code>UserChatAgent</code> in the AIOps system, passing the user's request and the Internal JWT.</li> <li>The AIOps system's agents (<code>UserChatAgent</code>, <code>Orchestrator</code>, <code>Workers</code>) pass this JWT internally for context and subsequent API calls. The agents themselves have no inherent privileges.</li> <li>To execute an action (e.g., scale a deployment), a <code>Worker Agent</code> makes a call back to a specific, non-public <strong>Internal Operations API</strong> on the HKS Control Plane (e.g., <code>POST /internal/v1/operations/scale</code>).</li> <li>This request <strong>must</strong> include the original Internal JWT.</li> <li>The HKS Control Plane receives the request. It <strong>re-validates</strong> the JWT and performs a <strong>final authorization check</strong>: "Does this user (<code>sub</code> from JWT) have permission to perform this action on this resource, according to the <em>latest</em> data in our database?"</li> <li>If authorized, the Control Plane executes the operation using its own privileged service account. If not, it returns a permission error.</li> </ol> <p>This flow ensures that the AIOps system is fully sandboxed. It can request actions, but the Control Plane remains the sole, authoritative "executor," enforcing all security and RBAC policies at the moment of execution.</p> <h3 id=42-session-management>4.2 Session Management<a class=headerlink href=#42-session-management title="Permanent link">&para;</a></h3> <p>User sessions with the <code>UserChatAgent</code> are stateful but must adapt to changes in user permissions.</p> <ul> <li><strong>Session Timeout</strong>: Sessions will have a defined idle timeout, after which the <code>UserChatAgent</code> will effectively "log out". The next user interaction will trigger a new authentication flow with the HKS Control Plane.</li> <li><strong>Permission Change Detection</strong>: HKS user permissions can change. To ensure the AIOps system never operates on stale permissions, the session must be re-validated. On each request that requires an action, the final authorization check by the Control Plane (Step 7 above) implicitly handles this. If a user's permissions were revoked, the action will fail. The AIOps system should interpret this as a potential permission change and can prompt the user to re-authenticate to "resume" the session with updated credentials.</li> </ul> <p>Thorough security test cases for this entire flow, especially covering permission changes and token validation, will be a critical part of the development process.</p> <h2 id=5-llmops-and-observability>5. LLMOps and Observability<a class=headerlink href=#5-llmops-and-observability title="Permanent link">&para;</a></h2> <p>To ensure the AIOps system is transparent, debuggable, and continuously improving, its interactions are tracked in two primary ways: AI Tracing for development and Audit Logging for user-visible actions.</p> <ul> <li><strong>AI Tracing with Langfuse</strong>: We will integrate the AIOps system with <a href=https://langfuse.com/ >Langfuse</a>. This is a developer-focused tool that captures the entire internal reasoning lifecycle of a request:</li> <li>The initial prompt from the <code>UserChatAgent</code>.</li> <li>The reasoning and task breakdown from the <code>Orchestration Agent</code>.</li> <li>The specific tools called and results returned by the <code>Worker Agents</code>.</li> <li>The final synthesized response.</li> <li><strong>Benefits</strong>: This detailed tracing provides invaluable data for debugging complex agent behaviors, analyzing performance, evaluating LLM quality, and creating datasets for future fine-tuning. The Langfuse SDK will be integrated directly into the Python AIOps application.</li> <li><strong>Audit Logging</strong>: All definitive actions taken by an agent on behalf of a user (e.g., modifying a Kubernetes resource) are logged in the central HKS Audit Log system (ClickHouse). This provides a compliant, user-visible record of all changes. For more details, see the main <code>Logging and Auditing Architecture</code> document.</li> </ul> <h2 id=6-development-and-repository-structure>6. Development and Repository Structure<a class=headerlink href=#6-development-and-repository-structure title="Permanent link">&para;</a></h2> <p>Initially, the AIOps system will be developed in a subdirectory of the main repository to facilitate close integration.</p> <div class="language-text highlight"><pre><span></span><code><span id=__span-0-1><a id=__codelineno-0-1 name=__codelineno-0-1 href=#__codelineno-0-1></a>
+</span></code></pre></div> <aside class=md-source-file> <span class=md-source-file__fact> <span class=md-icon title=最終更新日> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg> </span> <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2025年6月14日 13:50:08 UTC">2025年6月14日</span> </span> <span class=md-source-file__fact> <span class=md-icon title=作成日> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg> </span> <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2025年6月14日 13:50:08 UTC">2025年6月14日</span> </span> </aside> </article> </div> <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script> <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script> </div> <button type=button class="md-top md-icon" data-md-component=top hidden> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg> ページトップへ戻る </button> </main> <footer class=md-footer> <div class="md-footer-meta md-typeset"> <div class="md-footer-meta__inner md-grid"> <div class=md-copyright> Made with <a href=https://squidfunk.github.io/mkdocs-material/ target=_blank rel=noopener> Material for MkDocs </a> </div> <div class=md-social> <a href=https://github.com/KoribanDev/hexabase-ai target=_blank rel=noopener title=github.com class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 496 512"><!-- Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg> </a> </div> </div> </div> </footer> </div> <div class=md-dialog data-md-component=dialog> <div class="md-dialog__inner md-typeset"></div> </div> <div class=md-progress data-md-component=progress role=progressbar></div> <script id=__config type=application/json>{"base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.path", "navigation.top", "navigation.footer", "navigation.indexes", "navigation.instant", "navigation.instant.prefetch", "navigation.instant.progress", "navigation.tracking", "navigation.prune", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotate", "content.code.copy", "content.tooltips", "toc.follow"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "\u30b3\u30d4\u30fc\u3057\u307e\u3057\u305f", "clipboard.copy": "\u30af\u30ea\u30c3\u30d7\u30dc\u30fc\u30c9\u3078\u30b3\u30d4\u30fc", "search.result.more.one": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3082\u30461\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.other": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3042\u3068#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.none": "\u4f55\u3082\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f", "search.result.one": "1\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.other": "#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.placeholder": "\u691c\u7d22\u30ad\u30fc\u30ef\u30fc\u30c9\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044", "search.result.term.missing": "\u691c\u7d22\u306b\u542b\u307e\u308c\u306a\u3044", "select.version": "\u30d0\u30fc\u30b8\u30e7\u30f3\u5207\u308a\u66ff\u3048"}, "version": null}</script> <script src=../../assets/javascripts/bundle.13a4f30d.min.js></script> <script>
+    // Minimal navigation toggle functionality for both nested and section items
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initialize Japanese translation if needed
+      initializeJapaneseTranslation();
+      
+      // Add click handlers to navigation items with children (both nested and section)
+      const navItems = document.querySelectorAll('.md-nav__item--nested > .md-nav__link, .md-nav__item--section > .md-nav__link');
+      
+      navItems.forEach(function(item) {
+        const parent = item.parentElement;
+        const toggle = parent.querySelector('.md-nav__toggle');
+        
+        if (toggle) {
+          // Make the entire link clickable to toggle
+          item.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            toggle.checked = !toggle.checked;
+            
+            // Update arrow rotation
+            if (toggle.checked) {
+              item.classList.add('md-nav__link--expanded');
+            } else {
+              item.classList.remove('md-nav__link--expanded');
+            }
+          });
+          
+          // Prevent navigation when clicking on parent items
+          item.removeAttribute('href');
+          item.style.cursor = 'pointer';
+        }
+      });
+      
+      // Auto-expand items with active children (both nested and section)
+      document.querySelectorAll('.md-nav__item--nested, .md-nav__item--section').forEach(function(item) {
+        const hasActiveChild = item.querySelector('.md-nav__link--active');
+        if (hasActiveChild && hasActiveChild !== item.querySelector('> .md-nav__link')) {
+          const toggle = item.querySelector('.md-nav__toggle');
+          if (toggle) {
+            toggle.checked = true;
+            item.querySelector('> .md-nav__link').classList.add('md-nav__link--expanded');
+          }
+        }
+      });
+      
+      function initializeJapaneseTranslation() {
+        // Check if we're on the Japanese version of the site
+        const isJapanese = document.documentElement.lang === 'ja' || 
+                          window.location.pathname.includes('/ja/') ||
+                          document.querySelector('html[lang="ja"]') !== null ||
+                          document.querySelector('meta[name="language"][content="ja"]') !== null;
+        
+        if (isJapanese) {
+          // Define translation mappings for navigation items that might be in English
+          const translations = {
+            'Home': 'ホーム',
+            'Concept': 'コンセプト',
+            'Use Cases': 'ユースケース',
+            'Scenarios': 'シナリオ',
+            'Architecture': 'アーキテクチャ',
+            'ADRs': 'ADRs(アーキテクチャ選定記録)',
+            'RBAC': 'クラスターと権限管理',
+            'Clusters/RBAC': 'クラスターと権限管理',
+            'User Examples': 'ユーザー例',
+            'Nodes': 'ノード(VM)とストレージ',
+            'Nodes/Storages': 'ノード(VM)とストレージ',
+            'Applications': 'アプリケーション',
+            'CI/CD': 'CI/CD',
+            'CronJobs': 'バッチ処理(CronJob)',
+            'Functions': 'Functions',
+            'Observability': 'オブザーバビリティ(監視)',
+            'Backups': 'バックアップ',
+            'Security': 'セキュリティ',
+            'AIOps': 'AIOps',
+            'API Reference': 'APIリファレンス',
+            'SDK': 'SDK'
+          };
+          
+          // Apply translations to navigation links after a short delay to ensure DOM is ready
+          setTimeout(() => {
+            document.querySelectorAll('.md-nav__link').forEach(link => {
+              const text = link.textContent.trim();
+              if (translations[text]) {
+                link.textContent = translations[text];
+              }
+            });
+          }, 100);
+        }
+      }
+    });
+  </script> </body> </html>

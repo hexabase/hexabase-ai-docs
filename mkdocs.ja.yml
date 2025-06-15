@@ -1,0 +1,251 @@
+site_name: Hexabase.AI
+site_description: AI-Ops を搭載したマルチテナント Kubernetes as a Service
+site_url: https://docs.hexabase.ai/ja/
+site_author: Hexabase.AI Team
+
+theme:
+  name: material
+  custom_dir: overrides
+  language: ja
+  features:
+    - navigation.tabs
+    - navigation.path
+    - navigation.top
+    - navigation.footer
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.instant.progress
+    - navigation.tracking
+    - search.suggest
+    - search.highlight
+    - content.tabs.link
+    - content.code.annotate
+    - content.code.copy
+    - content.tooltips
+    - toc.follow
+  palette:
+    - scheme: default
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/brightness-7
+        name: ダークモードに切り替え
+    - scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/brightness-4
+        name: ライトモードに切り替え
+  font:
+    text: Inter
+    code: JetBrains Mono
+  icon:
+    logo: material/kubernetes
+
+extra_css:
+  - stylesheets/extra.css
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/KoribanDev/hexabase-ai
+  alternate:
+    - name: 日本語
+      link: /ja/
+      lang: ja
+    - name: English
+      link: /
+      lang: en
+
+plugins:
+  - search:
+      lang:
+        - ja
+        - en
+  - awesome-pages
+  - redirects
+  - minify:
+      minify_html: true
+  - git-revision-date-localized:
+      enable_creation_date: true
+      fallback_to_build_date: true
+      enable_git_follow: false
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+nav:
+  - ホーム:
+      - 概要: ja/index.md
+      - コンセプト:
+          - ja/concept/index.md
+          - "　プラットフォーム概要": ja/concept/overview.md
+          - "　コアコンセプト": ja/concept/core-concepts.md
+          - "　マルチテナンシー": ja/concept/multi-tenancy.md
+          - "　技術スタック": ja/concept/technology-stack.md
+      - ユースケース:
+          - ja/usecases/index.md
+          - "　シナリオ":
+              - "　　シングルユーザープラン": ja/usecases/single-user-plan.md
+              - "　　チームプラン": ja/usecases/team-plan.md
+              - "　　エンタープライズプラン": ja/usecases/enterprise-plan.md
+          - "　エンタープライズ Kubernetes": ja/usecases/enterprise-kubernetes.md
+          - "　AI を活用した DevOps": ja/usecases/ai-powered-devops.md
+      - サービス提供範囲と責任分界点: ja/service-scope.md
+  - アーキテクチャ:
+      - ja/architecture/index.md
+      - "　システムアーキテクチャ": ja/architecture/system-architecture.md
+      - "　技術設計": ja/architecture/technical-design.md
+      - "　セキュリティアーキテクチャ": ja/architecture/security-architecture.md
+      - "　ADRs":
+          - ja/architecture/adr/index.md
+          - "　　ADR-001 マルチテナントプラットフォーム": ja/architecture/adr/adr-001-multi-tenant-platform.md
+          - "　　ADR-002 OAuth2/OIDC セキュリティ": ja/architecture/adr/adr-002-oauth2-oidc-security.md
+          - "　　ADR-003 FaaS アーキテクチャ": ja/architecture/adr/adr-003-faas-architecture.md
+          - "　　ADR-004 AI オペレーション": ja/architecture/adr/adr-004-ai-operations.md
+          - "　　ADR-005 CI/CD アーキテクチャ": ja/architecture/adr/adr-005-cicd-architecture.md
+          - "　　ADR-006 ログ・監視": ja/architecture/adr/adr-006-logging-monitoring.md
+          - "　　ADR-007 バックアップ・DR": ja/architecture/adr/adr-007-backup-disaster-recovery.md
+          - "　　ADR-008 ドメイン駆動設計": ja/architecture/adr/adr-008-domain-driven-design.md
+  - クラスターと権限管理:
+      - ja/rbac/index.md
+      - " 権限管理 概要": ja/rbac/overview.md
+      - " Hexabase RBAC": ja/rbac/hexabase-rbac.md
+      - " Kubernetes RBAC": ja/rbac/kubernetes-rbac.md
+      - " ロールマッピング": ja/rbac/role-mappings.md
+      - " 権限モデル": ja/rbac/permission-model.md
+      - " ベストプラクティス": ja/rbac/best-practices.md
+      - " ユーザー例":
+          - "  ベストプラクティス": users/rbac/best-practices.md
+          - "  概要": users/rbac/overview.md
+          - "  権限モデル": users/rbac/permission-model.md
+          - "  ロールマッピング": users/rbac/role-mappings.md
+  - ノード(VM)とストレージ:
+      - ja/nodes/index.md
+      - " 専用VM管理": ja/nodes/vm-management.md
+      - " ノード設定": ja/nodes/configuration.md
+      - " スケーリング戦略": ja/nodes/scaling.md
+      - " 状態監視": ja/nodes/health-monitoring.md
+      - " ユーザー設定例":
+          - "  設定": users/nodes/configuration.md
+          - "  状態監視": users/nodes/health-monitoring.md
+          - "  スケーリング": users/nodes/scaling.md
+          - "  VM 管理": users/nodes/vm-management.md
+  - アプリケーション:
+      - ja/applications/index.md
+      - " リソース管理": ja/applications/resource-management.md
+      - " デプロイメント戦略": ja/applications/deployment.md
+      - " サービスディスカバリー": ja/applications/service-discovery.md
+      - " ロードバランシング": ja/applications/load-balancing.md
+  - CI/CD:
+      - ja/cicd/index.md
+      - " パイプライン設定": ja/cicd/pipeline-configuration.md
+      - " GitHub 統合": ja/cicd/github-integration.md
+      - " GitLab 統合": ja/cicd/gitlab-integration.md
+      - " ビルド戦略": ja/cicd/build-strategies.md
+      - " デプロイメント自動化": ja/cicd/deployment-automation.md
+  - Functions:
+      - ja/functions/index.md
+      - " HKS Functions 概要": ja/functions/overview.md
+      - " Function アーキテクチャ": ja/functions/architecture.md
+      - " Function 開発": ja/functions/development.md
+      - " デプロイメントガイド": ja/functions/deployment.md
+      - " AI エージェント Functions": ja/functions/ai-agent-functions.md
+      - " ランタイム環境": ja/functions/runtime.md
+      - " ユーザー例":
+          - "  AI エージェント Functions": users/functions/ai-agent-functions.md
+          - "  デプロイメント": users/functions/deployment.md
+          - "  開発": users/functions/development.md
+          - "  ランタイム": users/functions/runtime.md
+  - バッチ処理(CronJob):
+      - ja/cronjobs/index.md
+      - " CronJob 管理": ja/cronjobs/management.md
+      - " UI 設定": ja/cronjobs/ui-configuration.md
+      - " 統合パターン": ja/cronjobs/integration-patterns.md
+      - " 例": ja/cronjobs/examples.md
+      - " ユーザー例": users/cronjobs/examples.md
+      - " ユーザー統合パターン": users/cronjobs/integration-patterns.md
+      - " ユーザー UI 設定": users/cronjobs/ui-configuration.md
+  - バックアップ:
+      - ja/backups/index.md
+      - " バックアップ戦略": ja/backups/strategies.md
+      - " 自動バックアップ": ja/backups/automated-backups.md
+      - " 災害復旧": ja/backups/disaster-recovery.md
+      - " リストア手順": ja/backups/restore-procedures.md
+  - オブザーバビリティ(監視):
+      - ja/observability/index.md
+      - " 監視セットアップ": ja/observability/monitoring-setup.md
+      - " ログアーキテクチャ": ja/observability/logging.md
+      - " 分散トレーシング": ja/observability/tracing.md
+      - " ダッシュボード・アラート": ja/observability/dashboards-alerts.md
+      - " ClickHouse 分析": ja/observability/clickhouse-analytics.md
+      - " ユーザー例":
+          - "  ClickHouse 分析": users/observability/clickhouse-analytics.md
+          - "  ダッシュボード・アラート": users/observability/dashboards-alerts.md
+          - "  ログ": users/observability/logging.md
+          - "  トレーシング": users/observability/tracing.md
+  - セキュリティ:
+      - ja/security/index.md
+      - " セキュリティアーキテクチャ": ja/security/architecture.md
+      - " 認証・認可": ja/security/auth.md
+      - " ネットワークセキュリティ": ja/security/network-security.md
+      - " コンプライアンス": ja/security/compliance.md
+      - " セキュリティベストプラクティス": ja/security/best-practices.md
+  - AIOps:
+      - ja/aiops/index.md
+      - " アーキテクチャ概要": ja/aiops/architecture.md
+      - " エージェント階層": ja/aiops/agent-hierarchy.md
+      - " LLM 統合": ja/aiops/llm-integration.md
+      - " セキュアサンドボックス": ja/aiops/secure-sandbox.md
+      - " ユースケース": ja/aiops/use-cases.md
+  - APIリファレンス:
+      - ja/api/index.md
+      - " 認証": ja/api/authentication.md
+      - " REST API": ja/api/rest-api.md
+      - " WebSocket API": ja/api/websocket-api.md
+      - " Function API": ja/api/function-api.md
+      - " エラーハンドリング": ja/api/error-codes.md
+  - SDK:
+      - ja/sdk/index.md
+      - " JavaScript SDK": ja/sdk/javascript.md
+      - " Python SDK": ja/sdk/python.md
+      - " Go SDK": ja/sdk/go.md
+      - " CLI ツール": ja/sdk/cli.md
+      - " ユーザー例":
+          - "  Node.js SDK": users/sdk/nodejs.md
+          - "  Python SDK": users/sdk/python.md

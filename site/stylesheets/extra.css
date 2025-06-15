@@ -1,0 +1,331 @@
+/* Hexabase.AI Brand Colors - Updated 2024 */
+:root {
+  --md-primary-fg-color: #00C6AB;
+  --md-primary-fg-color--light: #00E6CB;
+  --md-primary-fg-color--dark: #00A68B;
+  --md-primary-bg-color: #FFFFFF;
+  --md-primary-bg-color--light: #FFFFFF;
+  
+  --md-accent-fg-color: #FF346B;
+  --md-accent-fg-color--transparent: rgba(255, 52, 107, 0.1);
+  --md-accent-bg-color: #FFFFFF;
+  --md-accent-bg-color--light: #FFFFFF;
+  
+  /* Additional brand colors */
+  --hxb-success: #4CAF50;
+  --hxb-warning: #FF9800;
+  --hxb-error: #F44336;
+  --hxb-info: #2196F3;
+}
+
+/* Dark mode adjustments */
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color: #00E6CB;
+  --md-primary-bg-color: #1E1E2E;
+  --md-accent-fg-color: #FF548B;
+}
+
+/* Custom header styling - Black background */
+.md-header {
+  background-color: #000000 !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+/* Ensure header text is visible on black background */
+.md-header__title,
+.md-header__topic,
+.md-header__topic:first-child,
+.md-header-nav__title,
+.md-header-nav__button,
+.md-header__button {
+  color: #FFFFFF !important;
+}
+
+/* Header navigation tabs */
+.md-tabs {
+  background-color: #000000 !important;
+}
+
+/* FORCE TOP NAVIGATION TAB COLORS */
+/* Default state - white */
+.md-tabs a,
+.md-tabs .md-tabs__link,
+.md-tabs__item a,
+.md-tabs__list a {
+  color: #FFFFFF !important;
+  opacity: 0.8 !important;
+  transition: all 0.2s ease !important;
+}
+
+/* Hover state - Hexabase green */
+.md-tabs a:hover,
+.md-tabs .md-tabs__link:hover,
+.md-tabs__item a:hover,
+.md-tabs__list a:hover,
+.md-tabs a:focus,
+.md-tabs .md-tabs__link:focus {
+  color: #00C6AB !important;
+  opacity: 1 !important;
+}
+
+/* Active/selected state - Hexabase green */
+.md-tabs a[class*="active"],
+.md-tabs .md-tabs__link--active,
+.md-tabs__item--active a,
+.md-tabs__item--active .md-tabs__link,
+[data-md-state="active"] .md-tabs__link {
+  color: #00C6AB !important;
+  opacity: 1 !important;
+  font-weight: 600 !important;
+}
+
+/* Active tab indicator line */
+.md-tabs__link::after {
+  background-color: transparent !important;
+  height: 2px;
+}
+
+.md-tabs__link--active::after,
+.md-tabs__item--active .md-tabs__link::after,
+[data-md-state="active"] .md-tabs__link::after {
+  background-color: #00C6AB !important;
+}
+
+/* Search styling for black header */
+.md-search__input {
+  background-color: rgba(255, 255, 255, 0.12) !important;
+  color: #FFFFFF !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+.md-search__input::placeholder {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+
+.md-search__input:hover {
+  background-color: rgba(255, 255, 255, 0.18) !important;
+}
+
+/* Navigation enhancement */
+/* Sidebar navigation links - default */
+.md-nav__link {
+  color: rgba(0, 0, 0, 0.87);
+  transition: color 0.2s ease;
+}
+
+/* Category labels (like UseCases, Scenarios) - Bold Black */
+.md-nav__item--nested > .md-nav__link,
+.md-nav__item--section > .md-nav__link,
+.md-nav--primary .md-nav__title,
+.md-nav__link[data-md-state="blur"] {
+  color: #000000 !important;
+  font-weight: 700 !important;
+}
+
+/* Only exact active/selected item - Hexabase pink */
+.md-nav__link--active:not(.md-nav__item--nested > .md-nav__link),
+.md-nav__item--active > .md-nav__link:not(.md-nav__item--nested > .md-nav__link) {
+  color: #FF346B !important;
+  font-weight: 600;
+}
+
+/* Hover state - only for non-category items */
+.md-nav__link:hover:not(.md-nav__item--nested > .md-nav__link),
+.md-nav__link:focus:not(.md-nav__item--nested > .md-nav__link) {
+  color: #FF346B !important;
+  opacity: 0.8;
+}
+
+/* Remove pink from parent items when child is selected */
+.md-nav__item--active.md-nav__item--nested > .md-nav__link {
+  color: #000000 !important;
+  font-weight: 700 !important;
+}
+
+/* Dark mode sidebar navigation */
+[data-md-color-scheme="slate"] .md-nav__link {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Dark mode category labels - Bold White */
+[data-md-color-scheme="slate"] .md-nav__item--nested > .md-nav__link,
+[data-md-color-scheme="slate"] .md-nav__item--section > .md-nav__link,
+[data-md-color-scheme="slate"] .md-nav--primary .md-nav__title {
+  color: #FFFFFF !important;
+  font-weight: 700 !important;
+}
+
+/* Dark mode only exact active item - Light pink */
+[data-md-color-scheme="slate"] .md-nav__link--active:not(.md-nav__item--nested > .md-nav__link),
+[data-md-color-scheme="slate"] .md-nav__item--active > .md-nav__link:not(.md-nav__item--nested > .md-nav__link) {
+  color: #FF548B !important;
+}
+
+/* Dark mode hover */
+[data-md-color-scheme="slate"] .md-nav__link:hover:not(.md-nav__item--nested > .md-nav__link),
+[data-md-color-scheme="slate"] .md-nav__link:focus:not(.md-nav__item--nested > .md-nav__link) {
+  color: #FF548B !important;
+  opacity: 0.8;
+}
+
+/* Card hover effects */
+.md-typeset .grid.cards > li:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transition: all 0.3s ease;
+}
+
+/* Code block enhancements */
+.md-typeset pre > code {
+  font-size: 0.85rem;
+}
+
+/* Admonition customization */
+.md-typeset .admonition.success,
+.md-typeset details.success {
+  border-color: var(--hxb-success);
+}
+
+.md-typeset .success > .admonition-title,
+.md-typeset .success > summary {
+  background-color: rgba(76, 175, 80, 0.1);
+  border-color: var(--hxb-success);
+}
+
+.md-typeset .success > .admonition-title::before,
+.md-typeset .success > summary::before {
+  background-color: var(--hxb-success);
+}
+
+/* Table styling */
+.md-typeset table:not([class]) {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.md-typeset table:not([class]) th {
+  background-color: var(--md-primary-fg-color--light);
+  color: white;
+  font-weight: 600;
+}
+
+/* Footer styling */
+.md-footer {
+  margin-top: 4rem;
+}
+
+/* Search styling */
+.md-search__form {
+  border-radius: 4px;
+}
+
+/* Tab styling */
+.md-typeset .tabbed-labels > label {
+  font-weight: 500;
+}
+
+.md-typeset .tabbed-labels > label:hover {
+  color: var(--md-accent-fg-color);
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 76.1875em) {
+  .md-nav--primary .md-nav__title {
+    background-color: var(--md-primary-fg-color);
+  }
+}
+
+/* OVERRIDE ANY THEME DEFAULTS - HIGHEST PRIORITY */
+/* Top navigation specific overrides */
+body .md-header .md-tabs a,
+body .md-header .md-tabs__link,
+body header .md-tabs a,
+body header .md-tabs__link,
+.md-header-nav__parent .md-tabs__link {
+  color: #FFFFFF !important;
+  opacity: 0.8 !important;
+}
+
+body .md-header .md-tabs a:hover,
+body .md-header .md-tabs__link:hover,
+body header .md-tabs a:hover,
+body header .md-tabs__link:hover {
+  color: #00C6AB !important;
+  opacity: 1 !important;
+}
+
+body .md-header .md-tabs a.md-tabs__link--active,
+body .md-header .md-tabs__link--active,
+body .md-header .md-tabs__item--active a,
+body header .md-tabs__link--active,
+body header [data-md-state="active"] a {
+  color: #00C6AB !important;
+  opacity: 1 !important;
+  font-weight: 600 !important;
+}
+
+/* Remove any red/accent color from tabs */
+.md-tabs__link {
+  --md-accent-fg-color: #00C6AB !important;
+}
+
+/* Simple Collapsible Navigation - Minimal Changes */
+
+/* Add expand/collapse arrows to navigation items with children */
+.md-nav__item--nested > .md-nav__link::after,
+.md-nav__item--section > .md-nav__link::after {
+  content: "▼";
+  position: absolute;
+  right: 0.6rem;
+  top: 50%;
+  transform: translateY(-50%) scale(0.7);
+  color: rgba(0, 0, 0, 0.54);
+  font-size: 0.8rem;
+  transition: transform 0.25s;
+  font-weight: normal;
+}
+
+/* Rotate arrow when expanded */
+.md-nav__item--nested .md-nav__toggle:checked ~ .md-nav__link::after,
+.md-nav__item--nested .md-nav__link--expanded::after,
+.md-nav__item--section .md-nav__toggle:checked ~ .md-nav__link::after,
+.md-nav__item--section .md-nav__link--expanded::after {
+  transform: translateY(-50%) rotate(-180deg) scale(0.7);
+}
+
+/* Dark mode arrow color */
+[data-md-color-scheme="slate"] .md-nav__item--nested > .md-nav__link::after,
+[data-md-color-scheme="slate"] .md-nav__item--section > .md-nav__link::after {
+  color: rgba(255, 255, 255, 0.54);
+}
+
+/* Make navigation items with children clickable */
+.md-nav__item--nested > .md-nav__link,
+.md-nav__item--section > .md-nav__link {
+  cursor: pointer;
+  padding-right: 2.4rem;
+  position: relative;
+}
+
+/* Hide nested navigation by default */
+.md-nav--primary .md-nav__item--nested .md-nav,
+.md-nav--primary .md-nav__item--section .md-nav {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+}
+
+/* Show nested navigation when expanded */
+.md-nav--primary .md-nav__item--nested .md-nav__toggle:checked ~ .md-nav,
+.md-nav--primary .md-nav__item--nested.md-nav__item--active .md-nav,
+.md-nav--primary .md-nav__item--section .md-nav__toggle:checked ~ .md-nav,
+.md-nav--primary .md-nav__item--section.md-nav__item--active .md-nav {
+  max-height: 1000rem;
+  opacity: 1;
+}
+
+/* Ensure toggle checkbox is properly hidden but functional */
+.md-nav__toggle {
+  display: none;
+}

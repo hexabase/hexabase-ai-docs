@@ -9,6 +9,7 @@ HXB Platform provides enterprise-grade multi-tenancy capabilities that enable or
 ### Tenant Isolation
 
 Each tenant operates within its own isolated environment with:
+
 - Dedicated namespaces
 - Resource quotas and limits
 - Network policies
@@ -18,6 +19,7 @@ Each tenant operates within its own isolated environment with:
 ### Resource Management
 
 Multi-tenancy in HXB Platform includes:
+
 - **Resource Quotas**: Limit CPU, memory, and storage per tenant
 - **Priority Classes**: Ensure fair resource allocation
 - **Network Isolation**: Tenant-specific network policies
@@ -56,6 +58,7 @@ spec:
 ### RBAC Integration
 
 Multi-tenancy leverages Kubernetes RBAC to:
+
 - Define tenant-specific roles
 - Manage access permissions
 - Enforce security policies
@@ -73,8 +76,8 @@ spec:
     matchLabels:
       tenant: production
   policyTypes:
-  - Ingress
-  - Egress
+    - Ingress
+    - Egress
 ```
 
 ## Implementation Guide
@@ -82,16 +85,19 @@ spec:
 ### Setting Up a New Tenant
 
 1. **Create Namespace**
+
    ```bash
    kubectl create namespace tenant-name
    ```
 
 2. **Apply Resource Quotas**
+
    ```bash
    kubectl apply -f tenant-quota.yaml
    ```
 
 3. **Configure RBAC**
+
    ```bash
    kubectl apply -f tenant-rbac.yaml
    ```
@@ -129,6 +135,7 @@ spec:
 ### Tenant Metrics
 
 Monitor key metrics per tenant:
+
 - Resource utilization
 - API request rates
 - Error rates
@@ -137,6 +144,7 @@ Monitor key metrics per tenant:
 ### Dashboards
 
 Create tenant-specific dashboards showing:
+
 - Resource consumption
 - Application health
 - Cost allocation
@@ -163,6 +171,7 @@ Create tenant-specific dashboards showing:
 ### Dynamic Tenant Provisioning
 
 Automate tenant creation with:
+
 - GitOps workflows
 - API-driven provisioning
 - Self-service portals
@@ -171,6 +180,7 @@ Automate tenant creation with:
 ### Cross-Tenant Communication
 
 When needed, enable controlled communication:
+
 - Service mesh integration
 - API gateways
 - Shared services
@@ -181,11 +191,13 @@ When needed, enable controlled communication:
 ### Common Issues
 
 1. **Resource Exhaustion**
+
    - Check quota limits
    - Review resource requests
    - Optimize applications
 
 2. **Access Denied**
+
    - Verify RBAC policies
    - Check service accounts
    - Review audit logs
@@ -198,5 +210,6 @@ When needed, enable controlled communication:
 ## Related Topics
 
 - [Technology Stack](./technology-stack.md)
-- [Kubernetes RBAC Overview](../kubernetes-rbac/overview.md)
-- [Best Practices](../kubernetes-rbac/best-practices.md)
+- **RBAC**: Each workspace has its own Role-Based Access Control, allowing for fine-grained permissions. For more details, see the [Kubernetes RBAC Overview](../rbac/overview.md) and [Best Practices](../rbac/best-practices.md).
+- **Network Policies**: Network traffic is restricted between workspaces by default.
+- **Resource Quotas**: Each workspace has its own resource quotas, preventing one workspace from impacting another.
