@@ -10,61 +10,65 @@ CronJobs in Hexabase.AI provide a reliable way to run scheduled tasks in your Ku
 
 <div class="grid cards" markdown>
 
--   :material-clock-start:{ .lg .middle } **Getting Started**
+- :material-clock-start:{ .lg .middle } **Getting Started**
 
-    ---
+  ***
 
-    Learn the basics of creating and deploying CronJobs
+  Learn the basics of creating and deploying CronJobs
 
-    [:octicons-arrow-right-24: CronJob Basics](management.md)
+  [:octicons-arrow-right-24: CronJob Basics](management.md)
 
--   :material-calendar-clock:{ .lg .middle } **Scheduling Patterns**
+- :material-calendar-clock:{ .lg .middle } **Scheduling Patterns**
 
-    ---
+  ***
 
-    Master cron expressions and scheduling strategies
+  Master cron expressions and scheduling strategies
 
-    [:octicons-arrow-right-24: Scheduling Guide](management.md#scheduling)
+  [:octicons-arrow-right-24: Scheduling Guide](management.md)
 
--   :material-cog-sync:{ .lg .middle } **Advanced Configuration**
+- :material-cog-sync:{ .lg .middle } **Advanced Configuration**
 
-    ---
+  ***
 
-    Configure job policies, resources, and dependencies
+  Configure job policies, resources, and dependencies
 
-    [:octicons-arrow-right-24: Advanced Config](management.md#configuration)
+  [:octicons-arrow-right-24: Advanced Config](management.md)
 
--   :material-monitor-dashboard:{ .lg .middle } **Monitoring & Debugging**
+- :material-monitor-dashboard:{ .lg .middle } **Monitoring & Debugging**
 
-    ---
+  ***
 
-    Track job execution and troubleshoot failures
+  Track job execution and troubleshoot failures
 
-    [:octicons-arrow-right-24: Monitoring Guide](../observability/monitoring-setup.md)
+  [:octicons-arrow-right-24: Monitoring Guide](../observability/monitoring-setup.md)
 
 </div>
 
 ## Key Features
 
 ### 1. Enhanced Scheduling
+
 - **Visual Cron Builder**: Create cron expressions with our intuitive UI
 - **Timezone Support**: Schedule jobs in any timezone
 - **Schedule Validation**: Prevent invalid cron expressions
 - **Next Run Preview**: See when your job will run next
 
 ### 2. Job Management
+
 - **Job History**: Track all executions with logs and metrics
 - **Manual Triggering**: Run jobs on-demand for testing
 - **Pause/Resume**: Temporarily disable jobs without deletion
 - **Batch Operations**: Manage multiple CronJobs at once
 
 ### 3. Enterprise Features
+
 - **Failure Notifications**: Get alerted when jobs fail
 - **Success Tracking**: Monitor job completion rates
 - **Resource Limits**: Prevent runaway jobs
 - **Dependency Management**: Chain jobs together
 
 ### 4. Integration Capabilities
+
 - **Secret Management**: Securely inject credentials
 - **ConfigMap Support**: Dynamic configuration
 - **Volume Mounts**: Access persistent data
@@ -73,63 +77,66 @@ CronJobs in Hexabase.AI provide a reliable way to run scheduled tasks in your Ku
 ## Common Use Cases
 
 ### Data Processing
+
 ```yaml
 apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: daily-etl
 spec:
-  schedule: "0 2 * * *"  # 2 AM daily
+  schedule: "0 2 * * *" # 2 AM daily
   jobTemplate:
     spec:
       template:
         spec:
           containers:
-          - name: etl-processor
-            image: myapp/etl:latest
-            command: ["python", "etl.py"]
+            - name: etl-processor
+              image: myapp/etl:latest
+              command: ["python", "etl.py"]
 ```
 
 ### Backup Operations
+
 ```yaml
 apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: database-backup
 spec:
-  schedule: "0 */6 * * *"  # Every 6 hours
+  schedule: "0 */6 * * *" # Every 6 hours
   jobTemplate:
     spec:
       template:
         spec:
           containers:
-          - name: backup
-            image: postgres:14
-            command: ["pg_dump"]
-            env:
-            - name: PGPASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: db-secret
-                  key: password
+            - name: backup
+              image: postgres:14
+              command: ["pg_dump"]
+              env:
+                - name: PGPASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: db-secret
+                      key: password
 ```
 
 ### Maintenance Tasks
+
 ```yaml
 apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: cleanup-old-data
 spec:
-  schedule: "30 3 * * 0"  # 3:30 AM every Sunday
+  schedule: "30 3 * * 0" # 3:30 AM every Sunday
   jobTemplate:
     spec:
       template:
         spec:
           containers:
-          - name: cleanup
-            image: myapp/maintenance:latest
-            command: ["./cleanup.sh"]
+            - name: cleanup
+              image: myapp/maintenance:latest
+              command: ["./cleanup.sh"]
 ```
 
 ## CronJob Lifecycle
@@ -153,23 +160,29 @@ spec:
 ## Best Practices
 
 ### 1. Idempotent Jobs
+
 Design jobs that can be safely re-run without side effects
 
 ### 2. Appropriate Timeouts
+
 Set realistic deadlines to prevent hanging jobs
 
 ### 3. Resource Limits
+
 Define CPU and memory limits to protect cluster stability
 
 ### 4. Error Handling
+
 Implement proper error handling and retry logic
 
 ### 5. Monitoring
+
 Set up alerts for job failures and performance issues
 
 ## Quick Examples
 
 ### Simple Hourly Job
+
 ```bash
 hks cronjob create hourly-report \
   --schedule "0 * * * *" \
@@ -178,6 +191,7 @@ hks cronjob create hourly-report \
 ```
 
 ### Job with Environment Variables
+
 ```bash
 hks cronjob create data-sync \
   --schedule "*/15 * * * *" \
@@ -187,6 +201,7 @@ hks cronjob create data-sync \
 ```
 
 ### View Job History
+
 ```bash
 hks cronjob history daily-backup --last 10
 ```
@@ -196,11 +211,13 @@ hks cronjob history daily-backup --last 10
 ### Common Issues
 
 1. **Job Not Running**
+
    - Check cron schedule syntax
    - Verify timezone settings
    - Ensure job is not paused
 
 2. **Job Failing**
+
    - Review job logs
    - Check resource limits
    - Verify image availability
@@ -213,8 +230,8 @@ hks cronjob history daily-backup --last 10
 ## Next Steps
 
 - **New to CronJobs?** Start with [Getting Started](management.md)
-- **Need scheduling help?** Check [Scheduling Patterns](management.md#scheduling)
-- **Advanced usage?** Explore [Configuration Options](management.md#configuration)
+- **Need scheduling help?** Check [Scheduling Patterns](management.md)
+- **Advanced usage?** Explore [Configuration Options](management.md)
 - **Having issues?** See [Monitoring & Debugging](../observability/monitoring-setup.md)
 
 ## Related Documentation

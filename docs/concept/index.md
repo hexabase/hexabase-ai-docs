@@ -10,37 +10,37 @@ Hexabase.AI is built on several key concepts that work together to provide a pow
 
 <div class="grid cards" markdown>
 
--   :material-domain:{ .lg .middle } **Organizations**
+- :material-domain:{ .lg .middle } **Organizations**
 
-    ---
+  ***
 
-    Top-level entities that represent companies or teams using Hexabase.AI
+  Top-level entities that represent companies or teams using Hexabase.AI
 
-    [:octicons-arrow-right-24: Learn about Organizations](multi-tenancy.md)
+  [:octicons-arrow-right-24: Learn about Organizations](multi-tenancy.md)
 
--   :material-view-dashboard:{ .lg .middle } **Workspaces**
+- :material-view-dashboard:{ .lg .middle } **Workspaces**
 
-    ---
+  ***
 
-    Isolated environments within organizations for different teams or projects
+  Isolated environments within organizations for different teams or projects
 
-    [:octicons-arrow-right-24: Learn about Workspaces](multi-tenancy.md#workspaces)
+  [:octicons-arrow-right-24: Learn about Workspaces](multi-tenancy.md)
 
--   :material-folder-multiple:{ .lg .middle } **Projects**
+- :material-folder-multiple:{ .lg .middle } **Projects**
 
-    ---
+  ***
 
-    Deployable units that contain your applications and configurations
+  Deployable units that contain your applications and configurations
 
-    [:octicons-arrow-right-24: Learn about Projects](core-concepts.md#projects)
+  [:octicons-arrow-right-24: Learn about Projects](core-concepts.md)
 
--   :material-kubernetes:{ .lg .middle } **Clusters**
+- :material-kubernetes:{ .lg .middle } **Clusters**
 
-    ---
+  ***
 
-    Kubernetes clusters managed by Hexabase.AI for running your workloads
+  Kubernetes clusters managed by Hexabase.AI for running your workloads
 
-    [:octicons-arrow-right-24: Learn about Clusters](technology-stack.md)
+  [:octicons-arrow-right-24: Learn about Clusters](technology-stack.md)
 
 </div>
 
@@ -56,6 +56,7 @@ Organization
 ```
 
 This structure provides:
+
 - **Isolation**: Complete separation between different organizations
 - **Flexibility**: Multiple workspaces for different teams or environments
 - **Security**: Role-based access control at each level
@@ -64,16 +65,19 @@ This structure provides:
 ## Platform Components
 
 ### Control Plane
+
 - Manages the overall platform operations
 - Handles authentication and authorization
 - Orchestrates cluster provisioning and management
 
 ### Data Plane
+
 - Runs actual workloads in Kubernetes clusters
 - Provides compute, storage, and networking resources
 - Implements security policies and resource quotas
 
 ### AIOps Engine
+
 - Monitors resource usage and performance
 - Provides intelligent recommendations
 - Automates optimization and scaling decisions
@@ -81,8 +85,8 @@ This structure provides:
 ## Next Steps
 
 - **New to Hexabase.AI?** Start with [Organizations](multi-tenancy.md) to understand the top-level structure
-- **Setting up a team?** Learn about [Workspaces](multi-tenancy.md#workspaces) and how to organize your environments
-- **Ready to deploy?** Understand [Projects](core-concepts.md#projects) and how to package your applications
+- **Setting up a team?** Learn about [Workspaces](multi-tenancy.md) and how to organize your environments
+- **Ready to deploy?** Understand [Projects](core-concepts.md) and how to package your applications
 - **Managing infrastructure?** Explore [Clusters](technology-stack.md) and their capabilities
 
 ## Related Documentation

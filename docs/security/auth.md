@@ -63,7 +63,7 @@ The authorization model has two main layers:
 1.  **Organization RBAC**: Defines roles at the organization level (`org_admin`, `org_user`). Org Admins can manage billing, users, and workspaces.
 2.  **Workspace RBAC**: Defines roles within a specific workspace (`workspace_admin`, `developer`, `viewer`). These roles grant permissions to interact with Kubernetes resources (Deployments, Pods, etc.) within that workspace.
 
-For more details, see the dedicated [RBAC documentation](../rbac/).
+For more details, see the dedicated [RBAC documentation](../rbac/index.md).
 
 ### How Authorization Works
 

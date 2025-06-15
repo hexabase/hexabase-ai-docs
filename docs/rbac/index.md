@@ -10,37 +10,37 @@ Hexabase.AI provides a sophisticated RBAC system that extends Kubernetes native 
 
 <div class="grid cards" markdown>
 
--   :material-account-key:{ .lg .middle } **Roles and Permissions**
+- :material-account-key:{ .lg .middle } **Roles and Permissions**
 
-    ---
+  ***
 
-    Understand predefined roles and custom permission models
+  Understand predefined roles and custom permission models
 
-    [:octicons-arrow-right-24: Explore Roles](hexabase-rbac.md)
+  [:octicons-arrow-right-24: Explore Roles](hexabase-rbac.md)
 
--   :material-account-group:{ .lg .middle } **User Management**
+- :material-account-group:{ .lg .middle } **User Management**
 
-    ---
+  ***
 
-    Managing users, groups, and service accounts
+  Managing users, groups, and service accounts
 
-    [:octicons-arrow-right-24: User Management Guide](kubernetes-rbac.md)
+  [:octicons-arrow-right-24: User Management Guide](kubernetes-rbac.md)
 
--   :material-shield-check:{ .lg .middle } **Policy Configuration**
+- :material-shield-check:{ .lg .middle } **Policy Configuration**
 
-    ---
+  ***
 
-    Configure and customize access policies
+  Configure and customize access policies
 
-    [:octicons-arrow-right-24: Policy Configuration](kubernetes-rbac.md#policies)
+  [:octicons-arrow-right-24: Policy Configuration](kubernetes-rbac.md)
 
--   :material-book-open:{ .lg .middle } **Best Practices**
+- :material-book-open:{ .lg .middle } **Best Practices**
 
-    ---
+  ***
 
-    Security best practices and common patterns
+  Security best practices and common patterns
 
-    [:octicons-arrow-right-24: RBAC Best Practices](best-practices.md)
+  [:octicons-arrow-right-24: RBAC Best Practices](best-practices.md)
 
 </div>
 
@@ -60,22 +60,26 @@ Organization
 ### Key Features
 
 #### 1. Multi-level Permissions
+
 - **Organization Level**: Control who can create workspaces and manage billing
 - **Workspace Level**: Manage project deployment and resource quotas
 - **Project Level**: Fine-grained Kubernetes permissions
 
 #### 2. Predefined Roles
+
 - **Organization Admin**: Full control over organization
 - **Workspace Owner**: Manage workspace and deploy projects
 - **Developer**: Deploy and manage applications
 - **Viewer**: Read-only access to resources
 
 #### 3. Custom Roles
+
 - Create custom roles with specific permissions
 - Combine multiple permissions for complex scenarios
 - Template-based role creation
 
 #### 4. Dynamic Permission Inheritance
+
 - Permissions cascade from organization to workspace
 - Override inherited permissions at lower levels
 - Automatic permission propagation
@@ -83,43 +87,49 @@ Organization
 ## Common RBAC Scenarios
 
 ### Scenario 1: Development Team Setup
+
 ```yaml
 Team Structure:
-- Team Lead: Workspace Owner
-- Developers: Developer role with deployment permissions
-- QA Engineers: Viewer role with log access
-- CI/CD Service: Service account with deployment permissions
+  - Team Lead: Workspace Owner
+  - Developers: Developer role with deployment permissions
+  - QA Engineers: Viewer role with log access
+  - CI/CD Service: Service account with deployment permissions
 ```
 
 ### Scenario 2: Multi-Environment Access
+
 ```yaml
 Environment Setup:
-- Production: Limited to senior developers and SREs
-- Staging: Open to all developers
-- Development: Self-service for all team members
+  - Production: Limited to senior developers and SREs
+  - Staging: Open to all developers
+  - Development: Self-service for all team members
 ```
 
 ### Scenario 3: Client Access
+
 ```yaml
 External Access:
-- Client stakeholders: Viewer role for specific workspaces
-- Contractors: Time-limited developer access
-- Auditors: Read-only access with audit log visibility
+  - Client stakeholders: Viewer role for specific workspaces
+  - Contractors: Time-limited developer access
+  - Auditors: Read-only access with audit log visibility
 ```
 
 ## Security Considerations
 
 ### Principle of Least Privilege
+
 - Users get minimal permissions required
 - Regular permission audits
 - Automated permission cleanup
 
 ### Separation of Duties
+
 - Different roles for deployment and approval
 - Separate production access controls
 - Audit trail for all permission changes
 
 ### Defense in Depth
+
 - Multiple layers of access control
 - Network policies complement RBAC
 - Resource quotas prevent abuse
@@ -127,11 +137,13 @@ External Access:
 ## Quick Start Examples
 
 ### Granting Developer Access
+
 ```bash
 hks rbac grant-role developer user@example.com --workspace my-workspace
 ```
 
 ### Creating Custom Role
+
 ```bash
 hks rbac create-role custom-deployer \
   --permissions deploy,view-logs,manage-secrets \
@@ -139,6 +151,7 @@ hks rbac create-role custom-deployer \
 ```
 
 ### Viewing User Permissions
+
 ```bash
 hks rbac list-permissions user@example.com
 ```
@@ -156,7 +169,7 @@ Hexabase.AI RBAC seamlessly integrates with native Kubernetes RBAC:
 
 - **New to RBAC?** Start with [Roles and Permissions](hexabase-rbac.md)
 - **Setting up users?** Follow the [User Management Guide](kubernetes-rbac.md)
-- **Need custom policies?** Learn about [Policy Configuration](kubernetes-rbac.md#policies)
+- **Need custom policies?** Learn about [Policy Configuration](kubernetes-rbac.md)
 - **Security focus?** Review [RBAC Best Practices](best-practices.md)
 
 ## Related Documentation
@@ -164,4 +177,4 @@ Hexabase.AI RBAC seamlessly integrates with native Kubernetes RBAC:
 - [Security Architecture](../architecture/security-architecture.md)
 - [Core Concepts](../concept/index.md)
 - [API Authentication](../api/authentication.md)
-- [Audit Logging](../observability/monitoring-setup.md)
+- [Audit Logging](../security/compliance.md#audit-logs-for-compliance)

@@ -122,8 +122,6 @@ nav:
           - Enterprise Plan: usecases/enterprise-plan.md
       - Enterprise Kubernetes: usecases/enterprise-kubernetes.md
       - AI-Powered DevOps: usecases/ai-powered-devops.md
-      - Serverless Platform: usecases/serverless-platform.md
-      - Multi-Cloud Management: usecases/multi-cloud-management.md
   - Architecture:
       - architecture/index.md
       - System Architecture: architecture/system-architecture.md
@@ -175,9 +173,9 @@ nav:
   - Functions:
       - functions/index.md
       - HKS Functions Overview: functions/overview.md
+      - Function Architecture: functions/architecture.md
       - Function Development: functions/development.md
       - Deployment Guide: functions/deployment.md
-      - Runtime Environment: functions/runtime.md
       - AI Agent Functions: functions/ai-agent-functions.md
   - Observability:
       - observability/index.md

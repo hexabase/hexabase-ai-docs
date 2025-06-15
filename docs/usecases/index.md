@@ -24,7 +24,7 @@ Hexabase.AI serves diverse use cases across industries, from startups deploying 
 
   Manage development, staging, and production environments efficiently
 
-  [:octicons-arrow-right-24: Learn Multi-Environment](enterprise-kubernetes.md#environments)
+  [:octicons-arrow-right-24: Learn Multi-Environment](enterprise-kubernetes.md)
 
 - :material-account-group:{ .lg .middle } **Team Collaboration**
 
