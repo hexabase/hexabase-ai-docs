@@ -17,8 +17,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy source code
 COPY . .
 
-# Build documentation
+# Build documentation for both languages
 RUN mkdocs build --clean
+RUN mkdocs build --config-file mkdocs.ja.yml --site-dir site/ja
 
 # Production stage
 FROM nginx:alpine

@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: hexabase-docs
+  namespace: default
+  labels:
+    app: hexabase-docs
+spec:
+  type: ClusterIP
+  selector:
+    app: hexabase-docs
+  ports:
+  - port: 80
+    targetPort: 80
+    protocol: TCP
+    name: http
