@@ -271,39 +271,16 @@ body header [data-md-state="active"] a {
 
 /* Simple Collapsible Navigation - Minimal Changes */
 
-/* Add expand/collapse arrows to navigation items with children */
+/* Remove expand/collapse arrows from navigation items */
 .md-nav__item--nested > .md-nav__link::after,
 .md-nav__item--section > .md-nav__link::after {
-  content: "▼";
-  position: absolute;
-  right: 0.6rem;
-  top: 50%;
-  transform: translateY(-50%) scale(0.7);
-  color: rgba(0, 0, 0, 0.54);
-  font-size: 0.8rem;
-  transition: transform 0.25s;
-  font-weight: normal;
-}
-
-/* Rotate arrow when expanded */
-.md-nav__item--nested .md-nav__toggle:checked ~ .md-nav__link::after,
-.md-nav__item--nested .md-nav__link--expanded::after,
-.md-nav__item--section .md-nav__toggle:checked ~ .md-nav__link::after,
-.md-nav__item--section .md-nav__link--expanded::after {
-  transform: translateY(-50%) rotate(-180deg) scale(0.7);
-}
-
-/* Dark mode arrow color */
-[data-md-color-scheme="slate"] .md-nav__item--nested > .md-nav__link::after,
-[data-md-color-scheme="slate"] .md-nav__item--section > .md-nav__link::after {
-  color: rgba(255, 255, 255, 0.54);
+  display: none;
 }
 
 /* Make navigation items with children clickable */
 .md-nav__item--nested > .md-nav__link,
 .md-nav__item--section > .md-nav__link {
   cursor: pointer;
-  padding-right: 2.4rem;
   position: relative;
 }
 

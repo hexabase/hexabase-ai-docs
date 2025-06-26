@@ -2,566 +2,574 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://docs.hexabase.ai/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.hexabase.ai/service-scope/</loc>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/aiops/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/aiops/agent-hierarchy/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/aiops/architecture/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/aiops/llm-integration/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/aiops/secure-sandbox/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/aiops/use-cases/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/api/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/api/authentication/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/api/error-codes/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/api/function-api/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/api/rest-api/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/api/websocket-api/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/applications/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/applications/deployment/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/applications/load-balancing/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/applications/resource-management/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/applications/service-discovery/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/architecture/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/architecture/security-architecture/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/architecture/system-architecture/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/architecture/technical-design/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/architecture/adr/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/architecture/adr/adr-001-multi-tenant-platform/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/architecture/adr/adr-002-oauth2-oidc-security/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/architecture/adr/adr-003-faas-architecture/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/architecture/adr/adr-004-ai-operations/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/architecture/adr/adr-005-cicd-architecture/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/architecture/adr/adr-006-logging-monitoring/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/architecture/adr/adr-007-backup-disaster-recovery/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/architecture/adr/adr-008-domain-driven-design/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/backups/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/backups/automated-backups/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/backups/disaster-recovery/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/backups/restore-procedures/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/backups/strategies/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/cicd/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/cicd/build-strategies/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/cicd/deployment-automation/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/cicd/github-integration/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/cicd/gitlab-integration/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/cicd/pipeline-configuration/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/concept/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/concept/core-concepts/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/concept/multi-tenancy/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/concept/overview/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/concept/technology-stack/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/cronjobs/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/cronjobs/examples/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/cronjobs/integration-patterns/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/cronjobs/management/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/cronjobs/ui-configuration/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/functions/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/functions/ai-agent-functions/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/functions/architecture/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/functions/deployment/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/functions/development/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/functions/overview/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/functions/runtime/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/ja/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.hexabase.ai/ja/service-scope/</loc>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/ja/applications/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/ja/applications/deployment/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/ja/applications/load-balancing/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/ja/applications/resource-management/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/ja/applications/service-discovery/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/ja/concept/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/ja/concept/core-concepts/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/ja/concept/multi-tenancy/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/ja/concept/overview/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/ja/concept/technology-stack/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/ja/nodes/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/ja/nodes/configuration/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/ja/rbac/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/ja/rbac/best-practices/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/ja/rbac/hexabase-rbac/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/ja/rbac/kubernetes-rbac/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/ja/rbac/overview/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/ja/rbac/permission-model/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/ja/rbac/role-mappings/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/ja/usecases/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/ja/usecases/ai-powered-devops/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/ja/usecases/enterprise-kubernetes/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/ja/usecases/enterprise-plan/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/ja/usecases/single-user-plan/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/ja/usecases/team-plan/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/nodes/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/nodes/configuration/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/nodes/health-monitoring/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/nodes/scaling/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/nodes/vm-management/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/observability/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/observability/clickhouse-analytics/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/observability/dashboards-alerts/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/observability/logging/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/observability/monitoring-setup/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/observability/tracing/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/rbac/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/rbac/best-practices/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/rbac/hexabase-rbac/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/rbac/kubernetes-rbac/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/rbac/overview/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/rbac/permission-model/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/rbac/role-mappings/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/sdk/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/sdk/cli/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/sdk/go/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/sdk/javascript/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/sdk/python/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/security/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/security/architecture/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/security/auth/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/security/best-practices/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/security/compliance/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/security/network-security/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/usecases/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/usecases/ai-powered-devops/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/usecases/enterprise-kubernetes/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/usecases/enterprise-plan/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/usecases/single-user-plan/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/usecases/team-plan/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/users/cronjobs/examples/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/users/cronjobs/integration-patterns/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/users/cronjobs/ui-configuration/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/users/functions/ai-agent-functions/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/users/functions/deployment/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/users/functions/development/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/users/functions/runtime/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/users/nodes/configuration/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/users/nodes/health-monitoring/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/users/nodes/scaling/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/users/nodes/vm-management/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/users/observability/clickhouse-analytics/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/users/observability/dashboards-alerts/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/users/observability/logging/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/users/observability/tracing/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/users/rbac/best-practices/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/users/rbac/overview/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/users/rbac/permission-model/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/users/rbac/role-mappings/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/users/sdk/nodejs/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
     <url>
          <loc>https://docs.hexabase.ai/users/sdk/python/</loc>
-         <lastmod>2025-06-15</lastmod>
+         <lastmod>2025-06-18</lastmod>
     </url>
 </urlset>
