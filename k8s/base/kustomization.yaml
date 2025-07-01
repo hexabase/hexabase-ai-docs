@@ -10,6 +10,7 @@ resources:
 - ingress.yaml
 - configmap.yaml
 - hpa.yaml
+- docs-content-configmap.yaml
 
 commonLabels:
   app: hexabase-docs

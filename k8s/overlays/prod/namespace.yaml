@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: hexabase-docs-prod
+  name: hexabase-ai
   labels:
-    name: hexabase-docs-prod
+    name: hexabase-ai
     environment: production

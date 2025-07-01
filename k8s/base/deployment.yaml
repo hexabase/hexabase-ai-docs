@@ -19,6 +19,7 @@ spec:
       containers:
       - name: docs
         image: hexabase-ai/docs:latest
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 80
           name: http
@@ -31,18 +32,23 @@ spec:
             cpu: "500m"
         livenessProbe:
           httpGet:
-            path: /health
+            path: /
             port: 80
           initialDelaySeconds: 10
           periodSeconds: 30
         readinessProbe:
           httpGet:
-            path: /health
+            path: /
             port: 80
           initialDelaySeconds: 5
           periodSeconds: 10
         env:
         - name: NGINX_PORT
           value: "80"
-      imagePullSecrets:
-      - name: hexabase-registry
+        volumeMounts:
+        - name: docs-content
+          mountPath: /usr/share/nginx/html
+      volumes:
+      - name: docs-content
+        configMap:
+          name: hexabase-docs-content

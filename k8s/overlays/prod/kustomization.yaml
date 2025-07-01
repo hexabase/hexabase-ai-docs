@@ -4,7 +4,7 @@ kind: Kustomization
 metadata:
   name: hexabase-docs-prod
 
-namespace: hexabase-docs-prod
+namespace: hexabase-ai
 
 resources:
 - ../../base
@@ -16,7 +16,8 @@ patchesStrategicMerge:
 
 images:
 - name: hexabase-ai/docs
-  newTag: v1.0.0
+  newName: nginx
+  newTag: alpine
 
 commonLabels:
   environment: production
