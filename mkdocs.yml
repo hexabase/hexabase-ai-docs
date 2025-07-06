@@ -62,6 +62,16 @@ plugins:
   - redirects
   - minify:
       minify_html: true
+  - i18n:
+      languages:
+        - locale: en
+          name: English
+          build: true
+          default: true
+        - locale: ja
+          name: 日本語
+          build: true
+          site_name: "Hexabase.AI (ja)"
   - git-revision-date-localized:
       enable_creation_date: true
       fallback_to_build_date: true
@@ -197,46 +207,48 @@ nav:
       - " User Examples": users/cronjobs/examples.md
       - " User Integration Patterns": users/cronjobs/integration-patterns.md
       - " User UI Configuration": users/cronjobs/ui-configuration.md
-  - Backups:
-      - backups/index.md
-      - " Backup Strategies": backups/strategies.md
-      - " Automated Backups": backups/automated-backups.md
-      - " Disaster Recovery": backups/disaster-recovery.md
-      - " Restore Procedures": backups/restore-procedures.md
-  - Observability:
-      - observability/index.md
-      - " Monitoring Setup": observability/monitoring-setup.md
-      - " Logging Architecture": observability/logging.md
-      - " Distributed Tracing": observability/tracing.md
-      - " Dashboards & Alerts": observability/dashboards-alerts.md
-      - " ClickHouse Analytics": observability/clickhouse-analytics.md
-      - " User Examples":
-          - "  ClickHouse Analytics": users/observability/clickhouse-analytics.md
-          - "  Dashboards & Alerts": users/observability/dashboards-alerts.md
-          - "  Logging": users/observability/logging.md
-          - "  Tracing": users/observability/tracing.md
-  - Security:
-      - security/index.md
-      - " Security Architecture": security/architecture.md
-      - " Authentication & Authorization": security/auth.md
-      - " Network Security": security/network-security.md
-      - " Compliance": security/compliance.md
-      - " Security Best Practices": security/best-practices.md
   - AIOps:
-      - aiops/index.md
-      - " Architecture Overview": aiops/architecture.md
-      - " Agent Hierarchy": aiops/agent-hierarchy.md
-      - " LLM Integration": aiops/llm-integration.md
-      - " Secure Sandbox": aiops/secure-sandbox.md
-      - " Use Cases": aiops/use-cases.md
-  - API Reference:
+      - AIOps:
+        - aiops/index.md
+        - " Architecture Overview": aiops/architecture.md
+        - " Agent Hierarchy": aiops/agent-hierarchy.md
+        - " LLM Integration": aiops/llm-integration.md
+        - " Secure Sandbox": aiops/secure-sandbox.md
+        - " Use Cases": aiops/use-cases.md
+      - Backups:
+        - backups/index.md
+        - " Backup Strategies": backups/strategies.md
+        - " Automated Backups": backups/automated-backups.md
+        - " Disaster Recovery": backups/disaster-recovery.md
+        - " Restore Procedures": backups/restore-procedures.md
+      - Observability:
+        - observability/index.md
+        - " Monitoring Setup": observability/monitoring-setup.md
+        - " Logging Architecture": observability/logging.md
+        - " Distributed Tracing": observability/tracing.md
+        - " Dashboards & Alerts": observability/dashboards-alerts.md
+        - " ClickHouse Analytics": observability/clickhouse-analytics.md
+        - " User Examples":
+            - "  ClickHouse Analytics": users/observability/clickhouse-analytics.md
+            - "  Dashboards & Alerts": users/observability/dashboards-alerts.md
+            - "  Logging": users/observability/logging.md
+            - "  Tracing": users/observability/tracing.md
+      - Security:
+        - security/index.md
+        - " Security Architecture": security/architecture.md
+        - " Authentication & Authorization": security/auth.md
+        - " Network Security": security/network-security.md
+        - " Compliance": security/compliance.md
+        - " Security Best Practices": security/best-practices.md
+  - Reference:
+    - API Reference:
       - api/index.md
       - " Authentication": api/authentication.md
       - " REST API": api/rest-api.md
       - " WebSocket API": api/websocket-api.md
       - " Function API": api/function-api.md
       - " Error Handling": api/error-codes.md
-  - SDK:
+    - SDK:
       - sdk/index.md
       - " JavaScript SDK": sdk/javascript.md
       - " Python SDK": sdk/python.md

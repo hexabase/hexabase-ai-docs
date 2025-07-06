@@ -67,7 +67,7 @@
 
   技術的なアーキテクチャを深く掘り下げます
 
-  [:octicons-arrow-right-24: アーキテクチャドキュメント (English)](../architecture/index.md)
+  [:octicons-arrow-right-24: アーキテクチャドキュメント (日本語)](architecture/index.md)
 
 - :material-shield-lock:{ .lg .middle } **RBAC**
 
@@ -127,7 +127,7 @@
 
   完全な API ドキュメントと SDK
 
-  [:octicons-arrow-right-24: API ドキュメント (English)](../api/index.md)
+  [:octicons-arrow-right-24: API ドキュメント (日本語)](api/index.md)
 
 - :material-translate:{ .lg .middle } **言語切り替え**
 

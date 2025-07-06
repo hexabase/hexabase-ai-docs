@@ -201,46 +201,48 @@ nav:
       - " ユーザー例": users/cronjobs/examples.md
       - " ユーザー統合パターン": users/cronjobs/integration-patterns.md
       - " ユーザー UI 設定": users/cronjobs/ui-configuration.md
-  - バックアップ:
-      - ja/backups/index.md
-      - " バックアップ戦略": ja/backups/strategies.md
-      - " 自動バックアップ": ja/backups/automated-backups.md
-      - " 災害復旧": ja/backups/disaster-recovery.md
-      - " リストア手順": ja/backups/restore-procedures.md
-  - オブザーバビリティ(監視):
-      - ja/observability/index.md
-      - " 監視セットアップ": ja/observability/monitoring-setup.md
-      - " ログアーキテクチャ": ja/observability/logging.md
-      - " 分散トレーシング": ja/observability/tracing.md
-      - " ダッシュボード・アラート": ja/observability/dashboards-alerts.md
-      - " ClickHouse 分析": ja/observability/clickhouse-analytics.md
-      - " ユーザー例":
-          - "  ClickHouse 分析": users/observability/clickhouse-analytics.md
-          - "  ダッシュボード・アラート": users/observability/dashboards-alerts.md
-          - "  ログ": users/observability/logging.md
-          - "  トレーシング": users/observability/tracing.md
-  - セキュリティ:
-      - ja/security/index.md
-      - " セキュリティアーキテクチャ": ja/security/architecture.md
-      - " 認証・認可": ja/security/auth.md
-      - " ネットワークセキュリティ": ja/security/network-security.md
-      - " コンプライアンス": ja/security/compliance.md
-      - " セキュリティベストプラクティス": ja/security/best-practices.md
   - AIOps:
-      - ja/aiops/index.md
-      - " アーキテクチャ概要": ja/aiops/architecture.md
-      - " エージェント階層": ja/aiops/agent-hierarchy.md
-      - " LLM 統合": ja/aiops/llm-integration.md
-      - " セキュアサンドボックス": ja/aiops/secure-sandbox.md
-      - " ユースケース": ja/aiops/use-cases.md
-  - APIリファレンス:
+      - AIOps:
+        - ja/aiops/index.md
+        - " アーキテクチャ概要": ja/aiops/architecture.md
+        - " エージェント階層": ja/aiops/agent-hierarchy.md
+        - " LLM 統合": ja/aiops/llm-integration.md
+        - " セキュアサンドボックス": ja/aiops/secure-sandbox.md
+        - " ユースケース": ja/aiops/use-cases.md
+      - バックアップ:
+        - ja/backups/index.md
+        - " バックアップ戦略": ja/backups/strategies.md
+        - " 自動バックアップ": ja/backups/automated-backups.md
+        - " 災害復旧": ja/backups/disaster-recovery.md
+        - " リストア手順": ja/backups/restore-procedures.md
+      - オブザーバビリティ(監視):
+        - ja/observability/index.md
+        - " 監視セットアップ": ja/observability/monitoring-setup.md
+        - " ログアーキテクチャ": ja/observability/logging.md
+        - " 分散トレーシング": ja/observability/tracing.md
+        - " ダッシュボード・アラート": ja/observability/dashboards-alerts.md
+        - " ClickHouse 分析": ja/observability/clickhouse-analytics.md
+        - " ユーザー例":
+            - "  ClickHouse 分析": users/observability/clickhouse-analytics.md
+            - "  ダッシュボード・アラート": users/observability/dashboards-alerts.md
+            - "  ログ": users/observability/logging.md
+            - "  トレーシング": users/observability/tracing.md
+      - セキュリティ:
+        - ja/security/index.md
+        - " セキュリティアーキテクチャ": ja/security/architecture.md
+        - " 認証・認可": ja/security/auth.md
+        - " ネットワークセキュリティ": ja/security/network-security.md
+        - " コンプライアンス": ja/security/compliance.md
+        - " セキュリティベストプラクティス": ja/security/best-practices.md
+  - リファレンス:
+    - APIリファレンス:
       - ja/api/index.md
       - " 認証": ja/api/authentication.md
       - " REST API": ja/api/rest-api.md
       - " WebSocket API": ja/api/websocket-api.md
       - " Function API": ja/api/function-api.md
       - " エラーハンドリング": ja/api/error-codes.md
-  - SDK:
+    - SDK:
       - ja/sdk/index.md
       - " JavaScript SDK": ja/sdk/javascript.md
       - " Python SDK": ja/sdk/python.md
