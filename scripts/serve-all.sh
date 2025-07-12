@@ -34,10 +34,10 @@ echo "🏗️ Building multi-language site first..."
 
 echo ""
 echo "🌐 Starting HTTP server for built site..."
-echo "📖 English Documentation: http://localhost:8000"
-echo "🇯🇵 Japanese Documentation: http://localhost:8000/ja/"
+echo "📖 English Documentation: http://localhost:7900"
+echo "🇯🇵 Japanese Documentation: http://localhost:7900/ja/"
 echo ""
 echo "Press Ctrl+C to stop the server"
 
 # Start HTTP server from the site directory
-cd site && python -m http.server 8000
+cd site && python -m http.server 7900

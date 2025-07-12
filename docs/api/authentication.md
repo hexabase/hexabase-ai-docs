@@ -337,6 +337,24 @@ Response:
 }
 ```
 
+## Authentication Endpoints Summary
+
+### Core Authentication
+- `POST /auth/login/:provider` - Initiate OAuth login
+- `GET /auth/callback/:provider` - OAuth callback (redirect)
+- `POST /auth/callback/:provider` - OAuth callback (PKCE)
+- `POST /auth/refresh` - Refresh access token
+- `POST /auth/logout` - Logout current session
+- `GET /auth/me` - Get current user info
+
+### Session Management
+- `GET /auth/sessions` - List active sessions
+- `DELETE /auth/sessions/:sessionId` - Revoke specific session
+- `POST /auth/sessions/revoke-all` - Revoke all sessions
+
+### Security Logs
+- `GET /auth/security-logs` - Get security events
+
 ## OIDC Discovery
 
 Hexabase KaaS provides OIDC discovery endpoints for integration:

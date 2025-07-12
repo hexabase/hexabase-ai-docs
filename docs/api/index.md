@@ -14,25 +14,127 @@ The Hexabase.AI API provides comprehensive programmatic access to all platform f
 
     ---
 
-    API keys, OAuth, and service accounts
+    OAuth, JWT tokens, and session management
 
     [:octicons-arrow-right-24: Authentication Guide](authentication.md)
 
--   :material-api:{ .lg .middle } **REST API**
+-   :material-domain:{ .lg .middle } **Organizations**
 
     ---
 
-    RESTful endpoints for all resources
+    Organization and member management
 
-    [:octicons-arrow-right-24: REST Reference](rest-api.md)
+    [:octicons-arrow-right-24: Organizations API](organizations.md)
 
--   :material-graphql:{ .lg .middle } **GraphQL API**
+-   :material-view-dashboard:{ .lg .middle } **Workspaces**
 
     ---
 
-    Flexible queries for complex data needs
+    Workspace provisioning and configuration
 
-    [:octicons-arrow-right-24: GraphQL Schema](websocket-api.md)
+    [:octicons-arrow-right-24: Workspaces API](workspaces.md)
+
+-   :material-folder:{ .lg .middle } **Projects**
+
+    ---
+
+    Project hierarchy and resource quotas
+
+    [:octicons-arrow-right-24: Projects API](projects.md)
+
+-   :material-application:{ .lg .middle } **Applications**
+
+    ---
+
+    Application deployment and lifecycle
+
+    [:octicons-arrow-right-24: Applications API](applications.md)
+
+-   :material-server:{ .lg .middle } **Nodes**
+
+    ---
+
+    Dedicated node provisioning and management
+
+    [:octicons-arrow-right-24: Node Management API](nodes.md)
+
+-   :material-function:{ .lg .middle } **Functions**
+
+    ---
+
+    Serverless function deployment and invocation
+
+    [:octicons-arrow-right-24: Functions API](functions.md)
+
+-   :material-pipe:{ .lg .middle } **CI/CD Pipelines**
+
+    ---
+
+    Pipeline creation and execution
+
+    [:octicons-arrow-right-24: Pipelines API](pipelines.md)
+
+-   :material-backup-restore:{ .lg .middle } **Backups**
+
+    ---
+
+    Backup policies and restore operations
+
+    [:octicons-arrow-right-24: Backups API](backups.md)
+
+-   :material-credit-card:{ .lg .middle } **Billing**
+
+    ---
+
+    Subscription and payment management
+
+    [:octicons-arrow-right-24: Billing API](billing.md)
+
+-   :material-monitor:{ .lg .middle } **Monitoring**
+
+    ---
+
+    Metrics, alerts, and health monitoring
+
+    [:octicons-arrow-right-24: Monitoring API](monitoring.md)
+
+-   :material-robot:{ .lg .middle } **AI Operations**
+
+    ---
+
+    AI-powered operations and chat interface
+
+    [:octicons-arrow-right-24: AI Operations API](aiops.md)
+
+-   :material-cog:{ .lg .middle } **Internal APIs**
+
+    ---
+
+    System-level operations for AI agents and services
+
+    [:octicons-arrow-right-24: Internal APIs](internal.md)
+
+</div>
+
+## Legacy API References
+
+<div class="grid cards" markdown>
+
+-   :material-api:{ .lg .middle } **REST API (Legacy)**
+
+    ---
+
+    Original REST API documentation
+
+    [:octicons-arrow-right-24: Legacy REST Reference](rest-api.md)
+
+-   :material-graphql:{ .lg .middle } **WebSocket API**
+
+    ---
+
+    Real-time communication endpoints
+
+    [:octicons-arrow-right-24: WebSocket Reference](websocket-api.md)
 
 -   :material-code-json:{ .lg .middle } **SDKs & Tools**
 
