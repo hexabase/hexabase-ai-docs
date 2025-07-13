@@ -27,13 +27,13 @@ HKS UI または CLI を通じて、いつでもノードからラベルとテ�
 
 ```bash
 # ノードに新しいラベルを追加
-hks node label my-node-01 owner=sre-team
+hb node label my-node-01 owner=sre-team
 
 # ノードに新しいテイントを追加
-hks node taint my-node-01 sensitive=true:NoSchedule
+hb node taint my-node-01 sensitive=true:NoSchedule
 
 # ノードからテイントを削除
-hks node taint my-node-01 sensitive:NoSchedule-
+hb node taint my-node-01 sensitive:NoSchedule-
 ```
 
 ## ノードプール
@@ -42,7 +42,7 @@ hks node taint my-node-01 sensitive:NoSchedule-
 
 ```bash
 # 3つの同一ノードでノードプールを作成
-hks nodepool create production-workers \
+hb nodepool create production-workers \
   --node-type c5.xlarge \
   --node-count 3 \
   --labels "pool=production-workers" \

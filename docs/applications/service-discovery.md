@@ -483,16 +483,16 @@ spec:
 
 ```bash
 # Check DNS resolution
-hks exec -it debug-pod -- nslookup myservice
+hb exec -it debug-pod -- nslookup myservice
 
 # Check endpoints
-hks get endpoints myservice
+hb get endpoints myservice
 
 # Check endpoint slices
-hks get endpointslices -l kubernetes.io/service-name=myservice
+hb get endpointslices -l kubernetes.io/service-name=myservice
 
 # Test service discovery
-hks run test --rm -it --image=busybox -- wget -O- http://myservice
+hb run test --rm -it --image=busybox -- wget -O- http://myservice
 ```
 
 ## Troubleshooting
@@ -503,33 +503,33 @@ hks run test --rm -it --image=busybox -- wget -O- http://myservice
 
    ```bash
    # Check CoreDNS logs
-   hks logs -n kube-system -l k8s-app=kube-dns
+   hb logs -n kube-system -l k8s-app=kube-dns
 
    # Test DNS from pod
-   hks exec -it myapp -- nslookup kubernetes.default
+   hb exec -it myapp -- nslookup kubernetes.default
    ```
 
 2. **Service Not Found**
 
    ```bash
    # Verify service exists
-   hks get svc myservice
+   hb get svc myservice
 
    # Check service selector
-   hks describe svc myservice
+   hb describe svc myservice
 
    # Verify matching pods
-   hks get pods -l app=myapp
+   hb get pods -l app=myapp
    ```
 
 3. **Endpoint Not Ready**
 
    ```bash
    # Check endpoint status
-   hks get endpoints myservice
+   hb get endpoints myservice
 
    # Check pod readiness
-   hks get pods -l app=myapp -o wide
+   hb get pods -l app=myapp -o wide
    ```
 
 ### Debugging Tools
@@ -615,11 +615,11 @@ spec:
 
 ```bash
 # List all services across clusters
-hks catalog list --global
+hb catalog list --global
 
 # Search services by capability
-hks catalog search --tag "user-auth"
+hb catalog search --tag "user-auth"
 
 # Get service details
-hks catalog describe user-service --detailed
+hb catalog describe user-service --detailed
 ```

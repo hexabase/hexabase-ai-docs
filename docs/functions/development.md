@@ -140,10 +140,10 @@ You can develop and test your functions locally without needing to deploy them f
 
     ```bash
     # For a Python function
-    hks function invoke-local main.py --event sample-event.json
+    hb function invoke-local main.py --event sample-event.json
 
     # For a Node.js function
-    hks function invoke-local index.js --event sample-event.json
+    hb function invoke-local index.js --event sample-event.json
     ```
 
 3.  **Create a sample event file** (`sample-event.json`) to simulate an HTTP request:

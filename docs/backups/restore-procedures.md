@@ -12,21 +12,21 @@ First, you need to identify the backup you want to restore from.
 
 ```bash
 # List all available backups
-hks get backups
+hb get backups
 
 # List backups from a specific plan
-hks get backups --selector hks.io/backup-plan=production-daily-backup
+hb get backups --selector hks.io/backup-plan=production-daily-backup
 
 # Get details of a specific backup
-hks describe backup <backup-name>
+hb describe backup <backup-name>
 ```
 
 ### Initiating a Restore via CLI
 
-The `hks restore create` command is the primary way to start a restore.
+The `hb restore create` command is the primary way to start a restore.
 
 ```bash
-hks restore create <restore-name> --from-backup <backup-name> [options]
+hb restore create <restore-name> --from-backup <backup-name> [options]
 ```
 
 ## Restore Scenarios
@@ -37,7 +37,7 @@ This is the most common scenario for recovering from a major application failure
 
 ```bash
 # Restore the 'production' namespace from a backup
-hks restore create restore-prod-ns \
+hb restore create restore-prod-ns \
   --from-backup production-daily-backup-20250615020000
 ```
 
@@ -50,7 +50,7 @@ By default, this restores all resources and associated volume data into the orig
 This is the recommended approach for testing restores or recovering specific data without impacting the live production environment.
 
 ```bash
-hks restore create test-restore-prod \
+hb restore create test-restore-prod \
   --from-backup production-daily-backup-20250615020000 \
   --namespace-mapping production:production-restored
 ```
@@ -62,7 +62,7 @@ This command restores the contents of the `production` namespace from the backup
 If only a single volume's data was lost or corrupted, you can restore just that PVC.
 
 ```bash
-hks restore create restore-db-volume \
+hb restore create restore-db-volume \
   --from-backup <backup-name> \
   --include-resources persistentvolumeclaims \
   --selector app=postgres-db
@@ -76,7 +76,7 @@ You can choose to restore only specific types of resources from a backup.
 
 ```bash
 # Restore only Deployments and ConfigMaps from a backup
-hks restore create restore-deploy-cfgs \
+hb restore create restore-deploy-cfgs \
   --from-backup <backup-name> \
   --include-resources deployments,configmaps
 ```
@@ -143,21 +143,21 @@ You can monitor the progress of a restore job from the CLI or UI.
 
 ```bash
 # Get the status of a restore
-hks get restore restore-prod-ns
+hb get restore restore-prod-ns
 
 # Describe the restore for detailed information and events
-hks describe restore restore-prod-ns
+hb describe restore restore-prod-ns
 
 # View the logs of the restore job
-hks restore logs restore-prod-ns
+hb restore logs restore-prod-ns
 ```
 
 The restore status will cycle through phases like `New`, `InProgress`, `Completed`, or `Failed`.
 
 ## Troubleshooting Failed Restores
 
-1.  **Check the Logs**: The first step is always `hks restore logs <restore-name>`. The logs will usually contain the specific error message.
-2.  **Examine Events**: `hks describe restore <restore-name>` will show Kubernetes events related to the restore process, which can highlight issues like insufficient permissions or storage provisioning failures.
+1.  **Check the Logs**: The first step is always `hb restore logs <restore-name>`. The logs will usually contain the specific error message.
+2.  **Examine Events**: `hb describe restore <restore-name>` will show Kubernetes events related to the restore process, which can highlight issues like insufficient permissions or storage provisioning failures.
 3.  **Permissions**: Ensure the HKS service account has the necessary permissions to create resources in the target namespace.
 4.  **Storage Provisioning**: If a PV restore fails, check the status of the underlying storage provisioner and ensure there is enough capacity.
 5.  **Resource Conflicts**: If you are not restoring to a clean namespace, there might be conflicts with existing resources. The logs will indicate if a resource `already exists`.

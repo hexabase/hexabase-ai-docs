@@ -17,7 +17,7 @@ Dedicated nodes can be provisioned directly from the Hexabase.AI UI or via the C
 
 ```bash
 # Provision a new dedicated node for your organization
-hks node create my-gpu-node-01 \
+hb node create my-gpu-node-01 \
   --type g5.2xlarge \
   --disk-size 200Gi \
   --region us-east-1 \
@@ -38,7 +38,7 @@ Once a node is provisioned at the organization level, an `organization_admin` ca
 
 ```bash
 # Assign the newly created node to the 'ml-research' workspace
-hks node assign my-gpu-node-01 --workspace ml-research
+hb node assign my-gpu-node-01 --workspace ml-research
 ```
 
 A node can be exclusively assigned to one workspace or shared between multiple workspaces within the same organization.

@@ -12,10 +12,10 @@ Hexabase.AI supports full GitLab integration, enabling you to leverage GitLab CI
 
 ```bash
 # Connect GitLab instance
-hks gitlab connect --url https://gitlab.com --token <token>
+hb gitlab connect --url https://gitlab.com --token <token>
 
 # For self-hosted GitLab
-hks gitlab connect --url https://gitlab.company.com --token <token>
+hb gitlab connect --url https://gitlab.company.com --token <token>
 ```
 
 ### Repository Integration
@@ -78,10 +78,10 @@ Deploy Hexabase-optimized GitLab runners:
 
 ```bash
 # Install runner in cluster
-hks gitlab runner install --workspace production
+hb gitlab runner install --workspace production
 
 # Register with GitLab
-hks gitlab runner register --token <registration-token>
+hb gitlab runner register --token <registration-token>
 ```
 
 ## Merge Request Integration
@@ -99,7 +99,7 @@ deploy:preview:
     url: https://mr-$CI_MERGE_REQUEST_IID.preview.example.com
     on_stop: stop:preview
   script:
-    - hks deploy --preview --mr-id $CI_MERGE_REQUEST_IID
+    - hb deploy --preview --mr-id $CI_MERGE_REQUEST_IID
 
 stop:preview:
   stage: deploy
@@ -110,7 +110,7 @@ stop:preview:
     name: preview/$CI_MERGE_REQUEST_IID
     action: stop
   script:
-    - hks destroy --preview --mr-id $CI_MERGE_REQUEST_IID
+    - hb destroy --preview --mr-id $CI_MERGE_REQUEST_IID
 ```
 
 ### MR Comments
@@ -141,7 +141,7 @@ registry:
 
 ```bash
 # Configure registry credentials
-hks secret create gitlab-registry \
+hb secret create gitlab-registry \
   --docker-server=$CI_REGISTRY \
   --docker-username=$CI_REGISTRY_USER \
   --docker-password=$CI_REGISTRY_PASSWORD
@@ -160,7 +160,7 @@ include:
 hexabase:security:sync:
   stage: .post
   script:
-    - hks security import --source gitlab --report gl-sast-report.json
+    - hb security import --source gitlab --report gl-sast-report.json
 ```
 
 ## Variables and Secrets
@@ -171,10 +171,10 @@ Sync GitLab CI/CD variables:
 
 ```bash
 # Sync all variables
-hks gitlab variables sync
+hb gitlab variables sync
 
 # Sync specific variable
-hks gitlab variables sync DATABASE_URL --workspace production
+hb gitlab variables sync DATABASE_URL --workspace production
 ```
 
 ### Protected Variables
@@ -216,10 +216,10 @@ Monitor GitLab CI/CD performance:
 
 ```bash
 # View pipeline metrics
-hks gitlab metrics pipelines
+hb gitlab metrics pipelines
 
 # Set up alerts
-hks gitlab alerts create \
+hb gitlab alerts create \
   --name "pipeline-failure" \
   --condition "failure_rate > 0.1" \
   --notify slack
@@ -240,19 +240,19 @@ hks gitlab alerts create \
 **Runner Connection Issues**
 ```bash
 # Check runner status
-hks gitlab runner status
+hb gitlab runner status
 
 # View runner logs
-hks logs -l app=gitlab-runner
+hb logs -l app=gitlab-runner
 ```
 
 **Registry Authentication**
 ```bash
 # Test registry access
-hks gitlab registry test
+hb gitlab registry test
 
 # Update credentials
-hks gitlab registry auth refresh
+hb gitlab registry auth refresh
 ```
 
 **Pipeline Failures**

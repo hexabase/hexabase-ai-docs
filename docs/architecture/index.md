@@ -119,7 +119,7 @@ Hexabase.AI is built on a modern, cloud-native architecture that combines the po
 
 We maintain Architecture Decision Records (ADRs) to document significant architectural choices:
 
-[:octicons-arrow-right-24: View ADRs](adr/index.md)
+[:octicons-arrow-right-24: View Technical Design](technical-design.md)
 
 ## Deployment Models
 
@@ -145,12 +145,12 @@ We maintain Architecture Decision Records (ADRs) to document significant archite
 
 - **Deep Dive**: Explore [Platform Components](technical-design.md) for detailed technical information
 - **Security Focus**: Review [Security Architecture](security-architecture.md) for compliance requirements
-- **Design Decisions**: Browse [ADRs](adr/index.md) to understand our architectural choices
-- **Integration**: Check [API Documentation](../api/index.md) for integration options
+- **Design Decisions**: Browse [Technical Design](technical-design.md) to understand our architectural choices
+- **Integration**: Check [API Documentation](https://api.hexabase.ai/docs) for integration options
 
 ## Related Documentation
 
 - [Core Concepts](../concept/index.md)
 - [Kubernetes RBAC](../rbac/index.md)
 - [Observability](../observability/index.md)
-- [API Reference](../api/index.md)
+- [API Reference](https://api.hexabase.ai/docs)

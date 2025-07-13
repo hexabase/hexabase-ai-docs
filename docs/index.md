@@ -1,40 +1,42 @@
 # Welcome to Hexabase.AI Documentation
 
+**AI-Oriented Kubernetes as a Service** - Deploy, scale, and manage AI applications with intelligent automation
+
 ## Getting Started
 
 <div class="grid cards" markdown>
 
--   :material-shield-account:{ .lg .middle } **HKS Admin**
+-   :material-brain:{ .lg .middle } **AI Developers**
 
     ---
 
-    Learn how to manage organizations and workspaces in Hexabase.AI
+    Quick deployment of AI applications and agents to production-ready Kubernetes
 
-    [:octicons-arrow-right-24: Admin Guide](rbac/index.md)
+    [:octicons-arrow-right-24: Start Building](concept/index.md)
 
--   :material-rocket-launch:{ .lg .middle } **HKS Users**
-
-    ---
-
-    Deploy projects and manage resources in your Kubernetes environments
-
-    [:octicons-arrow-right-24: User Guide](concept/index.md)
-
--   :material-code-tags:{ .lg .middle } **Contributors**
+-   :material-account-group:{ .lg .middle } **Teams**
 
     ---
 
-    Set up your development environment and contribute to Hexabase.AI
+    Collaborate and scale AI workloads on dedicated infrastructure with workspace isolation
 
-    [:octicons-arrow-right-24: Contributor Guide](architecture/index.md)
+    [:octicons-arrow-right-24: Team Setup](rbac/index.md)
 
--   :material-server:{ .lg .middle } **VM Deployers**
+-   :material-office-building:{ .lg .middle } **Enterprise**
 
     ---
 
-    Deploy and configure infrastructure with Proxmox
+    Deploy private, on-premise AI infrastructure with full control and compliance
 
-    [:octicons-arrow-right-24: Deployment Guide](nodes/index.md)
+    [:octicons-arrow-right-24: Enterprise Guide](nodes/index.md)
+
+-   :material-rocket-launch:{ .lg .middle } **Quick Start**
+
+    ---
+
+    Get your first AI application running in minutes with our guided setup
+
+    [:octicons-arrow-right-24: Quick Deploy](applications/index.md)
 
 </div>
 
@@ -118,14 +120,6 @@
 
 <div class="grid cards" markdown>
 
--   :material-api:{ .lg .middle } **API Reference**
-
-    ---
-
-    Complete API documentation and SDKs
-
-    [:octicons-arrow-right-24: API Docs](api/index.md)
-
 -   :material-language-java:{ .lg .middle } **日本語**
 
     ---
@@ -134,38 +128,54 @@
 
     [:octicons-arrow-right-24: 日本語ドキュメント](ja/index.md)
 
+-   :material-api:{ .lg .middle } **API Reference**
+
+    ---
+
+    Auto-generated API documentation (coming soon)
+
+    [:octicons-arrow-right-24: API Reference](https://api.hexabase.ai/docs)
+
 </div>
 
 ## What is Hexabase.AI?
 
-Hexabase.AI (HKS) is a **Multi-tenant Kubernetes as a Service platform with AIOps** that simplifies Kubernetes cluster management and deployment. It provides intelligent automation, monitoring, and optimization capabilities powered by AI.
+Hexabase.AI (HKS) is an **AI-Oriented Kubernetes as a Service platform** designed specifically for developers building AI applications and agents. Built on CNCF open-source standards, it provides intelligent automation, monitoring, and scaling capabilities that understand AI workload patterns.
 
-### Key Features
+### Why Choose Hexabase.AI?
 
-- **Multi-tenant Architecture**: Secure isolation between organizations and workspaces
-- **AI-Powered Operations**: Intelligent resource optimization and predictive scaling
-- **Self-Service Portal**: Easy project deployment and management
-- **Infrastructure Flexibility**: Deploy on cloud or on-premises with Proxmox
-- **Developer-Friendly**: Comprehensive APIs and SDKs for automation
+- **AI-First Design**: Optimized for AI applications, agents, and machine learning workloads
+- **Instant Production**: Deploy AI applications to production in minutes, not weeks
+- **Smart Scaling**: AI-powered resource optimization that learns from your workload patterns  
+- **Team Collaboration**: Multi-tenant workspaces with fine-grained access control
+- **Enterprise Ready**: Private, on-premise deployment with full compliance and control
+- **Open Standards**: Built on CNCF OSS - no vendor lock-in, use familiar tools
+
+### Perfect For
+
+- **AI Developers** coding applications with LLMs, ML models, and AI agents
+- **Startups** needing quick, scalable AI infrastructure without DevOps overhead
+- **Teams** requiring isolated environments for different AI projects and experiments
+- **Enterprises** wanting private AI infrastructure with governance and compliance
 
 ## Quick Links
 
 <div class="grid cards" markdown>
 
--   **Getting Started**
+-   **Development**
 
     ---
 
-    - [Admin Quick Start](rbac/index.md)
-    - [User Quick Start](concept/overview.md)
-    - [Development Setup](architecture/index.md)
+    - [Platform Concepts](concept/index.md)
+    - [API Reference](https://api.hexabase.ai/docs) (auto-generated)
+    - [CLI Tool Documentation](https://github.com/hexabase/cli/blob/main/README.md)
 
 -   **Resources**
 
     ---
 
     - [GitHub Repository](https://github.com/KoribanDev/hexabase-ai)
-    - [API Documentation](https://api.hexabase.ai)
+    - [Community Support](https://community.hexabase.ai)
     - [Release Notes](https://github.com/KoribanDev/hexabase-ai/releases)
 
 </div>

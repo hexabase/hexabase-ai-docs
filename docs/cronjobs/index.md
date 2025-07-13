@@ -184,7 +184,7 @@ Set up alerts for job failures and performance issues
 ### Simple Hourly Job
 
 ```bash
-hks cronjob create hourly-report \
+hb cronjob create hourly-report \
   --schedule "0 * * * *" \
   --image myapp/reporter:latest \
   --command "python report.py"
@@ -193,7 +193,7 @@ hks cronjob create hourly-report \
 ### Job with Environment Variables
 
 ```bash
-hks cronjob create data-sync \
+hb cronjob create data-sync \
   --schedule "*/15 * * * *" \
   --image myapp/sync:latest \
   --env DATABASE_URL=postgresql://... \
@@ -203,7 +203,7 @@ hks cronjob create data-sync \
 ### View Job History
 
 ```bash
-hks cronjob history daily-backup --last 10
+hb cronjob history daily-backup --last 10
 ```
 
 ## Troubleshooting Guide
@@ -239,4 +239,4 @@ hks cronjob history daily-backup --last 10
 - [Kubernetes Jobs Documentation](https://kubernetes.io/docs/concepts/workloads/controllers/job/)
 - [Functions](../functions/index.md) for event-driven tasks
 - [Observability](../observability/index.md) for monitoring
-- [API Reference](../api/index.md) for programmatic access
+- [API Reference](https://api.hexabase.ai/docs) for programmatic access

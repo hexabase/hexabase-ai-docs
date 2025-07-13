@@ -163,7 +163,7 @@ With HKS's integrated service mesh, enabling mTLS is a single command or annotat
 
 ```bash
 # Enable mTLS for the entire 'production' workspace
-hks mesh mtls enable --workspace production
+hb mesh mtls enable --workspace production
 ```
 
 Or via a policy:

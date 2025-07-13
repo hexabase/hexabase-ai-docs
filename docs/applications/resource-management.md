@@ -456,19 +456,19 @@ data:
 
 ```bash
 # View node resource usage
-hks top nodes
+hb top nodes
 
 # View pod resource usage
-hks top pods -n production
+hb top pods -n production
 
 # View container resource usage
-hks top pod myapp-pod --containers
+hb top pod myapp-pod --containers
 
 # Get resource quota status
-hks get resourcequota -n production
+hb get resourcequota -n production
 
 # Describe resource usage
-hks describe node worker-1
+hb describe node worker-1
 ```
 
 ## Best Practices
@@ -512,9 +512,9 @@ resources:
 
 ```bash
 # Create resource-isolated namespaces
-hks create namespace dev --quota small
-hks create namespace staging --quota medium
-hks create namespace production --quota large
+hb create namespace dev --quota small
+hb create namespace staging --quota medium
+hb create namespace production --quota large
 ```
 
 ### 4. Resource Planning
@@ -545,44 +545,44 @@ data:
 
    ```bash
    # Check for OOM kills
-   hks describe pod myapp-pod | grep -i oom
+   hb describe pod myapp-pod | grep -i oom
 
    # Increase memory limits
-   hks set resources deployment myapp --limits=memory=1Gi
+   hb set resources deployment myapp --limits=memory=1Gi
    ```
 
 2. **CPU Throttling**
 
    ```bash
    # Check CPU throttling
-   hks exec myapp-pod -- cat /sys/fs/cgroup/cpu/cpu.stat
+   hb exec myapp-pod -- cat /sys/fs/cgroup/cpu/cpu.stat
 
    # Adjust CPU limits
-   hks set resources deployment myapp --limits=cpu=1000m
+   hb set resources deployment myapp --limits=cpu=1000m
    ```
 
 3. **Pending Pods**
 
    ```bash
    # Check why pods are pending
-   hks describe pod myapp-pod
+   hb describe pod myapp-pod
 
    # View node resources
-   hks describe nodes | grep -A 5 "Allocated resources"
+   hb describe nodes | grep -A 5 "Allocated resources"
    ```
 
 ### Resource Optimization
 
 ```bash
 # Get recommendations from VPA
-hks get vpa myapp-vpa -o yaml
+hb get vpa myapp-vpa -o yaml
 
 # Analyze resource usage patterns
-hks top pods --sort-by=cpu
-hks top pods --sort-by=memory
+hb top pods --sort-by=cpu
+hb top pods --sort-by=memory
 
 # Export metrics for analysis
-hks get --raw /metrics | grep container_
+hb get --raw /metrics | grep container_
 ```
 
 ## HKS-Specific Features

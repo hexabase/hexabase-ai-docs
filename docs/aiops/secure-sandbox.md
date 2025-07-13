@@ -250,13 +250,13 @@ Enable detailed logging for troubleshooting:
 
 ```bash
 # Enable sandbox debug logs
-hks aiops sandbox debug --enable
+hb aiops sandbox debug --enable
 
 # View sandbox logs
-hks logs -n hexabase-aiops -l component=sandbox
+hb logs -n hexabase-aiops -l component=sandbox
 
 # Check sandbox metrics
-hks aiops sandbox metrics
+hb aiops sandbox metrics
 ```
 
 ## Future Enhancements

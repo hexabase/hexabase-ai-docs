@@ -35,7 +35,7 @@ Hexabase.AI は、強力なマルチテナントの Kubernetes as a Service プ�
 
   アプリケーションと構成を含む、デプロイ可能な単位
 
-  [:octicons-arrow-right-24: プロジェクトについて学ぶ (English)](../../concept/core-concepts.md)
+  [:octicons-arrow-right-24: プロジェクトについて学ぶ](multi-tenancy.md)
 
 - :material-kubernetes:{ .lg .middle } **クラスター (Clusters)**
 
@@ -89,11 +89,11 @@ Hexabase.AI は階層的なマルチテナンシーモデルを実装してい�
 
 - **Hexabase.AI は初めてですか？** トップレベルの構造を理解するために [組織 (English)](../../concept/multi-tenancy.md) から始めましょう
 - **チームをセットアップしますか？** [ワークスペース (English)](../../concept/multi-tenancy.md) について学び、環境を整理する方法を学びましょう
-- **デプロイの準備はできましたか？** [プロジェクト (English)](../../concept/core-concepts.md) を理解し、アプリケーションをパッケージ化する方法を学びましょう
+- **デプロイの準備はできましたか？** [プロジェクト](multi-tenancy.md) を理解し、アプリケーションをパッケージ化する方法を学びましょう
 - **インフラを管理しますか？** [クラスター (English)](../../concept/technology-stack.md) とその機能を探りましょう
 
 ## 関連ドキュメント
 
 - [概要 (English)](../../concept/overview.md)
 - [アーキテクチャ概要 (English)](../../architecture/index.md)
-- [API リファレンス (English)](../../api/index.md)
+- [API リファレンス (English)](../https://api.hexabase.ai/docs)

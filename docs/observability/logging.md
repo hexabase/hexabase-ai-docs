@@ -27,7 +27,7 @@ graph TD
     end
 
     subgraph "Users & Services"
-        CLI[HKS CLI<br>hks logs] --> QueryAPI;
+        CLI[HKS CLI<br>hb logs] --> QueryAPI;
         UI[HKS UI<br>Log Viewer] --> QueryAPI;
         AIOps[AIOps Engine] --> QueryAPI;
         QueryAPI(Log Query API)--> Indexer;
@@ -91,21 +91,21 @@ When HKS ingests the structured log, `http_method`, `http_path`, and `source_ip`
 
 ### Using the CLI
 
-The `hks logs` command is a powerful tool for interacting with your logs.
+The `hb logs` command is a powerful tool for interacting with your logs.
 
 ```bash
 # Follow the logs for a deployment in real-time
-hks logs -f deployment/my-app
+hb logs -f deployment/my-app
 
 # Get logs from the past hour for a specific pod
-hks logs my-app-pod-xyz --since 1h
+hb logs my-app-pod-xyz --since 1h
 
 # Use a selector to get logs from multiple pods
-hks logs -l app=my-app
+hb logs -l app=my-app
 
 # Filter logs based on their content (requires structured logging)
-hks logs -l app=my-app --filter "level=error"
-hks logs -l app=my-app --filter "http_status>=500"
+hb logs -l app=my-app --filter "level=error"
+hb logs -l app=my-app --filter "http_status>=500"
 ```
 
 ### Using the UI

@@ -65,7 +65,7 @@ spec:
 Apply the plan to the cluster:
 
 ```bash
-hks apply -f automated-backup-plan.yaml
+hb apply -f automated-backup-plan.yaml
 ```
 
 ## Managing Retention Policies (Grandfather-Father-Son)
@@ -84,11 +84,11 @@ You can temporarily pause a backup plan without deleting it.
 
 ```yaml
 # To disable (pause) a plan
-hks backup-plan pause production-daily-backup
+hb backup-plan pause production-daily-backup
 
 # The plan's status will show 'Paused'
 # To re-enable it
-hks backup-plan resume production-daily-backup
+hb backup-plan resume production-daily-backup
 ```
 
 This is useful during maintenance windows or when you need to prevent backups from running for a specific period.
@@ -101,13 +101,13 @@ You can monitor the status and history of your automated backups through the HKS
 
 ```bash
 # List all backups created by the plan
-hks get backups --selector hks.io/backup-plan=production-daily-backup
+hb get backups --selector hks.io/backup-plan=production-daily-backup
 
 # Describe the backup plan to see its status and last run time
-hks describe backup-plan production-daily-backup
+hb describe backup-plan production-daily-backup
 
 # View logs for a specific backup job
-hks backup logs <backup-name>
+hb backup logs <backup-name>
 ```
 
 ### From the UI

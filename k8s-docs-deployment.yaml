@@ -1,0 +1,173 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: hexabase-docs-nginx-config
+  namespace: hexabase-ai
+data:
+  default.conf: |
+    server {
+        listen 80;
+        server_name localhost;
+        root /usr/share/nginx/html;
+        index index.html;
+
+        # Enable compression
+        gzip on;
+        gzip_vary on;
+        gzip_min_length 1024;
+        gzip_proxied expired no-cache no-store private auth;
+        gzip_types text/plain text/css text/xml text/javascript application/javascript application/xml+rss application/json;
+
+        # Security headers
+        add_header X-Frame-Options "SAMEORIGIN" always;
+        add_header X-XSS-Protection "1; mode=block" always;
+        add_header X-Content-Type-Options "nosniff" always;
+        add_header Referrer-Policy "no-referrer-when-downgrade" always;
+        add_header Content-Security-Policy "default-src 'self' http: https: data: blob: 'unsafe-inline'" always;
+
+        # Handle 404 errors
+        error_page 404 /404.html;
+
+        # Handle Japanese routes
+        location /ja/ {
+            try_files $uri $uri/ $uri/index.html /ja/404.html;
+        }
+
+        # Handle all other routes
+        location / {
+            try_files $uri $uri/ $uri/index.html /404.html;
+        }
+
+        # Cache static assets
+        location ~* \.(css|js|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot)$ {
+            expires 1y;
+            add_header Cache-Control "public, immutable";
+        }
+    }
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: hexabase-docs-build
+  namespace: hexabase-ai
+spec:
+  template:
+    spec:
+      initContainers:
+      - name: git-sync
+        image: alpine/git
+        command:
+        - sh
+        - -c
+        - |
+          git clone https://github.com/hexabase/hexabase-ai-docs.git /workspace
+          cd /workspace
+          git checkout main
+        volumeMounts:
+        - name: workspace
+          mountPath: /workspace
+      containers:
+      - name: docs-builder
+        image: python:3.12-slim
+        command:
+        - sh
+        - -c
+        - |
+          cd /workspace
+          apt-get update && apt-get install -y git
+          pip install --upgrade pip
+          pip install mkdocs mkdocs-material mkdocs-material-extensions
+          pip install -r requirements.txt || true
+          chmod +x scripts/build.sh
+          ./scripts/build.sh
+          cp -r site/* /output/
+        volumeMounts:
+        - name: workspace
+          mountPath: /workspace
+        - name: docs-output
+          mountPath: /output
+      restartPolicy: Never
+      volumes:
+      - name: workspace
+        emptyDir: {}
+      - name: docs-output
+        persistentVolumeClaim:
+          claimName: hexabase-docs-pvc
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: hexabase-docs-pvc
+  namespace: hexabase-ai
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hexabase-docs-updated
+  namespace: hexabase-ai
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: hexabase-docs-updated
+  template:
+    metadata:
+      labels:
+        app: hexabase-docs-updated
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:alpine
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: docs-content
+          mountPath: /usr/share/nginx/html
+        - name: nginx-config
+          mountPath: /etc/nginx/conf.d
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "50m"
+          limits:
+            memory: "128Mi"
+            cpu: "100m"
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 10
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 10
+      volumes:
+      - name: docs-content
+        persistentVolumeClaim:
+          claimName: hexabase-docs-pvc
+      - name: nginx-config
+        configMap:
+          name: hexabase-docs-nginx-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hexabase-docs-updated-service
+  namespace: hexabase-ai
+spec:
+  selector:
+    app: hexabase-docs-updated
+  ports:
+  - name: http
+    port: 80
+    targetPort: 80
+  type: ClusterIP

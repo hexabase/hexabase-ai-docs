@@ -41,7 +41,7 @@ spec:
 HKS CLI を使用してデプロイ：
 
 ```bash
-hks apply -f deployment.yaml
+hb apply -f deployment.yaml
 ```
 
 ### 2. Helm チャート
@@ -50,10 +50,10 @@ hks apply -f deployment.yaml
 
 ```bash
 # Helm リポジトリを追加
-hks helm repo add bitnami https://charts.bitnami.com/bitnami
+hb helm repo add bitnami https://charts.bitnami.com/bitnami
 
 # アプリケーションをインストール
-hks helm install myapp bitnami/wordpress \
+hb helm install myapp bitnami/wordpress \
   --set wordpressBlogName="My Blog" \
   --namespace production
 ```
@@ -170,7 +170,7 @@ data:
 
 ```yaml
 # HKS シークレット管理を使用
-hks secret create app-secrets \
+hb secret create app-secrets \
 --from-literal=db-password=mypassword \
 --from-file=tls.crt=/path/to/cert
 ```
@@ -250,16 +250,16 @@ spec:
 
 ```bash
 # グリーンバージョンをデプロイ
-hks deploy myapp-green --image myapp:v2.0.0
+hb deploy myapp-green --image myapp:v2.0.0
 
 # グリーンバージョンをテスト
-hks test myapp-green
+hb test myapp-green
 
 # トラフィックを切り替え
-hks switch-traffic myapp --to green
+hb switch-traffic myapp --to green
 
 # ブルーバージョンを削除
-hks delete deployment myapp-blue
+hb delete deployment myapp-blue
 ```
 
 ### カナリアデプロイメント
@@ -394,12 +394,12 @@ replicas:
 
 ```bash
 # 環境を作成
-hks namespace create dev
-hks namespace create staging
-hks namespace create production
+hb namespace create dev
+hb namespace create staging
+hb namespace create production
 
 # 特定の環境にデプロイ
-hks deploy --namespace production
+hb deploy --namespace production
 ```
 
 ## 監視とオブザーバビリティ
@@ -469,30 +469,30 @@ spec:
 
 ```bash
 # デプロイメント状態をチェック
-hks get deployments -n production
+hb get deployments -n production
 
 # ポッドログを表示
-hks logs -f deployment/myapp
+hb logs -f deployment/myapp
 
 # イベントのためにポッドを記述
-hks describe pod myapp-xyz
+hb describe pod myapp-xyz
 
 # リソース使用量をチェック
-hks top pods -n production
+hb top pods -n production
 
 # 実行中のコンテナをデバッグ
-hks exec -it myapp-xyz -- /bin/sh
+hb exec -it myapp-xyz -- /bin/sh
 ```
 
 ### ロールバック手順
 
 ```bash
 # ロールアウト履歴を表示
-hks rollout history deployment/myapp
+hb rollout history deployment/myapp
 
 # 前のバージョンにロールバック
-hks rollout undo deployment/myapp
+hb rollout undo deployment/myapp
 
 # 特定のリビジョンにロールバック
-hks rollout undo deployment/myapp --to-revision=2
+hb rollout undo deployment/myapp --to-revision=2
 ```

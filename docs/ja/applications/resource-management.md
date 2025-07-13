@@ -456,19 +456,19 @@ data:
 
 ```bash
 # ノードリソース使用量を表示
-hks top nodes
+hb top nodes
 
 # ポッドリソース使用量を表示
-hks top pods -n production
+hb top pods -n production
 
 # コンテナリソース使用量を表示
-hks top pod myapp-pod --containers
+hb top pod myapp-pod --containers
 
 # リソースクォータ状態を取得
-hks get resourcequota -n production
+hb get resourcequota -n production
 
 # リソース使用量を詳述
-hks describe node worker-1
+hb describe node worker-1
 ```
 
 ## ベストプラクティス
@@ -512,9 +512,9 @@ resources:
 
 ```bash
 # リソース分離された namespace を作成
-hks create namespace dev --quota small
-hks create namespace staging --quota medium
-hks create namespace production --quota large
+hb create namespace dev --quota small
+hb create namespace staging --quota medium
+hb create namespace production --quota large
 ```
 
 ### 4. リソース計画
@@ -545,44 +545,44 @@ data:
 
    ```bash
    # OOM 強制終了をチェック
-   hks describe pod myapp-pod | grep -i oom
+   hb describe pod myapp-pod | grep -i oom
 
    # メモリ制限を増加
-   hks set resources deployment myapp --limits=memory=1Gi
+   hb set resources deployment myapp --limits=memory=1Gi
    ```
 
 2. **CPU スロットリング**
 
    ```bash
    # CPU スロットリングをチェック
-   hks exec myapp-pod -- cat /sys/fs/cgroup/cpu/cpu.stat
+   hb exec myapp-pod -- cat /sys/fs/cgroup/cpu/cpu.stat
 
    # CPU 制限を調整
-   hks set resources deployment myapp --limits=cpu=1000m
+   hb set resources deployment myapp --limits=cpu=1000m
    ```
 
 3. **保留中のポッド**
 
    ```bash
    # ポッドが保留中の理由をチェック
-   hks describe pod myapp-pod
+   hb describe pod myapp-pod
 
    # ノードリソースを表示
-   hks describe nodes | grep -A 5 "Allocated resources"
+   hb describe nodes | grep -A 5 "Allocated resources"
    ```
 
 ### リソース最適化
 
 ```bash
 # VPA から推奨事項を取得
-hks get vpa myapp-vpa -o yaml
+hb get vpa myapp-vpa -o yaml
 
 # リソース使用パターンを分析
-hks top pods --sort-by=cpu
-hks top pods --sort-by=memory
+hb top pods --sort-by=cpu
+hb top pods --sort-by=memory
 
 # 分析用にメトリクスをエクスポート
-hks get --raw /metrics | grep container_
+hb get --raw /metrics | grep container_
 ```
 
 ## HKS 固有の機能

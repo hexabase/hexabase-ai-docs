@@ -27,13 +27,13 @@ You can add or remove labels and taints from a node at any time via the HKS UI o
 
 ```bash
 # Add a new label to a node
-hks node label my-node-01 owner=sre-team
+hb node label my-node-01 owner=sre-team
 
 # Add a new taint to a node
-hks node taint my-node-01 sensitive=true:NoSchedule
+hb node taint my-node-01 sensitive=true:NoSchedule
 
 # Remove a taint from a node
-hks node taint my-node-01 sensitive:NoSchedule-
+hb node taint my-node-01 sensitive:NoSchedule-
 ```
 
 ## Node Pools
@@ -42,7 +42,7 @@ A Node Pool is a group of dedicated nodes that share the same configuration (ins
 
 ```bash
 # Create a node pool with 3 identical nodes
-hks nodepool create production-workers \
+hb nodepool create production-workers \
   --node-type c5.xlarge \
   --node-count 3 \
   --labels "pool=production-workers" \

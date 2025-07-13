@@ -480,13 +480,13 @@ spec:
 
 ```bash
 # ロードバランサーステータスをチェック
-hks lb status myapp-service
+hb lb status myapp-service
 
 # バックエンドヘルスを表示
-hks lb backends myapp-service
+hb lb backends myapp-service
 
 # トラフィック配信を監視
-hks lb traffic myapp-service --watch
+hb lb traffic myapp-service --watch
 ```
 
 ## トラブルシューティング
@@ -497,10 +497,10 @@ hks lb traffic myapp-service --watch
 
    ```bash
    # ポッド分散をチェック
-   hks get pods -o wide
+   hb get pods -o wide
 
    # サービスエンドポイントを確認
-   hks get endpoints myapp-service
+   hb get endpoints myapp-service
    ```
 
 2. **セッションアフィニティが機能しない**
@@ -516,10 +516,10 @@ hks lb traffic myapp-service --watch
 
    ```bash
    # ヘルスエンドポイントをチェック
-   hks exec -it myapp-pod -- curl localhost:8080/health
+   hb exec -it myapp-pod -- curl localhost:8080/health
 
    # ingress コントローラーログを表示
-   hks logs -n ingress-nginx deployment/ingress-nginx-controller
+   hb logs -n ingress-nginx deployment/ingress-nginx-controller
    ```
 
 ## ベストプラクティス

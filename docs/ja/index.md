@@ -1,43 +1,42 @@
 # Hexabase.AI ドキュメントへようこそ
 
-!!! info "翻訳について"
-    現在、ドキュメントの大部分は英語で提供されています。日本語への翻訳は順次進めています。
+**AI指向Kubernetes as a Service** - AI アプリケーションとエージェントを知能的な自動化でデプロイ、スケール、管理
 
 ## はじめに
 
 <div class="grid cards" markdown>
 
-- :material-shield-account:{ .lg .middle } **HKS 管理者**
+- :material-brain:{ .lg .middle } **AI 開発者**
 
   ***
 
-  Hexabase.AI で組織とワークスペースを管理する方法を学びます
+  AI アプリケーションとエージェントを本番対応の Kubernetes に高速デプロイ
 
-  [:octicons-arrow-right-24: 管理者ガイド (English)](../rbac/index.md)
+  [:octicons-arrow-right-24: 開発を始める](concept/index.md)
 
-- :material-rocket-launch:{ .lg .middle } **HKS ユーザー**
-
-  ***
-
-  Kubernetes 環境でプロジェクトのデプロイとリソースの管理を行います
-
-  [:octicons-arrow-right-24: ユーザーガイド (日本語)](concept/index.md)
-
-- :material-code-tags:{ .lg .middle } **コントリビューター**
+- :material-account-group:{ .lg .middle } **チーム**
 
   ***
 
-  開発環境をセットアップし、Hexabase.AI に貢献します
+  ワークスペース分離で専用インフラストラクチャ上での AI ワークロードの協業とスケール
 
-  [:octicons-arrow-right-24: コントリビューターガイド (English)](../architecture/index.md)
+  [:octicons-arrow-right-24: チームセットアップ](../rbac/index.md)
 
-- :material-server:{ .lg .middle } **VM デプロイヤー**
+- :material-office-building:{ .lg .middle } **エンタープライズ**
 
   ***
 
-  Proxmox でインフラストラクチャをデプロイおよび設定します
+  完全な制御とコンプライアンスによるプライベート・オンプレミス AI インフラストラクチャのデプロイ
 
-  [:octicons-arrow-right-24: デプロイガイド (English)](../nodes/index.md)
+  [:octicons-arrow-right-24: エンタープライズガイド](../nodes/index.md)
+
+- :material-rocket-launch:{ .lg .middle } **クイックスタート**
+
+  ***
+
+  ガイド付きセットアップで数分で最初の AI アプリケーションを実行
+
+  [:octicons-arrow-right-24: クイックデプロイ](../applications/index.md)
 
 </div>
 
@@ -121,14 +120,6 @@
 
 <div class="grid cards" markdown>
 
-- :material-api:{ .lg .middle } **API リファレンス**
-
-  ***
-
-  完全な API ドキュメントと SDK
-
-  [:octicons-arrow-right-24: API ドキュメント (English)](../api/index.md)
-
 - :material-translate:{ .lg .middle } **言語切り替え**
 
   ***
@@ -137,38 +128,64 @@
 
   [:octicons-arrow-right-24: English Documentation](../index.md)
 
+- :material-api:{ .lg .middle } **API リファレンス**
+
+  ***
+
+  自動生成API ドキュメント（準備中）
+
+  [:octicons-arrow-right-24: API リファレンス](https://api.hexabase.ai/docs)
+
 </div>
 
 ## Hexabase.AI とは？
 
-Hexabase.AI (HKS) は、**AIOps を備えたマルチテナント Kubernetes as a Service プラットフォーム**であり、Kubernetes クラスタの管理とデプロイを簡素化します。AI によって強化されたインテリジェントな自動化、監視、最適化機能を提供します。
+Hexabase.AI (HKS) は、AI アプリケーションとエージェントを構築する開発者向けに特別に設計された **AI指向Kubernetes as a Service プラットフォーム**です。CNCF オープンソース標準に基づいて構築され、AI ワークロードパターンを理解する知能的な自動化、監視、スケーリング機能を提供します。
 
-### 主な特徴
+### なぜ Hexabase.AI を選ぶのか？
 
-- **マルチテナントアーキテクチャ**: 組織とワークスペース間の安全な分離
-- **AI を活用した運用**: インテリジェントなリソース最適化と予測スケーリング
-- **セルフサービスポータル**: 簡単なプロジェクトのデプロイと管理
-- **インフラストラクチャの柔軟性**: クラウドまたは Proxmox を使用したオンプレミスへのデプロイ
-- **開発者フレンドリー**: 自動化のための包括的な API と SDK
+- **AI ファーストデザイン**: AI アプリケーション、エージェント、機械学習ワークロードに最適化
+- **即座の本番環境**: AI アプリケーションを数週間ではなく数分で本番環境にデプロイ
+- **スマートスケーリング**: ワークロードパターンから学習する AI 駆動のリソース最適化
+- **チーム協業**: きめ細かいアクセス制御を備えたマルチテナントワークスペース
+- **エンタープライズ対応**: 完全なコンプライアンスと制御を備えたプライベート・オンプレミスデプロイ
+- **オープン標準**: CNCF OSS に基づく構築 - ベンダーロックインなし、馴染みのあるツールを使用
+
+### 最適な対象者
+
+- LLM、ML モデル、AI エージェントを使用してアプリケーションをコーディングする **AI 開発者**
+- DevOps のオーバーヘッドなしに迅速でスケーラブルな AI インフラストラクチャが必要な **スタートアップ**
+- 異なる AI プロジェクトと実験のための分離された環境が必要な **チーム**
+- ガバナンスとコンプライアンスを備えたプライベート AI インフラストラクチャが必要な **エンタープライズ**
+
+## アーキテクチャと技術
+
+Hexabase.AI は実績のある CNCF オープンソース技術に基づいて構築されており、信頼性、スケーラビリティ、ベンダー独立性を保証します：
+
+- **Kubernetes**: コンテナオーケストレーションの基盤
+- **Prometheus & Grafana**: 監視とオブザーバビリティスタック
+- **OpenTelemetry**: 分散トレーシングとメトリクス収集
+- **Proxmox**: 専用ノード管理のための仮想化
+- **AI オペレーション**: Python ベースの知能的自動化エンジン
 
 ## クイックリンク
 
 <div class="grid cards" markdown>
 
-- **はじめに**
+- **開発**
 
   ***
 
-  - [管理者クイックスタート (English)](../rbac/index.md)
-  - [ユーザー向けクイックスタート (English)](../concept/overview.md)
-  - [開発セットアップ (English)](../architecture/index.md)
+  - [プラットフォームコンセプト](concept/index.md)
+  - [API リファレンス](https://api.hexabase.ai/docs)（自動生成）
+  - [CLI ツールドキュメント](https://github.com/hexabase/cli/blob/main/README.md)
 
 - **リソース**
 
   ***
 
   - [GitHub リポジトリ](https://github.com/KoribanDev/hexabase-ai)
-  - [API ドキュメント](https://api.hexabase.ai)
+  - [コミュニティサポート](https://community.hexabase.ai)
   - [リリースノート](https://github.com/KoribanDev/hexabase-ai/releases)
 
 </div>

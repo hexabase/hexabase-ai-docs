@@ -31,10 +31,10 @@
 
   ```bash
   # ワークスペース内のすべてのユーザーとそのロールをリスト
-  hks list-users --workspace my-prod-space
+  hb list-users --workspace my-prod-space
 
   # 特定のカスタムロールの権限をチェック
-  hks get workspacerole custom-role -o yaml
+  hb get workspacerole custom-role -o yaml
   ```
 
 ## 5. きめ細かい制御にはカスタムロールを使用する

@@ -40,7 +40,7 @@ spec:
         - name: deploy-to-k8s
           when: branch == 'main'
           commands:
-            - hks deploy --manifest k8s/
+            - hb deploy --manifest k8s/
 ```
 
 ## Pipeline Components
@@ -266,7 +266,7 @@ spec:
       jobs:
         - name: deploy
           commands:
-            - hks deploy
+            - hb deploy
 ```
 
 ## Integration with Hexabase Features
@@ -354,7 +354,7 @@ Monitor pipeline performance:
 - Review trigger conditions
 
 **Build Failures**
-- Check build logs: `hks pipeline logs <build-id>`
+- Check build logs: `hb pipeline logs <build-id>`
 - Verify image availability
 - Check resource limits
 
@@ -377,11 +377,11 @@ View pipeline execution:
 
 ```bash
 # List recent pipeline runs
-hks pipeline list
+hb pipeline list
 
 # Get pipeline details
-hks pipeline get <pipeline-id>
+hb pipeline get <pipeline-id>
 
 # Stream logs
-hks pipeline logs -f <build-id>
+hb pipeline logs -f <build-id>
 ```
