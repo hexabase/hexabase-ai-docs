@@ -1,10 +1,10 @@
 # コンテナレジストリサービス
 
-Hexabase.AI は、組織内でのコンテナイメージの安全な保存、管理、配布を可能にする包括的なコンテナレジストリサービスを提供します。デフォルトのレジストリプラットフォームとして Harbor を基盤とし、エンタープライズグレードのセキュリティ、スケーラビリティ、CI/CD ワークフローとのシームレスな統合を保証します。
+Hexabase.AI は、Hexabase.AI プロジェクト内でのコンテナイメージの安全な保存、管理、配布を可能にする**プロジェクトスコープ型コンテナレジストリサービス**を提供します。デフォルトプラットフォームとしてHarborを含む複数のレジストリプロバイダーをサポートし、エンタープライズグレードのセキュリティ、スケーラビリティ、CI/CD ワークフローとのシームレスな統合を保証します。
 
 ## 概要
 
-コンテナレジストリサービスは、すべてのコンテナイメージの中央ハブとして機能し、安全な保存、脆弱性スキャン、アクセス制御を提供します。マイクロサービスのデプロイ、CI/CD パイプラインの管理、複数環境にわたるアプリケーションの配布など、様々な用途でコンテナイメージの安全性、アクセシビリティ、適切な管理を保証します。
+コンテナレジストリサービスは**プロジェクトスコープ型**で、各Hexabase.AIプロジェクトが独自の専用コンテナレジストリ空間を持つことができます。このアプローチにより、ワークスペース全体のレジストリと比較して、より良い分離、セキュリティ、リソース管理を提供します。マイクロサービスのデプロイ、CI/CD パイプラインの管理、複数環境にわたるアプリケーションの配布など、様々な用途でコンテナイメージの安全性、アクセシビリティ、プロジェクトレベルでの適切な管理を保証します。
 
 ## 主要機能
 
@@ -67,7 +67,7 @@ Hexabase.AI はデフォルトのコンテナレジストリプラットフォ�
 
 ## レジストリアーキテクチャ
 
-### マルチテナントアーキテクチャ
+### プロジェクトスコープアーキテクチャ
 
 ```
 ┌─────────────────────────────────────────────────────────┐
@@ -77,12 +77,17 @@ Hexabase.AI はデフォルトのコンテナレジストリプラットフォ�
 │                                                         │
 │  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐     │
 │  │ワークスペースA│  │ワークスペースB│  │ワークスペースC│     │
-│  │  レジストリ │  │  レジストリ │  │  レジストリ │     │
+│  │             │  │             │  │             │     │
+│  │ ┌─プロジェクト1─┐ │ ┌─プロジェクト1─┐ │ ┌─プロジェクト1─┐ │   │
+│  │ │ レジストリ  │ │ │ │ レジストリ  │ │ │ │ レジストリ  │ │   │
+│  │ └───────────┘ │ │ └───────────┘ │ │ └───────────┘ │   │
+│  │ ┌─プロジェクト2─┐ │ ┌─プロジェクト2─┐ │ ┌─プロジェクト2─┐ │   │
+│  │ │ レジストリ  │ │ │ │ レジストリ  │ │ │ │ レジストリ  │ │   │
+│  │ └───────────┘ │ │ └───────────┘ │ │ └───────────┘ │   │
 │  └─────────────┘  └─────────────┘  └─────────────┘     │
 │                                                         │
 ├─────────────────────────────────────────────────────────┤
-│                   Harbor プラットフォーム              │
-│              (デフォルトレジストリエンジン)             │
+│       レジストリプロバイダー (Harbor, ECR, ACR...)      │
 ├─────────────────────────────────────────────────────────┤
 │    ストレージバックエンド (オブジェクトストレージ + DB)  │
 └─────────────────────────────────────────────────────────┘
@@ -99,16 +104,23 @@ Hexabase.AI はデフォルトのコンテナレジストリプラットフォ�
 
 ## 使い始める
 
-### 1. レジストリへのアクセス
+### 1. プロジェクトレジストリの作成
 
-各ワークスペースは専用のレジストリエンドポイントを取得します：
+各プロジェクトは独自の専用レジストリを持つことができます。まず、プロジェクト用のレジストリを作成します：
 
 ```bash
-# レジストリURL形式
-https://<workspace-id>.registry.hexabase.ai
+# プロジェクト用レジストリを作成
+hb registry create-project \
+  --project-id my-project \
+  --name "マイプロジェクトレジストリ" \
+  --provider harbor \
+  --description "アプリケーション用コンテナレジストリ"
+
+# レジストリURL形式（プロジェクトスコープ）
+https://<registry-id>.registry.hexabase.ai/<project-id>
 
 # 例
-https://prod-workspace.registry.hexabase.ai
+https://harbor-01.registry.hexabase.ai/my-project
 ```
 
 ### 2. 認証
@@ -116,8 +128,8 @@ https://prod-workspace.registry.hexabase.ai
 #### Docker CLI の使用
 
 ```bash
-# ワークスペースレジストリにログイン
-docker login prod-workspace.registry.hexabase.ai
+# プロジェクトレジストリにログイン
+docker login harbor-01.registry.hexabase.ai
 
 # Hexabase.AI認証情報を入力
 Username: your-username
@@ -129,15 +141,15 @@ Password: your-token-or-password
 自動化ワークフロー用にロボットアカウントを作成：
 
 ```bash
-# CLI経由でロボットアカウントを作成
+# プロジェクト用ロボットアカウントを作成
 hb registry robot create \
   --name ci-cd-bot \
-  --workspace production \
+  --project-id my-project \
   --permissions read,write \
   --description "CI/CD自動化アカウント"
 
 # ロボット認証情報を使用
-docker login prod-workspace.registry.hexabase.ai \
+docker login harbor-01.registry.hexabase.ai \
   -u robot$ci-cd-bot \
   -p <robot-token>
 ```
@@ -147,49 +159,124 @@ docker login prod-workspace.registry.hexabase.ai \
 #### イメージのプッシュ
 
 ```bash
-# イメージにタグ付け
-docker tag myapp:latest prod-workspace.registry.hexabase.ai/myproject/myapp:latest
+# イメージにタグ付け（プロジェクトスコープ）
+docker tag myapp:latest harbor-01.registry.hexabase.ai/my-project/myapp:latest
 
-# レジストリにプッシュ
-docker push prod-workspace.registry.hexabase.ai/myproject/myapp:latest
+# プロジェクトレジストリにプッシュ
+docker push harbor-01.registry.hexabase.ai/my-project/myapp:latest
 ```
 
 #### イメージのプル
 
 ```bash
-# レジストリからプル
-docker pull prod-workspace.registry.hexabase.ai/myproject/myapp:latest
+# プロジェクトレジストリからプル
+docker pull harbor-01.registry.hexabase.ai/my-project/myapp:latest
 
 # Kubernetesにデプロイ
 kubectl create deployment myapp \
-  --image=prod-workspace.registry.hexabase.ai/myproject/myapp:latest
+  --image=harbor-01.registry.hexabase.ai/my-project/myapp:latest
 ```
 
-## プロジェクト管理
+## APIエンドポイント
 
-### プロジェクトの作成
+コンテナレジストリサービスはプロジェクトスコープ型のREST APIエンドポイントを提供します：
 
-プロジェクトはコンテナイメージを整理し、アクセスポリシーを定義します：
+### レジストリ管理（管理者レベル）
+```bash
+# 新しいレジストリインスタンスを登録
+POST /api/v1/registries
+
+# 利用可能なレジストリをリスト
+GET /api/v1/registries
+
+# レジストリ詳細を取得
+GET /api/v1/registries/{id}
+
+# レジストリ設定を更新
+PUT /api/v1/registries/{id}
+
+# レジストリを削除
+DELETE /api/v1/registries/{id}
+
+# レジストリヘルスをチェック
+GET /api/v1/registries/{id}/health
+```
+
+### プロジェクトスコープレジストリ操作
+```bash
+# プロジェクト用レジストリを作成
+POST /api/v1/projects/{projectId}/registry
+
+# プロジェクトレジストリ詳細を取得
+GET /api/v1/projects/{projectId}/registry
+
+# プロジェクトレジストリを更新
+PUT /api/v1/projects/{projectId}/registry
+
+# プロジェクトレジストリを削除
+DELETE /api/v1/projects/{projectId}/registry
+
+# プロジェクトストレージ使用量を取得
+GET /api/v1/projects/{projectId}/registry/usage
+
+# プロジェクトセキュリティ設定を構成
+PUT /api/v1/projects/{projectId}/registry/security
+
+# ストレージクォータを更新
+PUT /api/v1/projects/{projectId}/registry/quota
+```
+
+### API使用例
+
+#### プロジェクトレジストリの作成
+```bash
+curl -X POST "https://api.hexabase.ai/api/v1/projects/my-project/registry" \
+  -H "Authorization: Bearer $HB_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "マイプロジェクトレジストリ",
+    "provider": "harbor",
+    "visibility": "private",
+    "description": "アプリケーション用コンテナレジストリ"
+  }'
+```
+
+#### プロジェクトレジストリ情報の取得
+```bash
+curl -X GET "https://api.hexabase.ai/api/v1/projects/my-project/registry" \
+  -H "Authorization: Bearer $HB_TOKEN"
+```
+
+## プロジェクトレジストリ管理
+
+### プロジェクトレジストリの作成
+
+各Hexabase.AIプロジェクトは独自のコンテナレジストリを持つことができます：
 
 ```bash
-# 新しいプロジェクトを作成
-hb registry project create \
-  --name frontend-services \
-  --workspace production \
+# プロジェクト用レジストリを作成
+hb registry create-project \
+  --project-id frontend-app \
+  --name "フロントエンドアプリケーションレジストリ" \
+  --provider harbor \
   --visibility private \
-  --description "フロントエンドマイクロサービス"
+  --description "フロントエンドマイクロサービス用レジストリ"
 
-# プロジェクトをリスト
-hb registry project list --workspace production
+# プロジェクトレジストリをリスト
+hb registry list-projects --workspace production
+
+# プロジェクトレジストリ詳細を取得
+hb registry get-project --project-id frontend-app
 ```
 
-### プロジェクト設定
+### プロジェクトレジストリ設定
 
 #### アクセス制御
 
 ```yaml
-# プロジェクトRBAC設定
-project: frontend-services
+# プロジェクトレジストリRBAC設定
+project_id: frontend-app
+registry_id: harbor-01
 members:
   - user: "alice@company.com"
     role: "ProjectAdmin"
@@ -198,11 +285,12 @@ members:
   - group: "frontend-team"
     role: "Developer"
 
-policies:
+security_policies:
   vulnerability_scanning: true
   content_trust: required
   prevent_vulnerable_images: true
   auto_scan_on_push: true
+  severity_threshold: "high"
 ```
 
 #### 保持ポリシー
@@ -241,9 +329,10 @@ retention_policy:
 #### 脆弱性レポート
 
 ```bash
-# 脆弱性レポートを取得
+# プロジェクトイメージの脆弱性レポートを取得
 hb registry scan report \
-  --image prod-workspace.registry.hexabase.ai/myproject/myapp:latest
+  --project-id my-project \
+  --image harbor-01.registry.hexabase.ai/my-project/myapp:latest
 
 # 出力例
 脆弱性サマリー:
@@ -283,20 +372,20 @@ security_policy:
 ```bash
 # コンテントトラストを有効化
 export DOCKER_CONTENT_TRUST=1
-export DOCKER_CONTENT_TRUST_SERVER=https://prod-workspace.registry.hexabase.ai:4443
+export DOCKER_CONTENT_TRUST_SERVER=https://harbor-01.registry.hexabase.ai:4443
 
 # 署名付きイメージをプッシュ
-docker push prod-workspace.registry.hexabase.ai/myproject/myapp:latest
+docker push harbor-01.registry.hexabase.ai/my-project/myapp:latest
 ```
 
 #### Cosign統合
 
 ```bash
 # Cosignでイメージに署名
-cosign sign prod-workspace.registry.hexabase.ai/myproject/myapp:latest
+cosign sign harbor-01.registry.hexabase.ai/my-project/myapp:latest
 
 # 署名を検証
-cosign verify prod-workspace.registry.hexabase.ai/myproject/myapp:latest
+cosign verify harbor-01.registry.hexabase.ai/my-project/myapp:latest
 ```
 
 ## レプリケーション
@@ -309,15 +398,15 @@ cosign verify prod-workspace.registry.hexabase.ai/myproject/myapp:latest
 # レプリケーションエンドポイントを作成
 hb registry replication endpoint create \
   --name disaster-recovery \
-  --url https://dr-region.registry.hexabase.ai \
-  --workspace production
+  --url https://dr-harbor.registry.hexabase.ai \
+  --project-id my-project
 
 # レプリケーションルールを作成
 hb registry replication rule create \
-  --name prod-to-dr \
-  --source-workspace production \
+  --name project-to-dr \
+  --source-project my-project \
   --destination-endpoint disaster-recovery \
-  --filter-pattern "production/**" \
+  --filter-pattern "my-project/**" \
   --trigger manual
 ```
 
@@ -368,7 +457,7 @@ jobs:
       - name: Hexabaseレジストリにログイン
         uses: docker/login-action@v2
         with:
-          registry: prod-workspace.registry.hexabase.ai
+          registry: harbor-01.registry.hexabase.ai
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
       
@@ -378,13 +467,14 @@ jobs:
           context: .
           push: true
           tags: |
-            prod-workspace.registry.hexabase.ai/myproject/myapp:latest
-            prod-workspace.registry.hexabase.ai/myproject/myapp:${{ github.sha }}
+            harbor-01.registry.hexabase.ai/my-project/myapp:latest
+            harbor-01.registry.hexabase.ai/my-project/myapp:${{ github.sha }}
       
       - name: イメージスキャン
         run: |
           hb registry scan start \
-            --image prod-workspace.registry.hexabase.ai/myproject/myapp:${{ github.sha }} \
+            --project-id my-project \
+            --image harbor-01.registry.hexabase.ai/my-project/myapp:${{ github.sha }} \
             --wait
 ```
 
@@ -398,8 +488,9 @@ stages:
   - deploy
 
 variables:
-  REGISTRY: "prod-workspace.registry.hexabase.ai"
-  IMAGE_NAME: "$REGISTRY/myproject/myapp"
+  REGISTRY: "harbor-01.registry.hexabase.ai"
+  PROJECT_ID: "my-project"
+  IMAGE_NAME: "$REGISTRY/$PROJECT_ID/myapp"
 
 build:
   stage: build
@@ -411,8 +502,8 @@ build:
 security_scan:
   stage: scan
   script:
-    - hb registry scan start --image $IMAGE_NAME:$CI_COMMIT_SHA --wait
-    - hb registry scan report --image $IMAGE_NAME:$CI_COMMIT_SHA --format json > scan-results.json
+    - hb registry scan start --project-id $PROJECT_ID --image $IMAGE_NAME:$CI_COMMIT_SHA --wait
+    - hb registry scan report --project-id $PROJECT_ID --image $IMAGE_NAME:$CI_COMMIT_SHA --format json > scan-results.json
   artifacts:
     reports:
       vulnerability: scan-results.json
@@ -425,8 +516,8 @@ security_scan:
 レジストリのパフォーマンスと使用状況を監視：
 
 ```bash
-# レジストリ統計を取得
-hb registry stats --workspace production
+# プロジェクトレジストリ統計を取得
+hb registry stats --project-id my-project
 
 # 出力例
 レジストリ統計:
@@ -524,11 +615,11 @@ Harbor がデフォルトプラットフォームとして機能する一方で�
 # レジストリコマンドのヘルプを取得
 hb registry help
 
-# レジストリサービス状態をチェック
-hb registry status --workspace production
+# プロジェクトレジストリ状態をチェック
+hb registry status --project-id my-project
 
-# レジストリログを表示
-hb registry logs --follow --workspace production
+# プロジェクトレジストリログを表示
+hb registry logs --follow --project-id my-project
 ```
 
 ### 一般的な問題のトラブルシューティング
@@ -536,22 +627,22 @@ hb registry logs --follow --workspace production
 #### 認証問題
 ```bash
 # Docker認証情報をクリア
-docker logout prod-workspace.registry.hexabase.ai
+docker logout harbor-01.registry.hexabase.ai
 
 # 再認証
-docker login prod-workspace.registry.hexabase.ai
+docker login harbor-01.registry.hexabase.ai
 
 # 接続をテスト
-docker pull prod-workspace.registry.hexabase.ai/library/hello-world
+docker pull harbor-01.registry.hexabase.ai/my-project/hello-world
 ```
 
 #### ネットワーク問題
 ```bash
 # レジストリ接続をテスト
-curl -v https://prod-workspace.registry.hexabase.ai/v2/
+curl -v https://harbor-01.registry.hexabase.ai/v2/
 
 # DNS解決をチェック
-nslookup prod-workspace.registry.hexabase.ai
+nslookup harbor-01.registry.hexabase.ai
 ```
 
 ## 関連ドキュメント

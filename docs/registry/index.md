@@ -1,10 +1,10 @@
 # Container Registry Service
 
-Hexabase.AI provides a comprehensive Container Registry Service that enables secure storage, management, and distribution of container images within your organization. Built on Harbor as the default registry platform, our service ensures enterprise-grade security, scalability, and seamless integration with your CI/CD workflows.
+Hexabase.AI provides a **project-scoped Container Registry Service** that enables secure storage, management, and distribution of container images within your Hexabase.AI projects. Built with support for multiple registry providers including Harbor as the default platform, our service ensures enterprise-grade security, scalability, and seamless integration with your CI/CD workflows.
 
 ## Overview
 
-The Container Registry Service acts as a centralized hub for all your container images, providing secure storage, vulnerability scanning, and access control. Whether you're deploying microservices, managing CI/CD pipelines, or distributing applications across multiple environments, our registry service ensures your container images are secure, accessible, and properly managed.
+The Container Registry Service is **project-scoped**, meaning each Hexabase.AI project can have its own dedicated container registry space. This approach provides better isolation, security, and resource management compared to workspace-wide registries. Whether you're deploying microservices, managing CI/CD pipelines, or distributing applications across multiple environments, our registry service ensures your container images are secure, accessible, and properly managed at the project level.
 
 ## Key Features
 
@@ -67,7 +67,7 @@ Hexabase.AI uses **Harbor** as the default container registry platform, providin
 
 ## Registry Architecture
 
-### Multi-Tenant Architecture
+### Project-Scoped Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────┐
@@ -77,12 +77,17 @@ Hexabase.AI uses **Harbor** as the default container registry platform, providin
 │                                                         │
 │  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐     │
 │  │ Workspace A │  │ Workspace B │  │ Workspace C │     │
-│  │  Registry   │  │  Registry   │  │  Registry   │     │
+│  │             │  │             │  │             │     │
+│  │ ┌─Project 1─┐ │  │ ┌─Project 1─┐ │  │ ┌─Project 1─┐ │     │
+│  │ │ Registry  │ │  │ │ Registry  │ │  │ │ Registry  │ │     │
+│  │ └───────────┘ │  │ └───────────┘ │  │ └───────────┘ │     │
+│  │ ┌─Project 2─┐ │  │ ┌─Project 2─┐ │  │ ┌─Project 2─┐ │     │
+│  │ │ Registry  │ │  │ │ Registry  │ │  │ │ Registry  │ │     │
+│  │ └───────────┘ │  │ └───────────┘ │  │ └───────────┘ │     │
 │  └─────────────┘  └─────────────┘  └─────────────┘     │
 │                                                         │
 ├─────────────────────────────────────────────────────────┤
-│                   Harbor Platform                      │
-│              (Default Registry Engine)                 │
+│         Registry Providers (Harbor, ECR, ACR...)      │
 ├─────────────────────────────────────────────────────────┤
 │    Storage Backend (Object Storage + Database)         │
 └─────────────────────────────────────────────────────────┘
@@ -99,16 +104,23 @@ Hexabase.AI uses **Harbor** as the default container registry platform, providin
 
 ## Getting Started
 
-### 1. Access Your Registry
+### 1. Create a Project Registry
 
-Each workspace gets its own dedicated registry endpoint:
+Each project can have its own dedicated registry. First, create a registry for your project:
 
 ```bash
-# Registry URL format
-https://<workspace-id>.registry.hexabase.ai
+# Create a registry for your project
+hb registry create-project \
+  --project-id my-project \
+  --name "My Project Registry" \
+  --provider harbor \
+  --description "Container registry for my application"
+
+# Registry URL format (project-scoped)
+https://<registry-id>.registry.hexabase.ai/<project-id>
 
 # Example
-https://prod-workspace.registry.hexabase.ai
+https://harbor-01.registry.hexabase.ai/my-project
 ```
 
 ### 2. Authentication
@@ -116,8 +128,8 @@ https://prod-workspace.registry.hexabase.ai
 #### Using Docker CLI
 
 ```bash
-# Login to your workspace registry
-docker login prod-workspace.registry.hexabase.ai
+# Login to your project registry
+docker login harbor-01.registry.hexabase.ai
 
 # Enter your Hexabase.AI credentials
 Username: your-username
@@ -129,15 +141,15 @@ Password: your-token-or-password
 For automated workflows, create robot accounts:
 
 ```bash
-# Create robot account via CLI
+# Create robot account for project
 hb registry robot create \
   --name ci-cd-bot \
-  --workspace production \
+  --project-id my-project \
   --permissions read,write \
   --description "CI/CD automation account"
 
 # Use robot credentials
-docker login prod-workspace.registry.hexabase.ai \
+docker login harbor-01.registry.hexabase.ai \
   -u robot$ci-cd-bot \
   -p <robot-token>
 ```
@@ -147,49 +159,124 @@ docker login prod-workspace.registry.hexabase.ai \
 #### Push Images
 
 ```bash
-# Tag your image
-docker tag myapp:latest prod-workspace.registry.hexabase.ai/myproject/myapp:latest
+# Tag your image (project-scoped)
+docker tag myapp:latest harbor-01.registry.hexabase.ai/my-project/myapp:latest
 
-# Push to registry
-docker push prod-workspace.registry.hexabase.ai/myproject/myapp:latest
+# Push to project registry
+docker push harbor-01.registry.hexabase.ai/my-project/myapp:latest
 ```
 
 #### Pull Images
 
 ```bash
-# Pull from registry
-docker pull prod-workspace.registry.hexabase.ai/myproject/myapp:latest
+# Pull from project registry
+docker pull harbor-01.registry.hexabase.ai/my-project/myapp:latest
 
 # Deploy to Kubernetes
 kubectl create deployment myapp \
-  --image=prod-workspace.registry.hexabase.ai/myproject/myapp:latest
+  --image=harbor-01.registry.hexabase.ai/my-project/myapp:latest
 ```
 
-## Project Management
+## API Endpoints
 
-### Creating Projects
+The Container Registry Service provides project-scoped REST API endpoints:
 
-Projects organize your container images and define access policies:
+### Registry Management (Admin Level)
+```bash
+# Register a new registry instance
+POST /api/v1/registries
+
+# List all available registries
+GET /api/v1/registries
+
+# Get registry details
+GET /api/v1/registries/{id}
+
+# Update registry configuration
+PUT /api/v1/registries/{id}
+
+# Delete registry
+DELETE /api/v1/registries/{id}
+
+# Check registry health
+GET /api/v1/registries/{id}/health
+```
+
+### Project-Scoped Registry Operations
+```bash
+# Create registry for a project
+POST /api/v1/projects/{projectId}/registry
+
+# Get project registry details
+GET /api/v1/projects/{projectId}/registry
+
+# Update project registry
+PUT /api/v1/projects/{projectId}/registry
+
+# Delete project registry
+DELETE /api/v1/projects/{projectId}/registry
+
+# Get project storage usage
+GET /api/v1/projects/{projectId}/registry/usage
+
+# Configure project security settings
+PUT /api/v1/projects/{projectId}/registry/security
+
+# Update storage quota
+PUT /api/v1/projects/{projectId}/registry/quota
+```
+
+### Example API Usage
+
+#### Create Project Registry
+```bash
+curl -X POST "https://api.hexabase.ai/api/v1/projects/my-project/registry" \
+  -H "Authorization: Bearer $HB_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "My Project Registry",
+    "provider": "harbor",
+    "visibility": "private",
+    "description": "Container registry for my application"
+  }'
+```
+
+#### Get Project Registry Info
+```bash
+curl -X GET "https://api.hexabase.ai/api/v1/projects/my-project/registry" \
+  -H "Authorization: Bearer $HB_TOKEN"
+```
+
+## Project Registry Management
+
+### Creating Project Registries
+
+Each Hexabase.AI project can have its own container registry:
 
 ```bash
-# Create a new project
-hb registry project create \
-  --name frontend-services \
-  --workspace production \
+# Create a registry for a project
+hb registry create-project \
+  --project-id frontend-app \
+  --name "Frontend Application Registry" \
+  --provider harbor \
   --visibility private \
-  --description "Frontend microservices"
+  --description "Registry for frontend microservices"
 
-# List projects
-hb registry project list --workspace production
+# List project registries
+hb registry list-projects --workspace production
+
+# Get project registry details
+hb registry get-project --project-id frontend-app
 ```
 
-### Project Configuration
+### Project Registry Configuration
 
 #### Access Control
 
 ```yaml
-# Project RBAC configuration
-project: frontend-services
+# Project registry RBAC configuration
+project_id: frontend-app
+registry_id: harbor-01
 members:
   - user: "alice@company.com"
     role: "ProjectAdmin"
@@ -198,11 +285,12 @@ members:
   - group: "frontend-team"
     role: "Developer"
 
-policies:
+security_policies:
   vulnerability_scanning: true
   content_trust: required
   prevent_vulnerable_images: true
   auto_scan_on_push: true
+  severity_threshold: "high"
 ```
 
 #### Retention Policies
@@ -241,9 +329,10 @@ retention_policy:
 #### Vulnerability Reports
 
 ```bash
-# Get vulnerability report
+# Get vulnerability report for project image
 hb registry scan report \
-  --image prod-workspace.registry.hexabase.ai/myproject/myapp:latest
+  --project-id my-project \
+  --image harbor-01.registry.hexabase.ai/my-project/myapp:latest
 
 # Example output
 Vulnerability Summary:
@@ -283,20 +372,20 @@ security_policy:
 ```bash
 # Enable content trust
 export DOCKER_CONTENT_TRUST=1
-export DOCKER_CONTENT_TRUST_SERVER=https://prod-workspace.registry.hexabase.ai:4443
+export DOCKER_CONTENT_TRUST_SERVER=https://harbor-01.registry.hexabase.ai:4443
 
 # Push signed image
-docker push prod-workspace.registry.hexabase.ai/myproject/myapp:latest
+docker push harbor-01.registry.hexabase.ai/my-project/myapp:latest
 ```
 
 #### Cosign Integration
 
 ```bash
 # Sign image with Cosign
-cosign sign prod-workspace.registry.hexabase.ai/myproject/myapp:latest
+cosign sign harbor-01.registry.hexabase.ai/my-project/myapp:latest
 
 # Verify signature
-cosign verify prod-workspace.registry.hexabase.ai/myproject/myapp:latest
+cosign verify harbor-01.registry.hexabase.ai/my-project/myapp:latest
 ```
 
 ## Replication
@@ -309,15 +398,15 @@ Set up replication for disaster recovery and global distribution:
 # Create replication endpoint
 hb registry replication endpoint create \
   --name disaster-recovery \
-  --url https://dr-region.registry.hexabase.ai \
-  --workspace production
+  --url https://dr-harbor.registry.hexabase.ai \
+  --project-id my-project
 
 # Create replication rule
 hb registry replication rule create \
-  --name prod-to-dr \
-  --source-workspace production \
+  --name project-to-dr \
+  --source-project my-project \
   --destination-endpoint disaster-recovery \
-  --filter-pattern "production/**" \
+  --filter-pattern "my-project/**" \
   --trigger manual
 ```
 
@@ -368,7 +457,7 @@ jobs:
       - name: Login to Hexabase Registry
         uses: docker/login-action@v2
         with:
-          registry: prod-workspace.registry.hexabase.ai
+          registry: harbor-01.registry.hexabase.ai
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
       
@@ -378,13 +467,14 @@ jobs:
           context: .
           push: true
           tags: |
-            prod-workspace.registry.hexabase.ai/myproject/myapp:latest
-            prod-workspace.registry.hexabase.ai/myproject/myapp:${{ github.sha }}
+            harbor-01.registry.hexabase.ai/my-project/myapp:latest
+            harbor-01.registry.hexabase.ai/my-project/myapp:${{ github.sha }}
       
       - name: Scan image
         run: |
           hb registry scan start \
-            --image prod-workspace.registry.hexabase.ai/myproject/myapp:${{ github.sha }} \
+            --project-id my-project \
+            --image harbor-01.registry.hexabase.ai/my-project/myapp:${{ github.sha }} \
             --wait
 ```
 
@@ -398,8 +488,9 @@ stages:
   - deploy
 
 variables:
-  REGISTRY: "prod-workspace.registry.hexabase.ai"
-  IMAGE_NAME: "$REGISTRY/myproject/myapp"
+  REGISTRY: "harbor-01.registry.hexabase.ai"
+  PROJECT_ID: "my-project"
+  IMAGE_NAME: "$REGISTRY/$PROJECT_ID/myapp"
 
 build:
   stage: build
@@ -411,8 +502,8 @@ build:
 security_scan:
   stage: scan
   script:
-    - hb registry scan start --image $IMAGE_NAME:$CI_COMMIT_SHA --wait
-    - hb registry scan report --image $IMAGE_NAME:$CI_COMMIT_SHA --format json > scan-results.json
+    - hb registry scan start --project-id $PROJECT_ID --image $IMAGE_NAME:$CI_COMMIT_SHA --wait
+    - hb registry scan report --project-id $PROJECT_ID --image $IMAGE_NAME:$CI_COMMIT_SHA --format json > scan-results.json
   artifacts:
     reports:
       vulnerability: scan-results.json
@@ -425,8 +516,8 @@ security_scan:
 Monitor registry performance and usage:
 
 ```bash
-# Get registry statistics
-hb registry stats --workspace production
+# Get project registry statistics
+hb registry stats --project-id my-project
 
 # Example output
 Registry Statistics:
@@ -524,11 +615,11 @@ While Harbor serves as our default platform, we're planning support for addition
 # Get help with registry commands
 hb registry help
 
-# Check registry service status
-hb registry status --workspace production
+# Check project registry status
+hb registry status --project-id my-project
 
-# View registry logs
-hb registry logs --follow --workspace production
+# View project registry logs
+hb registry logs --follow --project-id my-project
 ```
 
 ### Troubleshooting Common Issues
@@ -536,22 +627,22 @@ hb registry logs --follow --workspace production
 #### Authentication Problems
 ```bash
 # Clear Docker credentials
-docker logout prod-workspace.registry.hexabase.ai
+docker logout harbor-01.registry.hexabase.ai
 
 # Re-authenticate
-docker login prod-workspace.registry.hexabase.ai
+docker login harbor-01.registry.hexabase.ai
 
 # Test connection
-docker pull prod-workspace.registry.hexabase.ai/library/hello-world
+docker pull harbor-01.registry.hexabase.ai/my-project/hello-world
 ```
 
 #### Network Issues
 ```bash
 # Test registry connectivity
-curl -v https://prod-workspace.registry.hexabase.ai/v2/
+curl -v https://harbor-01.registry.hexabase.ai/v2/
 
 # Check DNS resolution
-nslookup prod-workspace.registry.hexabase.ai
+nslookup harbor-01.registry.hexabase.ai
 ```
 
 ## Related Documentation
