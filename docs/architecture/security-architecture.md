@@ -223,7 +223,54 @@ type SecureSession struct {
 }
 ```
 
-### 5.2 Session Security
+### 5.2 Logout Flow and Token Requirements
+
+As per **ADR-021: Mandatory Refresh Token Requirement for Logout**, the logout endpoint now requires both access and refresh tokens for complete session security.
+
+#### Enhanced Logout Implementation
+
+The logout endpoint requires both access and refresh tokens:
+
+```http
+POST /api/v1/auth/logout
+Authorization: Bearer <access-token>
+Content-Type: application/json
+
+{
+  "refresh_token": "eyJhbGciOiJSUzI1NiIs..."
+}
+```
+
+**Security Benefits**:
+- **Complete Session Termination**: Ensures both access and refresh tokens are invalidated
+- **Token Family Revocation**: Prevents refresh token replay attacks
+- **Enhanced Security**: Guarantees no residual session tokens remain active
+- **Audit Trail**: Provides complete logout event tracking
+- **Compliance**: Meets security requirements for proper session management
+
+#### Error Handling
+
+If refresh token is missing or invalid:
+
+```http
+HTTP/1.1 400 Bad Request
+Content-Type: application/json
+
+{
+  "error": "invalid_request",
+  "error_description": "refresh_token is required for logout"
+}
+```
+
+#### Implementation Requirements
+
+Client applications must:
+1. **Store refresh tokens** securely alongside access tokens
+2. **Include refresh tokens** in all logout requests
+3. **Handle logout errors** appropriately when tokens are missing
+4. **Clear local storage** completely after successful logout
+
+### 5.3 Session Security
 
 1. **Idle Timeout**: 30 minutes of inactivity
 2. **Absolute Timeout**: 24 hours maximum
@@ -231,7 +278,7 @@ type SecureSession struct {
 4. **Device Tracking**: Fingerprint validation
 5. **IP Validation**: Session bound to IP address
 
-### 5.3 Session Storage
+### 5.4 Session Storage
 
 Redis-based session storage with automatic expiration:
 
