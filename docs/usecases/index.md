@@ -16,7 +16,7 @@ Hexabase.AI serves diverse use cases across industries, from startups deploying 
 
   Migrate legacy applications to Kubernetes with minimal complexity
 
-  [:octicons-arrow-right-24: Explore Modernization](enterprise-kubernetes.md)
+  [:octicons-arrow-right-24: Explore Modernization](on-premise-deployment.md)
 
 - :material-scale-balance:{ .lg .middle } **Multi-Environment Management**
 
@@ -24,7 +24,7 @@ Hexabase.AI serves diverse use cases across industries, from startups deploying 
 
   Manage development, staging, and production environments efficiently
 
-  [:octicons-arrow-right-24: Learn Multi-Environment](enterprise-kubernetes.md)
+  [:octicons-arrow-right-24: Learn Multi-Environment](enterprise-plan.md)
 
 - :material-account-group:{ .lg .middle } **Team Collaboration**
 
@@ -32,7 +32,7 @@ Hexabase.AI serves diverse use cases across industries, from startups deploying 
 
   Enable multiple teams to work independently on shared infrastructure
 
-  [:octicons-arrow-right-24: Team Collaboration Guide](ai-powered-devops.md)
+  [:octicons-arrow-right-24: Team Collaboration Guide](../aiops/ai-devops-use-cases.md)
 
 - :material-chart-line:{ .lg .middle } **Cost Optimization**
 
@@ -40,7 +40,7 @@ Hexabase.AI serves diverse use cases across industries, from startups deploying 
 
   Reduce infrastructure costs with AI-powered resource optimization
 
-  [:octicons-arrow-right-24: Cost Optimization Strategies](ai-powered-devops.md#cost-optimization)
+  [:octicons-arrow-right-24: Cost Optimization Strategies](../aiops/index.md)
 
 </div>
 
@@ -141,5 +141,5 @@ Ready to explore how Hexabase.AI can transform your Kubernetes journey?
 
 - [Architecture Overview](../architecture/index.md)
 - [Getting Started Guide](../concept/overview.md)
-- [API Documentation](../api/index.md)
+- [API Documentation](https://api.hexabase.ai/docs)
 - [Best Practices](../security/index.md)

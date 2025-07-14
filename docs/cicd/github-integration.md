@@ -21,13 +21,13 @@ Hexabase.AI provides native GitHub integration that allows you to connect your r
 
 ```bash
 # Connect GitHub account
-hks github connect
+hb github connect
 
 # List available repositories
-hks github repos list
+hb github repos list
 
 # Connect specific repository
-hks github repo connect owner/repo --workspace production
+hb github repo connect owner/repo --workspace production
 ```
 
 ### 2. Repository Configuration
@@ -231,10 +231,10 @@ Sync GitHub secrets to Hexabase.AI:
 
 ```bash
 # Sync all secrets
-hks github secrets sync
+hb github secrets sync
 
 # Sync specific secret
-hks github secrets sync API_KEY --workspace production
+hb github secrets sync API_KEY --workspace production
 ```
 
 ## Branch Protection
@@ -276,7 +276,7 @@ For organization-wide integration:
 3. Install in Hexabase.AI:
 
 ```bash
-hks github app install \
+hb github app install \
   --app-id 123456 \
   --private-key @private-key.pem \
   --organization myorg
@@ -361,19 +361,19 @@ Use conventional commits for better automation:
 **Webhook Not Triggering**
 ```bash
 # Check webhook status
-hks github webhook status
+hb github webhook status
 
 # Redeliver webhook
-hks github webhook redeliver <delivery-id>
+hb github webhook redeliver <delivery-id>
 ```
 
 **Authentication Errors**
 ```bash
 # Refresh GitHub token
-hks github auth refresh
+hb github auth refresh
 
 # Check permissions
-hks github auth check
+hb github auth check
 ```
 
 **Build Not Starting**
@@ -387,10 +387,10 @@ Enable detailed GitHub integration logging:
 
 ```bash
 # Enable debug logs
-hks github debug --enable
+hb github debug --enable
 
 # View integration logs
-hks logs -n hexabase-system -l component=github-integration
+hb logs -n hexabase-system -l component=github-integration
 ```
 
 ## Migration Guide
@@ -399,7 +399,7 @@ hks logs -n hexabase-system -l component=github-integration
 
 1. Export existing workflow:
 ```bash
-hks github migrate workflow .github/workflows/deploy.yml
+hb github migrate workflow .github/workflows/deploy.yml
 ```
 
 2. Review generated pipeline:
@@ -409,10 +409,10 @@ cat .hexabase/pipeline.yml
 
 3. Test in staging:
 ```bash
-hks pipeline run --workspace staging
+hb pipeline run --workspace staging
 ```
 
 4. Enable automatic triggers:
 ```bash
-hks github triggers enable
+hb github triggers enable
 ```

@@ -46,7 +46,7 @@ spec:
 
 ```yaml
 # HKS CLI command for namespace backup
-hks backup create my-namespace-backup --include-namespaces production
+hb backup create my-namespace-backup --include-namespaces production
 ```
 
 ### 3. Resource-Filtered Backups
@@ -56,7 +56,7 @@ hks backup create my-namespace-backup --include-namespaces production
 
 ```bash
 # Back up all resources with the label "app=mission-critical"
-hks backup create critical-app-backup --selector app=mission-critical
+hb backup create critical-app-backup --selector app=mission-critical
 ```
 
 ## Backup Storage Locations

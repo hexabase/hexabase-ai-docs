@@ -64,11 +64,11 @@ spec:
 
 ## Deployment with the HKS CLI
 
-The `hks function deploy` command reads your `function.yaml`, packages the source code directory, and deploys it to your workspace.
+The `hb function deploy` command reads your `function.yaml`, packages the source code directory, and deploys it to your workspace.
 
 ```bash
 # Deploy the function defined in the current directory's function.yaml
-hks function deploy
+hb function deploy
 ```
 
 **What happens during deployment:**
@@ -87,7 +87,7 @@ Subsequent deployments will create a new version of the function, and you can ea
 
 ```bash
 # Roll back to the previous version of a function
-hks function rollback my-hello-world-function
+hb function rollback my-hello-world-function
 ```
 
 ## CI/CD Integration
@@ -103,7 +103,7 @@ deploy_function:
   script:
     - echo "Deploying my-hello-world-function..."
     # The HKS_API_KEY for a service account should be stored as a secure CI/CD variable
-    - hks function deploy --api-key $HKS_API_KEY
+    - hb function deploy --api-key $HKS_API_KEY
   rules:
     # Only run when changes are made in the function's source directory
     - changes:
@@ -116,13 +116,13 @@ You can check the status and details of your deployed functions at any time.
 
 ```bash
 # List all functions in your current workspace
-hks function list
+hb function list
 
 # Get detailed information about a specific function, including its endpoint URL
-hks function get my-hello-world-function
+hb function get my-hello-world-function
 
 # View the real-time logs for a function
-hks function logs -f my-hello-world-function
+hb function logs -f my-hello-world-function
 ```
 
 The HKS UI also provides a complete overview of all your deployed functions, their versions, invocation metrics, and logs.

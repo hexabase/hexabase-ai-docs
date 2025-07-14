@@ -166,26 +166,26 @@ workspaces:
 
 ```bash
 # Enable LLM features
-hks llm enable --provider ollama
+hb llm enable --provider ollama
 
 # Install a model
-hks llm install llama3:8b
+hb llm install llama3:8b
 
 # Configure organization defaults
-hks org set-llm --model llama3:8b --temperature 0.7
+hb org set-llm --model llama3:8b --temperature 0.7
 ```
 
 ### Commercial API Setup
 
 ```bash
 # Configure OpenAI integration
-hks llm enable --provider openai
+hb llm enable --provider openai
 
 # Set API credentials (stored securely)
-hks secret create openai-api-key --from-literal=key=sk-...
+hb secret create openai-api-key --from-literal=key=sk-...
 
 # Configure model preferences
-hks workspace set-llm --model gpt-4 --max-tokens 8192
+hb workspace set-llm --model gpt-4 --max-tokens 8192
 ```
 
 ## Monitoring and Observability
@@ -223,6 +223,6 @@ hks workspace set-llm --model gpt-4 --max-tokens 8192
 
 ### Getting Help
 
-- Check AIOps logs: `hks logs -n hexabase-aiops`
+- Check AIOps logs: `hb logs -n hexabase-aiops`
 - Review model metrics in dashboards
 - Contact support with correlation IDs

@@ -139,13 +139,13 @@ Hexabase.AI は、きめ細かいアクセス制御を提供する階層 RBAC �
 ### 開発者アクセスの付与
 
 ```bash
-hks rbac grant-role developer user@example.com --workspace my-workspace
+hb rbac grant-role developer user@example.com --workspace my-workspace
 ```
 
 ### カスタムロールの作成
 
 ```bash
-hks rbac create-role custom-deployer \
+hb rbac create-role custom-deployer \
   --permissions deploy,view-logs,manage-secrets \
   --workspace my-workspace
 ```
@@ -153,7 +153,7 @@ hks rbac create-role custom-deployer \
 ### ユーザー権限の表示
 
 ```bash
-hks rbac list-permissions user@example.com
+hb rbac list-permissions user@example.com
 ```
 
 ## Kubernetes との統合
@@ -174,7 +174,7 @@ Hexabase.AI RBAC はネイティブ Kubernetes RBAC とシームレスに統合�
 
 ## 関連ドキュメント
 
-- [セキュリティアーキテクチャ](../architecture/security-architecture.md)
+- [セキュリティベストプラクティス](best-practices.md)
 - [コアコンセプト](../concept/index.md)
-- [API 認証](../api/authentication.md)
-- [監査ログ](../security/compliance.md#audit-logs-for-compliance)
+- [コアコンセプト](../concept/index.md)
+- [権限モデル](permission-model.md)

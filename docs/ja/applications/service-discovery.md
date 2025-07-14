@@ -483,16 +483,16 @@ spec:
 
 ```bash
 # DNS 解決をチェック
-hks exec -it debug-pod -- nslookup myservice
+hb exec -it debug-pod -- nslookup myservice
 
 # エンドポイントをチェック
-hks get endpoints myservice
+hb get endpoints myservice
 
 # エンドポイントスライスをチェック
-hks get endpointslices -l kubernetes.io/service-name=myservice
+hb get endpointslices -l kubernetes.io/service-name=myservice
 
 # サービスディスカバリーをテスト
-hks run test --rm -it --image=busybox -- wget -O- http://myservice
+hb run test --rm -it --image=busybox -- wget -O- http://myservice
 ```
 
 ## トラブルシューティング
@@ -503,33 +503,33 @@ hks run test --rm -it --image=busybox -- wget -O- http://myservice
 
    ```bash
    # CoreDNS ログをチェック
-   hks logs -n kube-system -l k8s-app=kube-dns
+   hb logs -n kube-system -l k8s-app=kube-dns
 
    # ポッドから DNS をテスト
-   hks exec -it myapp -- nslookup kubernetes.default
+   hb exec -it myapp -- nslookup kubernetes.default
    ```
 
 2. **サービスが見つからない**
 
    ```bash
    # サービスが存在することを確認
-   hks get svc myservice
+   hb get svc myservice
 
    # サービスセレクターをチェック
-   hks describe svc myservice
+   hb describe svc myservice
 
    # 一致するポッドを確認
-   hks get pods -l app=myapp
+   hb get pods -l app=myapp
    ```
 
 3. **エンドポイントが準備できていない**
 
    ```bash
    # エンドポイント状態をチェック
-   hks get endpoints myservice
+   hb get endpoints myservice
 
    # ポッド準備状態をチェック
-   hks get pods -l app=myapp -o wide
+   hb get pods -l app=myapp -o wide
    ```
 
 ### デバッグツール
@@ -615,11 +615,11 @@ spec:
 
 ```bash
 # クラスター全体のすべてのサービスをリスト
-hks catalog list --global
+hb catalog list --global
 
 # 機能でサービスを検索
-hks catalog search --tag "user-auth"
+hb catalog search --tag "user-auth"
 
 # サービス詳細を取得
-hks catalog describe user-service --detailed
+hb catalog describe user-service --detailed
 ```

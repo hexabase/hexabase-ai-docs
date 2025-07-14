@@ -87,16 +87,16 @@ stages:
     jobs:
       - name: lint
         commands:
-          - hks validate deployment.yaml
-          - hks validate service.yaml
+          - hb validate deployment.yaml
+          - hb validate service.yaml
 
   - name: deploy-staging
     jobs:
       - name: deploy
         environment: staging
         commands:
-          - hks deploy --environment staging
-          - hks wait --for condition=ready
+          - hb deploy --environment staging
+          - hb wait --for condition=ready
 
   - name: test
     jobs:
@@ -110,7 +110,7 @@ stages:
       - name: deploy
         environment: production
         commands:
-          - hks deploy --environment production --strategy canary
+          - hb deploy --environment production --strategy canary
 ```
 
 ### Environment-Specific Deployments
@@ -272,13 +272,13 @@ rollback:
 
 ```bash
 # Rollback to previous version
-hks rollback --app myapp
+hb rollback --app myapp
 
 # Rollback to specific version
-hks rollback --app myapp --version v1.2.3
+hb rollback --app myapp --version v1.2.3
 
 # Rollback with custom strategy
-hks rollback --app myapp --strategy gradual --steps 4
+hb rollback --app myapp --strategy gradual --steps 4
 ```
 
 ## Multi-Region Deployments
@@ -327,13 +327,13 @@ monitoring:
 
 ```bash
 # View deployment status
-hks deployment status --app myapp
+hb deployment status --app myapp
 
 # Watch deployment progress
-hks deployment watch --app myapp
+hb deployment watch --app myapp
 
 # View deployment history
-hks deployment history --app myapp --limit 10
+hb deployment history --app myapp --limit 10
 ```
 
 ## Best Practices
@@ -371,22 +371,22 @@ hks deployment history --app myapp --limit 10
 
 ```bash
 # Deploy application
-hks deploy --app myapp --version v1.2.3
+hb deploy --app myapp --version v1.2.3
 
 # Deploy with specific strategy
-hks deploy --app myapp --strategy canary --steps 3
+hb deploy --app myapp --strategy canary --steps 3
 
 # Promote canary to full deployment
-hks promote --app myapp --environment production
+hb promote --app myapp --environment production
 
 # Pause deployment
-hks pause --deployment myapp-v1.2.3
+hb pause --deployment myapp-v1.2.3
 
 # Resume deployment
-hks resume --deployment myapp-v1.2.3
+hb resume --deployment myapp-v1.2.3
 
 # Abort deployment
-hks abort --deployment myapp-v1.2.3
+hb abort --deployment myapp-v1.2.3
 ```
 
 ## Integration with CI/CD
@@ -409,7 +409,7 @@ hks abort --deployment myapp-v1.2.3
 deploy:
   stage: deploy
   script:
-    - hks deploy --app $CI_PROJECT_NAME --version $CI_COMMIT_TAG
+    - hb deploy --app $CI_PROJECT_NAME --version $CI_COMMIT_TAG
   environment:
     name: production
     url: https://myapp.example.com

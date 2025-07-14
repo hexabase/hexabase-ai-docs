@@ -139,13 +139,13 @@ External Access:
 ### Granting Developer Access
 
 ```bash
-hks rbac grant-role developer user@example.com --workspace my-workspace
+hb rbac grant-role developer user@example.com --workspace my-workspace
 ```
 
 ### Creating Custom Role
 
 ```bash
-hks rbac create-role custom-deployer \
+hb rbac create-role custom-deployer \
   --permissions deploy,view-logs,manage-secrets \
   --workspace my-workspace
 ```
@@ -153,7 +153,7 @@ hks rbac create-role custom-deployer \
 ### Viewing User Permissions
 
 ```bash
-hks rbac list-permissions user@example.com
+hb rbac list-permissions user@example.com
 ```
 
 ## Integration with Kubernetes

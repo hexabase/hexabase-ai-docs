@@ -12,7 +12,7 @@ The primary mechanism for horizontal scaling is the **Node Pool Autoscaler**. As
 
 ```bash
 # Create an autoscaling node pool
-hks nodepool create web-workers \
+hb nodepool create web-workers \
   --node-type m5.large \
   --enable-autoscaling \
   --min-nodes 3 \
@@ -60,7 +60,7 @@ You can manually change the instance type of a dedicated node or a node pool.
 
 ```bash
 # Change the instance type for an entire node pool
-hks nodepool update database-workers --node-type r5.2xlarge
+hb nodepool update database-workers --node-type r5.2xlarge
 ```
 
 **Process**:

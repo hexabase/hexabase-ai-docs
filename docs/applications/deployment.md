@@ -41,7 +41,7 @@ spec:
 Deploy using HKS CLI:
 
 ```bash
-hks apply -f deployment.yaml
+hb apply -f deployment.yaml
 ```
 
 ### 2. Helm Charts
@@ -50,10 +50,10 @@ Deploy applications using Helm for templating and package management:
 
 ```bash
 # Add a Helm repository
-hks helm repo add bitnami https://charts.bitnami.com/bitnami
+hb helm repo add bitnami https://charts.bitnami.com/bitnami
 
 # Install an application
-hks helm install myapp bitnami/wordpress \
+hb helm install myapp bitnami/wordpress \
   --set wordpressBlogName="My Blog" \
   --namespace production
 ```
@@ -170,7 +170,7 @@ data:
 
 ```yaml
 # Using HKS secret management
-hks secret create app-secrets \
+hb secret create app-secrets \
 --from-literal=db-password=mypassword \
 --from-file=tls.crt=/path/to/cert
 ```
@@ -250,16 +250,16 @@ spec:
 
 ```bash
 # Deploy green version
-hks deploy myapp-green --image myapp:v2.0.0
+hb deploy myapp-green --image myapp:v2.0.0
 
 # Test green version
-hks test myapp-green
+hb test myapp-green
 
 # Switch traffic
-hks switch-traffic myapp --to green
+hb switch-traffic myapp --to green
 
 # Remove blue version
-hks delete deployment myapp-blue
+hb delete deployment myapp-blue
 ```
 
 ### Canary Deployment
@@ -394,12 +394,12 @@ replicas:
 
 ```bash
 # Create environments
-hks namespace create dev
-hks namespace create staging
-hks namespace create production
+hb namespace create dev
+hb namespace create staging
+hb namespace create production
 
 # Deploy to specific environment
-hks deploy --namespace production
+hb deploy --namespace production
 ```
 
 ## Monitoring and Observability
@@ -469,30 +469,30 @@ spec:
 
 ```bash
 # Check deployment status
-hks get deployments -n production
+hb get deployments -n production
 
 # View pod logs
-hks logs -f deployment/myapp
+hb logs -f deployment/myapp
 
 # Describe pod for events
-hks describe pod myapp-xyz
+hb describe pod myapp-xyz
 
 # Check resource usage
-hks top pods -n production
+hb top pods -n production
 
 # Debug running container
-hks exec -it myapp-xyz -- /bin/sh
+hb exec -it myapp-xyz -- /bin/sh
 ```
 
 ### Rollback Procedures
 
 ```bash
 # View rollout history
-hks rollout history deployment/myapp
+hb rollout history deployment/myapp
 
 # Rollback to previous version
-hks rollout undo deployment/myapp
+hb rollout undo deployment/myapp
 
 # Rollback to specific revision
-hks rollout undo deployment/myapp --to-revision=2
+hb rollout undo deployment/myapp --to-revision=2
 ```

@@ -133,7 +133,7 @@ Hexabase AI is a multi-tenant Kubernetes platform that simplifies application de
 
 ## Next Steps
 
-- **[Core Concepts](core-concepts.md)**
+- **[Core Concepts](index.md)**
 - **[System Architecture](../architecture/system-architecture.md)**
 - **[AIOps Engine](../aiops/index.md)**
 - **[Join Community](https://discord.gg/hexabase)**

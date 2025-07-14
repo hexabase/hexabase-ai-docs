@@ -24,12 +24,12 @@ LANG=${1:-"en"}
 
 if [ "$LANG" = "ja" ]; then
     echo "🇯🇵 Starting Japanese development server..."
-    echo "📖 Japanese Documentation: http://localhost:8000"
-    mkdocs serve --config-file mkdocs.ja.yml --dev-addr 0.0.0.0:8000
+    echo "📖 Japanese Documentation: http://localhost:7901"
+    mkdocs serve --config-file mkdocs.ja.yml --dev-addr 0.0.0.0:7901
 elif [ "$LANG" = "en" ]; then
     echo "🇺🇸 Starting English development server..."
-    echo "📖 English Documentation: http://localhost:8000"
-    mkdocs serve --config-file mkdocs.yml --dev-addr 0.0.0.0:8000
+    echo "📖 English Documentation: http://localhost:7900"
+    mkdocs serve --config-file mkdocs.yml --dev-addr 0.0.0.0:7900
 else
     echo "❌ Invalid language '$LANG'. Use 'en' or 'ja'"
     echo "Usage: ./serve.sh [en|ja]"

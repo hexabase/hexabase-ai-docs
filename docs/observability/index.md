@@ -122,25 +122,25 @@ End-to-end request flow tracking
 ### 1. Enable Observability
 
 ```bash
-hks observability enable --workspace my-workspace
+hb observability enable --workspace my-workspace
 ```
 
 ### 2. View Metrics Dashboard
 
 ```bash
-hks dashboard open metrics --workspace my-workspace
+hb dashboard open metrics --workspace my-workspace
 ```
 
 ### 3. Search Logs
 
 ```bash
-hks logs search "error" --workspace my-workspace --last 1h
+hb logs search "error" --workspace my-workspace --last 1h
 ```
 
 ### 4. Create Alert
 
 ```bash
-hks alert create high-cpu \
+hb alert create high-cpu \
   --metric "cpu_usage > 80" \
   --duration 5m \
   --notify slack
@@ -275,5 +275,5 @@ func init() {
 
 - [AIOps Features](../aiops/index.md)
 - [Architecture Overview](../architecture/index.md)
-- [API Reference](../api/index.md)
+- [API Reference](https://api.hexabase.ai/docs)
 - [Best Practices](../security/index.md)

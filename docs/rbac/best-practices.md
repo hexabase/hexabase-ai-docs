@@ -31,10 +31,10 @@ This is the most fundamental principle of access control.
 
   ```bash
   # List all users in a workspace and their roles
-  hks list-users --workspace my-prod-space
+  hb list-users --workspace my-prod-space
 
   # Check the permissions of a specific custom role
-  hks get workspacerole custom-role -o yaml
+  hb get workspacerole custom-role -o yaml
   ```
 
 ## 5. Use Custom Roles for Fine-Grained Control

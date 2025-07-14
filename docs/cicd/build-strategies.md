@@ -194,7 +194,7 @@ stages:
     jobs:
       - name: change-detection
         commands:
-          - hks monorepo detect --base main
+          - hb monorepo detect --base main
   
   - name: build
     jobs:
@@ -369,11 +369,11 @@ build:
 
 ```bash
 # View build metrics
-hks pipeline metrics --stage build
+hb pipeline metrics --stage build
 
 # Analyze build times
-hks pipeline analyze --optimization-suggestions
+hb pipeline analyze --optimization-suggestions
 
 # Set up alerts
-hks alert create --metric build.duration --threshold 10m
+hb alert create --metric build.duration --threshold 10m
 ```

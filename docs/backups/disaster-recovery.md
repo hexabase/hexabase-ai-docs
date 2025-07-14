@@ -88,7 +88,7 @@ When a disaster is confirmed, the first step is to officially declare it. This i
 
 ```bash
 # Pause replication to prevent corrupted data from being copied
-hks replication-plan pause replicate-prod-backups
+hb replication-plan pause replicate-prod-backups
 
 # (External Step) Update DNS, notify stakeholders, etc.
 ```
@@ -101,7 +101,7 @@ The goal is to bring up the application in the recovery site using the latest re
 # In the DR site cluster:
 
 # 1. Restore the entire namespace from the replicated backup
-hks restore create restore-production \
+hb restore create restore-production \
   --from-backup <latest-replicated-backup-name> \
   --from-storage-location s3-dr-storage
 
@@ -109,8 +109,8 @@ hks restore create restore-production \
 #    The AIOps restore controller handles the entire workflow.
 
 # 3. Verify application health in the DR site
-hks get pods -n production
-hks check-health -n production
+hb get pods -n production
+hb check-health -n production
 
 # 4. (External Step) Switch public DNS to point to the DR site's load balancer.
 ```
@@ -126,12 +126,12 @@ Data may have changed in the DR site while it was active. You need to replicate 
 ```bash
 # In the DR cluster:
 # 1. Back up the active DR namespace
-hks backup create dr-site-data --include-namespaces production --storage-location s3-dr-storage
+hb backup create dr-site-data --include-namespaces production --storage-location s3-dr-storage
 
 # In the Primary cluster:
 # 2. Ensure the primary site is clean and ready
 # 3. Restore from the backup of the DR site's data
-hks restore create restore-from-dr --from-backup dr-site-data
+hb restore create restore-from-dr --from-backup dr-site-data
 ```
 
 ### Step 2: Switch Traffic Back
@@ -143,7 +143,7 @@ hks restore create restore-from-dr --from-backup dr-site-data
 5.  Re-enable your backup and replication plans.
 
 ```bash
-hks replication-plan resume replicate-prod-backups
+hb replication-plan resume replicate-prod-backups
 ```
 
 ## Automated DR Testing

@@ -16,7 +16,7 @@ Hexabase.AI は、初回のマイクロサービスをデプロイするスタ�
 
   開発したアプリケーションを簡単にデプロイし、拡張性の高い Kubernetes で運用できます
 
-  [:octicons-arrow-right-24: モダナイゼーションを探る](enterprise-kubernetes.md)
+  [:octicons-arrow-right-24: モダナイゼーションを探る](on-premise-deployment.md)
 
 - :material-scale-balance:{ .lg .middle } **複数の環境管理（開発、ステージング、本番)**
 
@@ -24,7 +24,7 @@ Hexabase.AI は、初回のマイクロサービスをデプロイするスタ�
 
   開発、ステージング、本番環境を効率的に管理します
 
-  [:octicons-arrow-right-24: マルチ環境を学ぶ](enterprise-kubernetes.md)
+  [:octicons-arrow-right-24: マルチ環境を学ぶ](enterprise-plan.md)
 
 - :material-account-group:{ .lg .middle } **チームコラボレーション**
 
@@ -32,7 +32,7 @@ Hexabase.AI は、初回のマイクロサービスをデプロイするスタ�
 
   複数のチームが共有インフラストラクチャで独立して作業できます
 
-  [:octicons-arrow-right-24: チームコラボレーションガイド](ai-powered-devops.md)
+  [:octicons-arrow-right-24: チームコラボレーションガイド](../aiops/ai-devops-use-cases.md)
 
 - :material-chart-line:{ .lg .middle } **コスト最適化**
 
@@ -40,7 +40,7 @@ Hexabase.AI は、初回のマイクロサービスをデプロイするスタ�
 
   AI を活用したリソース最適化でインフラストラクチャコストを削減します
 
-  [:octicons-arrow-right-24: コスト最適化戦略](ai-powered-devops.md#cost-optimization)
+  [:octicons-arrow-right-24: コスト最適化戦略](../aiops/index.md)
 
 </div>
 
@@ -64,7 +64,7 @@ Hexabase.AI は、利用共に成長するよう設計されています。新�
 
   プロジェクトが成長し、より多くのパフォーマンスやリソース保証が必要になったら、本番ワークロード用の強力な専用ノードを含む Pro プランへシームレスにアップグレードできます。
 
-  [:octicons-arrow-right-24: Pro プランの機能を見る](single-user-plan.md#pro-plan-features)
+  [:octicons-arrow-right-24: Pro プランの機能を見る](single-user-plan.md#pro-プランの機能)
 
 - :material-account-group:{ .lg .middle } **チームプラン**
 
@@ -139,7 +139,7 @@ Hexabase.AI があなたの Kubernetes ジャーニーをどのように変革�
 
 ## 関連リソース
 
-- [アーキテクチャ概要](../architecture/index.md)
+- [コアコンセプト](../concept/index.md)
 - [はじめにガイド](../concept/overview.md)
-- [API ドキュメント](../api/index.md)
-- [ベストプラクティス](../security/index.md)
+- [RBAC 設定](../rbac/index.md)
+- [アプリケーション管理](../applications/index.md)

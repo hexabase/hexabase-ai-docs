@@ -2,99 +2,75 @@
 
 ## Overview
 
-HXB Platform is built on a modern, cloud-native technology stack that combines best-in-class open source technologies with innovative custom components to deliver a comprehensive platform for AI-powered operations and infrastructure management.
+Hexabase.AI is built on a modern, cloud-native technology stack that combines proven CNCF open-source technologies with custom AI-oriented components to deliver a comprehensive AI-first Kubernetes platform.
 
 ## Core Technologies
 
 ### Container Orchestration
 
-#### Kubernetes
+#### K3s + vCluster
 
-- **Version**: 1.28+
-- **Distribution**: Compatible with EKS, GKE, AKS, and vanilla Kubernetes
-- **Components**:
-  - Control plane (API server, scheduler, controller manager)
-  - Data plane (kubelet, kube-proxy)
-  - etcd for distributed state management
+- **K3s**: Lightweight Kubernetes distribution as the host cluster
+- **vCluster**: Virtual Kubernetes clusters for workspace isolation
+- **Benefits**: 
+  - Minimal resource overhead compared to full Kubernetes
+  - Complete API server isolation per workspace
+  - Production-ready with enterprise features
 
-### Container Runtime
+### Programming Languages & Frameworks
 
-#### containerd
+#### Backend
 
-- High-performance container runtime
-- OCI-compliant
-- Integrated with Kubernetes CRI
+- **Go (Golang)**: API server, CLI tools, and core platform components
+- **Python**: AI operations service, ML pipelines, and automation scripts
 
-#### Docker
+#### Frontend
 
-- Development environment support
-- Image building and management
-- Registry integration
+- **Next.js**: Modern React-based web UI
+- **TypeScript**: Type-safe JavaScript for frontend development
 
-### Service Mesh
+#### Communication
 
-#### Istio
+- **REST APIs**: Primary interface for external integrations
+- **HTTP/HTTPS**: Standard web protocols for all communications
+- **WebSocket**: Real-time updates and notifications
 
-- Traffic management
-- Security policies
-- Observability
-- Circuit breaking and retry logic
-
-### Ingress Controllers
-
-#### NGINX Ingress Controller
-
-- HTTP/HTTPS routing
-- SSL/TLS termination
-- Load balancing
-- WebSocket support
-
-#### Traefik
-
-- Dynamic configuration
-- Let's Encrypt integration
-- Middleware support
-
-### Storage
-
-#### Persistent Storage
-
-- **CSI Drivers**: Support for major cloud providers
-- **Rook/Ceph**: On-premises distributed storage
-- **MinIO**: S3-compatible object storage
+### Data Layer
 
 #### Databases
 
-- **PostgreSQL**: Primary relational database
-- **Redis**: Caching and session management
-- **ClickHouse**: Analytics and time-series data
+- **PostgreSQL**: Primary relational database for all platform data
+- **Redis**: Caching, session management, and real-time data
+- **NATS**: Messaging system for async processing and event handling
+
+#### Storage
+
+- **Persistent Volumes**: Kubernetes-native storage for workloads
+- **Cloud Storage**: S3, GCS, Azure Blob for backup and object storage
+- **MinIO**: S3-compatible object storage for on-premises deployments
 
 ### Observability Stack
 
-#### Metrics
+#### Monitoring & Metrics
 
 - **Prometheus**: Metrics collection and storage
 - **Grafana**: Visualization and dashboards
-- **AlertManager**: Alert routing and management
+- **OpenTelemetry**: Distributed tracing and metrics
+- **ClickHouse**: Time-series analytics and aggregation
 
 #### Logging
 
-- **Fluentd/Fluent Bit**: Log collection and forwarding
-- **Elasticsearch**: Log storage and search
-- **Kibana**: Log visualization and analysis
+- **Loki**: Log aggregation and storage
+- **Grafana**: Log visualization and querying
+- **Vector**: High-performance log processing
 
-#### Tracing
+### CI/CD & GitOps
 
-- **OpenTelemetry**: Distributed tracing
-- **Jaeger**: Trace storage and visualization
-
-### CI/CD and GitOps
-
-#### ArgoCD
+#### Flux
 
 - GitOps continuous delivery
-- Application synchronization
-- Multi-cluster support
+- Multi-tenancy support
+- Automatic synchronization with Git repositories
 
 #### Tekton
 
@@ -104,59 +80,62 @@ HXB Platform is built on a modern, cloud-native technology stack that combines b
 
 ### Security
 
+#### Authentication & Authorization
+
+- **OIDC**: OAuth2/OpenID Connect for external identity providers
+- **RBAC**: Kubernetes role-based access control
+- **vCluster Isolation**: Complete API server isolation per workspace
+
 #### Policy Management
 
-- **Open Policy Agent (OPA)**: Policy as code
-- **Gatekeeper**: Kubernetes admission controller
-- **Falco**: Runtime security monitoring
+- **Kyverno**: Kubernetes admission controller for policy enforcement
+- **Network Policies**: Pod-to-pod communication control
+- **Pod Security Standards**: Kubernetes-native pod security
 
-#### Secret Management
+#### Runtime Security
 
-- **Kubernetes Secrets**: Native secret storage
-- **Sealed Secrets**: Encrypted secrets in Git
-- **External Secrets Operator**: Integration with external vaults
+- **Falco**: Runtime security monitoring and threat detection
+- **Trivy**: Container and infrastructure vulnerability scanning
 
-### AI/ML Infrastructure
+### AI Operations
 
-#### Model Serving
+#### AI Engine
 
-- **KServe**: Serverless inference
-- **Seldon Core**: ML deployment platform
-- **NVIDIA Triton**: High-performance inference
+- **Python**: Core AI operations service
+- **LangChain**: LLM application framework for AI agents
+- **OpenAI/Claude API**: Integration with large language models
 
-#### LLM Integration
+#### Function Runtime
 
-- **LangChain**: LLM application framework
-- **Vector Databases**: Chroma, Pinecone, Weaviate
-- **Model Registries**: MLflow, Kubeflow
+- **HKS Functions**: Serverless function platform for AI workloads
+- **Python/Node.js**: Supported runtime environments
+- **Auto-scaling**: AI-powered resource optimization
 
-### Development Tools
+### Infrastructure
 
-#### Languages and Frameworks
+#### Virtualization
 
-- **Go**: Core platform components
-- **Python**: AI/ML services and scripts
-- **TypeScript/React**: Web UI
-- **Rust**: High-performance components
+- **Proxmox**: VM management for dedicated node plans
+- **Cloud Providers**: EKS, GKE, AKS, OKE integration
 
-#### APIs
+#### Networking
 
-- **gRPC**: Internal service communication
-- **GraphQL**: Frontend API gateway
-- **REST**: External integrations
+- **Calico/Flannel**: Container networking
+- **NGINX Ingress**: HTTP/HTTPS routing and SSL termination
+- **Cert-Manager**: Automatic TLS certificate management
 
-## Architecture Layers
+## System Architecture
 
-### Infrastructure Layer
+### Infrastructure Foundation
 
 ```
 ┌─────────────────────────────────────┐
-│         Cloud Providers             │
-│    (AWS, GCP, Azure, On-Prem)      │
+│         Infrastructure              │
+│   Proxmox | AWS | GCP | Azure      │
 └─────────────────────────────────────┘
 ┌─────────────────────────────────────┐
-│         Kubernetes Clusters         │
-│    (Multi-region, Multi-cloud)     │
+│         Host K3s Cluster            │
+│    (Lightweight Kubernetes)        │
 └─────────────────────────────────────┘
 ```
 
@@ -164,12 +143,13 @@ HXB Platform is built on a modern, cloud-native technology stack that combines b
 
 ```
 ┌─────────────────────────────────────┐
-│      Service Mesh (Istio)          │
+│      Hexabase.AI Control Plane     │
+│    (Go API + PostgreSQL + Redis)   │
 ├─────────────────────────────────────┤
-│   Observability    │    Security    │
-│ (Prometheus, ELK)  │  (OPA, Falco)  │
-├─────────────────────────────────────┤
-│     CI/CD & GitOps (ArgoCD)        │
+│         vClusters (Workspaces)      │
+│   ┌─────────┐ ┌─────────┐ ┌──────┐  │
+│   │vCluster1│ │vCluster2│ │ ...  │  │
+│   └─────────┘ └─────────┘ └──────┘  │
 └─────────────────────────────────────┘
 ```
 
@@ -177,11 +157,11 @@ HXB Platform is built on a modern, cloud-native technology stack that combines b
 
 ```
 ┌─────────────────────────────────────┐
-│        HXB Platform Services        │
+│          User Workloads             │
 ├─────────────────────────────────────┤
-│  AI Agents  │  Functions  │  APIs  │
+│ AI Apps │ Functions │ Web Services │
 ├─────────────────────────────────────┤
-│    Workload Management & Scaling    │
+│      Projects (Namespaces)         │
 └─────────────────────────────────────┘
 ```
 
@@ -189,78 +169,82 @@ HXB Platform is built on a modern, cloud-native technology stack that combines b
 
 ### External Services
 
-- **Cloud Provider APIs**: AWS, GCP, Azure
-- **Version Control**: GitHub, GitLab, Bitbucket
-- **Container Registries**: Docker Hub, ECR, GCR
-- **Identity Providers**: OIDC, SAML, LDAP
+- **Identity Providers**: Google, GitHub, and other OIDC providers
+- **Version Control**: GitHub, GitLab integration for CI/CD
+- **Container Registries**: Docker Hub, ECR, GCR, private registries
+- **Cloud Storage**: S3, GCS, Azure Blob for backups and artifacts
+- **AI Services**: OpenAI, Anthropic, and other LLM providers
 
-### Communication Protocols
+### API Interfaces
 
-- **HTTP/HTTPS**: External APIs
-- **gRPC**: Internal services
-- **WebSocket**: Real-time updates
-- **AMQP/Kafka**: Event streaming
+- **REST APIs**: Primary interface for all platform operations
+- **WebSocket**: Real-time notifications and live updates
+- **OIDC Provider**: Authentication for vClusters and workspaces
+- **Kubernetes API**: Direct kubectl access to workspaces
 
-## Performance Characteristics
+## SDKs & CLI Tools
 
-### Scalability
+### HKS CLI
 
-- Horizontal pod autoscaling
-- Vertical pod autoscaling
-- Cluster autoscaling
-- Multi-region deployment
+- **Go-based**: Native CLI for Hexabase.AI operations
+- **Functions**: Deploy and manage serverless functions
+- **Workspaces**: Create and manage isolated environments
+- **Projects**: Application lifecycle management
 
-### High Availability
+### SDKs
 
-- Multi-master control plane
-- Cross-zone replication
-- Automated failover
-- Disaster recovery
+- **Python SDK**: For AI/ML workflows and automation
+- **JavaScript/Node.js SDK**: For web applications and functions
+- **REST API**: Language-agnostic HTTP interface
 
-### Performance Optimization
+## Deployment Options
 
-- Resource quotas and limits
-- Pod priority and preemption
-- Node affinity and anti-affinity
-- Topology-aware scheduling
+### Cloud Deployments
+
+- **Amazon EKS**: Managed Kubernetes on AWS
+- **Google GKE**: Managed Kubernetes on Google Cloud
+- **Azure AKS**: Managed Kubernetes on Microsoft Azure
+- **Oracle OKE**: Managed Kubernetes on Oracle Cloud
+
+### On-Premises
+
+- **Proxmox**: VM-based deployment with dedicated resources
+- **Bare Metal**: Direct Kubernetes installation
+- **Edge Computing**: Lightweight K3s for edge locations
+
+## Performance & Scalability
+
+### AI-Powered Optimization
+
+- **Intelligent Scaling**: AI-driven resource optimization
+- **Predictive Scaling**: Learn from workload patterns
+- **Cost Optimization**: Automatic right-sizing recommendations
+- **Performance Insights**: AI-generated optimization suggestions
+
+### Multi-Tenancy Efficiency
+
+- **vCluster Overhead**: Minimal resource impact per workspace
+- **Shared Infrastructure**: Efficient resource utilization
+- **Dedicated Nodes**: Premium isolation for enterprise workloads
 
 ## Development Workflow
 
-### Local Development
+### For AI Developers
 
-```bash
-# Development tools
-- kubectl
-- Helm
-- Skaffold
-- Tilt
-```
+1. **Create Workspace**: Isolated environment for AI projects
+2. **Deploy Functions**: Serverless AI agent deployment
+3. **CI/CD Integration**: Automated testing and deployment
+4. **Monitoring**: Built-in observability for AI workloads
 
-### Testing
+### Development Tools
 
-- Unit testing frameworks
-- Integration testing
-- End-to-end testing
-- Chaos engineering
-
-### Deployment
-
-- Blue-green deployments
-- Canary releases
-- Feature flags
-- Progressive delivery
-
-## Roadmap
-
-### Upcoming Technologies
-
-- **WebAssembly**: WASM-based functions
-- **eBPF**: Advanced networking and observability
-- **Crossplane**: Infrastructure as Code
-- **Dapr**: Distributed application runtime
+- **kubectl**: Direct Kubernetes access to workspaces
+- **HKS CLI**: Hexabase.AI-specific operations
+- **Docker**: Container building and testing
+- **VS Code Extensions**: IDE integration for seamless development
 
 ## Related Topics
 
-- **[Hexabase AI Architecture Overview](../architecture/index.md)**: Deep dive into the platform's design.
-- **[Multi-Tenancy](./multi-tenancy.md)**: Learn how HKS isolates workspaces.
-- **[Join our Community](https://discord.gg/hexabase)**: Get help and connect with other users.
+- [Multi-Tenancy](./multi-tenancy.md) - Understanding workspace and project isolation
+- [System Architecture](../architecture/index.md) - Detailed technical architecture
+- [API Reference](https://api.hexabase.ai/docs) - Complete API documentation

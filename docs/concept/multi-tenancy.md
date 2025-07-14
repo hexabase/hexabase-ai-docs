@@ -1,215 +1,202 @@
-# Multi-Tenancy
+# Multi-Tenancy in Hexabase.AI
 
 ## Overview
 
-HXB Platform provides enterprise-grade multi-tenancy capabilities that enable organizations to securely share infrastructure while maintaining strict isolation between different teams, projects, or customers.
+Hexabase.AI provides enterprise-grade multi-tenancy through a hierarchical structure built on K3s and vCluster technology. This architecture enables organizations to securely share infrastructure while maintaining strict isolation between different teams, projects, and environments.
 
-## Key Concepts
+## Hierarchical Structure
 
-### Tenant Isolation
+Hexabase.AI implements a three-tier multi-tenancy model:
 
-Each tenant operates within its own isolated environment with:
-
-- Dedicated namespaces
-- Resource quotas and limits
-- Network policies
-- Security boundaries
-- RBAC policies
-
-### Resource Management
-
-Multi-tenancy in HXB Platform includes:
-
-- **Resource Quotas**: Limit CPU, memory, and storage per tenant
-- **Priority Classes**: Ensure fair resource allocation
-- **Network Isolation**: Tenant-specific network policies
-- **Storage Isolation**: Dedicated persistent volumes per tenant
-
-## Architecture
-
-### Namespace-Based Isolation
-
-```yaml
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: tenant-production
-  labels:
-    tenant: production
-    environment: prod
+```
+Organization (Billing Entity)
+└── Workspaces (vCluster Isolation)
+    └── Projects (Namespace Isolation)
+        └── Applications & Resources
 ```
 
-### Resource Quotas
+### Organizations
 
-```yaml
-apiVersion: v1
-kind: ResourceQuota
-metadata:
-  name: tenant-quota
-spec:
-  hard:
-    requests.cpu: "100"
-    requests.memory: "200Gi"
-    persistentvolumeclaims: "10"
+- **Purpose**: Top-level billing and administrative boundary
+- **Scope**: Platform-wide entity managed by Hexabase.AI
+- **Users**: Organization administrators manage billing, user invitations, and workspace creation
+- **Isolation**: Complete separation between different organizations
+
+### Workspaces
+
+- **Purpose**: Isolated Kubernetes environments for teams or environments (dev/staging/prod)
+- **Technology**: Each workspace is a dedicated vCluster running on the host K3s cluster
+- **Benefits**: 
+  - Complete API server isolation
+  - Independent Kubernetes control plane
+  - Own RBAC system and resource quotas
+  - Optional dedicated nodes for premium plans
+- **Users**: Workspace members with kubectl access and OIDC authentication
+
+### Projects
+
+- **Purpose**: Application and resource isolation within a workspace
+- **Technology**: Kubernetes namespaces within the vCluster
+- **Benefits**:
+  - Resource quotas per project
+  - Network policies for isolation
+  - Project-specific RBAC roles
+  - Environment-specific configurations
+
+## RBAC Integration
+
+### Hexabase.AI RBAC + Kubernetes RBAC
+
+Hexabase.AI implements a dual-layer RBAC system:
+
+#### Platform Level (Hexabase.AI)
+- **Organization Users**: Platform-level access for billing and administration
+- **Workspace Members**: Technical users with access to specific workspaces
+- **Workspace Groups**: Hierarchical permission assignment units
+
+#### Workspace Level (Kubernetes/vCluster)
+- **ClusterRoles**: Workspace-wide permissions (e.g., `hexabase:workspace-admin`, `hexabase:workspace-viewer`)
+- **Roles**: Project-scoped permissions within namespaces
+- **OIDC Integration**: Hexabase.AI acts as OIDC provider for vClusters
+
+### Default RBAC Setup
+
+When a workspace is created:
+
+1. **Auto-create ClusterRoles**:
+   - `hexabase:workspace-admin` - Full workspace control
+   - `hexabase:workspace-viewer` - Read-only workspace access
+
+2. **Create Default Groups**:
+   - `WorkspaceMembers` → `WSAdmins` (administrators)
+   - `WorkspaceMembers` → `WSUsers` (regular users)
+
+3. **Assign Creator**: Workspace creator automatically added to `WSAdmins` group
+
+### Permission Flow
+
+```
+User Login → OIDC Token → Group Claims → vCluster RBAC → Project Access
 ```
 
-## Security Considerations
+- Users authenticate via external IdP (Google/GitHub)
+- Hexabase.AI adds group claims to OIDC tokens
+- vCluster validates tokens and applies Kubernetes RBAC
+- Users get appropriate access to projects/resources
 
-### RBAC Integration
+## Isolation Mechanisms
 
-Multi-tenancy leverages Kubernetes RBAC to:
+### vCluster Isolation (Workspace Level)
 
-- Define tenant-specific roles
-- Manage access permissions
-- Enforce security policies
-- Audit access and actions
+Each workspace provides complete isolation through:
 
-### Network Policies
+- **Dedicated API Server**: Independent Kubernetes API server per workspace
+- **Separate etcd**: Isolated data storage for each workspace
+- **Independent Controllers**: Workspace-specific controller managers
+- **Network Isolation**: vCluster networking prevents cross-workspace communication
+- **Resource Boundaries**: CPU, memory, and storage quotas per workspace
 
-```yaml
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
-metadata:
-  name: tenant-isolation
-spec:
-  podSelector:
-    matchLabels:
-      tenant: production
-  policyTypes:
-    - Ingress
-    - Egress
+### Namespace Isolation (Project Level)
+
+Within each workspace, projects are isolated via:
+
+- **Kubernetes Namespaces**: Standard namespace-based resource isolation
+- **Resource Quotas**: Per-project limits on compute and storage resources
+- **Network Policies**: Project-to-project communication controls
+- **RBAC Boundaries**: Project-specific roles and permissions
+
+## Workspace Management
+
+### Workspace Creation Flow
+
+1. **Organization Admin** creates workspace through Hexabase.AI UI
+2. **vCluster Provisioning**: New vCluster deployed on host K3s cluster
+3. **OIDC Configuration**: Workspace configured to trust Hexabase.AI as OIDC provider
+4. **Default Setup**: ClusterRoles and groups automatically created
+5. **User Assignment**: Workspace creator added to admin group
+
+### Workspace Plans
+
+- **Shared Plan**: Multiple workspaces share the same K3s nodes
+- **Dedicated Plan**: Workspace gets dedicated K3s nodes for guaranteed resources
+
+### Project Management
+
+Projects (namespaces) within workspaces can be managed via:
+- **Hexabase.AI UI**: Point-and-click project creation and management
+- **kubectl**: Direct Kubernetes CLI access with proper RBAC
+- **API**: Programmatic project management via Hexabase.AI API
+
+## User Workflows
+
+### Organization Admin Workflow
+
+1. **Create Organization**: Automatic on first signup with external IdP
+2. **Manage Billing**: Configure Stripe billing and subscription plans
+3. **Invite Users**: Send invitations to join organization
+4. **Create Workspaces**: Provision isolated environments for teams
+5. **Monitor Usage**: Track resource consumption and costs across workspaces
+
+### Workspace Member Workflow
+
+1. **Join Workspace**: Accept invitation from organization admin
+2. **Get Kubeconfig**: Download workspace-specific kubeconfig file
+3. **Create Projects**: Set up isolated environments for applications
+4. **Deploy Applications**: Use kubectl, Hexabase.AI UI, or CI/CD pipelines
+5. **Manage Access**: Add project-specific permissions for team members
+
+## Security Model
+
+### Authentication Flow
+
+```
+External IdP (Google/GitHub) → Hexabase.AI → vCluster OIDC → Kubernetes RBAC
 ```
 
-## Implementation Guide
+### Key Security Features
 
-### Setting Up a New Tenant
+- **External IdP Only**: No local passwords, all authentication via trusted providers
+- **vCluster Isolation**: Complete API server isolation prevents cross-workspace access
+- **OIDC Integration**: Workspace authentication handled by Hexabase.AI OIDC provider
+- **Network Policies**: Default deny-all policies with explicit allow rules
+- **Audit Logging**: Complete audit trail of all API operations
+- **Policy Enforcement**: Kyverno policies for security and compliance
 
-1. **Create Namespace**
+## Resource Management
 
-   ```bash
-   kubectl create namespace tenant-name
-   ```
+### Workspace-Level Quotas
 
-2. **Apply Resource Quotas**
+Each workspace can be configured with:
+- CPU and memory limits
+- Storage quotas
+- Network bandwidth limits
+- Number of allowed projects/namespaces
 
-   ```bash
-   kubectl apply -f tenant-quota.yaml
-   ```
+### Project-Level Quotas
 
-3. **Configure RBAC**
+Within each workspace, projects have:
+- Resource requests and limits
+- Object count limits (pods, services, etc.)
+- Storage class restrictions
+- Priority class assignments
 
-   ```bash
-   kubectl apply -f tenant-rbac.yaml
-   ```
+## Monitoring & Observability
 
-4. **Set Network Policies**
-   ```bash
-   kubectl apply -f tenant-network-policy.yaml
-   ```
+### Built-in Monitoring
 
-## Best Practices
+- **Prometheus**: Metrics collection per workspace and project
+- **Grafana**: Pre-built dashboards for workspace and project health
+- **Loki**: Centralized logging with workspace/project filtering
+- **AIOps**: AI-powered insights and recommendations per workspace
 
-### Tenant Onboarding
+### Cost Tracking
 
-- Automate tenant provisioning
-- Use templates for consistency
-- Implement approval workflows
-- Monitor resource usage
-
-### Resource Management
-
-- Set appropriate quotas
-- Monitor utilization
-- Implement auto-scaling
-- Regular capacity planning
-
-### Security
-
-- Regular security audits
-- Implement least privilege
-- Monitor for anomalies
-- Keep policies updated
-
-## Monitoring and Observability
-
-### Tenant Metrics
-
-Monitor key metrics per tenant:
-
-- Resource utilization
-- API request rates
-- Error rates
-- Performance metrics
-
-### Dashboards
-
-Create tenant-specific dashboards showing:
-
-- Resource consumption
-- Application health
-- Cost allocation
-- Compliance status
-
-## Cost Management
-
-### Resource Tracking
-
-- Track resource usage per tenant
-- Implement chargeback/showback
-- Generate usage reports
-- Optimize resource allocation
-
-### Cost Optimization
-
-- Right-size resource quotas
-- Implement resource policies
-- Use spot instances where appropriate
-- Regular cost reviews
-
-## Advanced Features
-
-### Dynamic Tenant Provisioning
-
-Automate tenant creation with:
-
-- GitOps workflows
-- API-driven provisioning
-- Self-service portals
-- Integration with identity providers
-
-### Cross-Tenant Communication
-
-When needed, enable controlled communication:
-
-- Service mesh integration
-- API gateways
-- Shared services
-- Audit trails
-
-## Troubleshooting
-
-### Common Issues
-
-1. **Resource Exhaustion**
-
-   - Check quota limits
-   - Review resource requests
-   - Optimize applications
-
-2. **Access Denied**
-
-   - Verify RBAC policies
-   - Check service accounts
-   - Review audit logs
-
-3. **Network Connectivity**
-   - Validate network policies
-   - Check DNS resolution
-   - Verify service discovery
+- **Per-workspace billing**: Resource usage tracked and billed separately
+- **Project-level costs**: Granular cost breakdown within workspaces
+- **Resource optimization**: AI-powered recommendations for cost reduction
 
 ## Related Topics
 
-- [Technology Stack](./technology-stack.md)
-- **RBAC**: Each workspace has its own Role-Based Access Control, allowing for fine-grained permissions. For more details, see the [Kubernetes RBAC Overview](../rbac/overview.md) and [Best Practices](../rbac/best-practices.md).
-- **Network Policies**: Network traffic is restricted between workspaces by default.
-- **Resource Quotas**: Each workspace has its own resource quotas, preventing one workspace from impacting another.
+- [Technology Stack](./technology-stack.md) - Core technologies powering multi-tenancy
+- [RBAC Overview](../rbac/overview.md) - Detailed RBAC implementation
+- [Architecture Overview](../architecture/index.md) - System architecture and design decisions

@@ -166,13 +166,13 @@ module.exports.handle = async (event) => {
 
 ```bash
 # Deploy from current directory
-hks function deploy hello-world \
+hb function deploy hello-world \
   --runtime python3.9 \
   --handler function.handle \
   --trigger http
 
 # Deploy from Git repository
-hks function deploy data-processor \
+hb function deploy data-processor \
   --git-url https://github.com/myorg/functions \
   --git-path processors/etl \
   --trigger cron --schedule "0 * * * *"
@@ -186,14 +186,14 @@ curl https://api.hexabase.ai/functions/hello-world \
   -d '{"name": "Alice"}'
 
 # Direct invocation
-hks function invoke data-processor \
+hb function invoke data-processor \
   --data '{"file": "s3://bucket/data.csv"}'
 ```
 
 ### View Function Logs
 
 ```bash
-hks function logs hello-world --follow
+hb function logs hello-world --follow
 ```
 
 ## Best Practices
@@ -237,6 +237,6 @@ Use secrets management for sensitive data
 ## Related Documentation
 
 - [CronJobs](../cronjobs/index.md) for scheduled batch jobs
-- [API Reference](../api/function-api.md) for function API
+- [API Reference](https://api.hexabase.ai/docs#functions) for function API
 - [Observability](../observability/index.md) for monitoring
 - [Security Best Practices](../security/index.md)

@@ -44,10 +44,10 @@ spec:
 
 ```bash
 # Create a service account
-hks create service-account cicd-agent --description "For CI/CD pipeline"
+hb create service-account cicd-agent --description "For CI/CD pipeline"
 
 # Create an API key (JWT) for the service account
-hks create api-key --service-account cicd-agent --duration 24h
+hb create api-key --service-account cicd-agent --duration 24h
 ```
 
 The output of this command is a JWT that can be used as a Bearer token in API requests.

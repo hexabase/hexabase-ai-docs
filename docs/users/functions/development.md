@@ -752,4 +752,4 @@ exports.getHeavyModule = () => {
 - [Function Deployment](deployment.md)
 - [Function Runtime](runtime.md)
 - [AI Agent Functions](ai-agent-functions.md)
-- [SDK Documentation](../../sdk/javascript.md)
+- [CLI Documentation](https://github.com/hexabase/cli/blob/main/README.md)

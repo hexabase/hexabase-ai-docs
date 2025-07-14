@@ -89,7 +89,7 @@ graph TD
 
 ## Data Flow Example: Secure API Request
 
-1.  A developer runs `hks get pods -w my-prod-space`.
+1.  A developer runs `hb get pods -w my-prod-space`.
 2.  The HKS CLI, using its OIDC token, establishes an mTLS connection to the **API Gateway**.
 3.  The Gateway validates the token with the **AuthN/AuthZ Service**.
 4.  The AuthZ service checks its policy store and confirms the user has `get pod` permissions for `my-prod-space`.

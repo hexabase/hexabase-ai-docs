@@ -480,13 +480,13 @@ Monitor key metrics:
 
 ```bash
 # Check load balancer status
-hks lb status myapp-service
+hb lb status myapp-service
 
 # View backend health
-hks lb backends myapp-service
+hb lb backends myapp-service
 
 # Monitor traffic distribution
-hks lb traffic myapp-service --watch
+hb lb traffic myapp-service --watch
 ```
 
 ## Troubleshooting
@@ -497,10 +497,10 @@ hks lb traffic myapp-service --watch
 
    ```bash
    # Check pod distribution
-   hks get pods -o wide
+   hb get pods -o wide
 
    # Verify service endpoints
-   hks get endpoints myapp-service
+   hb get endpoints myapp-service
    ```
 
 2. **Session Affinity Not Working**
@@ -516,10 +516,10 @@ hks lb traffic myapp-service --watch
 
    ```bash
    # Check health endpoint
-   hks exec -it myapp-pod -- curl localhost:8080/health
+   hb exec -it myapp-pod -- curl localhost:8080/health
 
    # View ingress controller logs
-   hks logs -n ingress-nginx deployment/ingress-nginx-controller
+   hb logs -n ingress-nginx deployment/ingress-nginx-controller
    ```
 
 ## Best Practices

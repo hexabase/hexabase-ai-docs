@@ -19,7 +19,7 @@ An Org Admin can enable a Compliance Pack for a specific workspace.
 
 ```bash
 # Enable the HIPAA compliance pack for the 'healthcare-data' workspace
-hks workspace configure healthcare-data --compliance-pack hipaa
+hb workspace configure healthcare-data --compliance-pack hipaa
 ```
 
 When a pack is enabled, HKS automatically:
@@ -68,7 +68,7 @@ Enterprise Plan users have access to long-term, immutable audit logs.
 
 ```bash
 # Query audit logs for a specific workspace and time range
-hks audit-logs query \
+hb audit-logs query \
   --workspace sensitive-data \
   --start-time "2025-06-01T00:00:00Z" \
   --end-time "2025-06-15T00:00:00Z" \
@@ -126,14 +126,14 @@ You can view vulnerability reports for your running applications at any time.
 
 ```bash
 # Get a vulnerability report for a deployment
-hks get vulnerabilities --deployment myapp-deployment
+hb get vulnerabilities --deployment myapp-deployment
 ```
 
 ## Best Practices for Maintaining Compliance
 
 1.  **Engage Your Security Team**: Work with your organization's security and compliance teams to map regulatory requirements to HKS features.
 2.  **Use Compliance Packs**: If you are on the Enterprise Plan, leverage Compliance Packs to automate the enforcement of baseline controls.
-3.  **Automate Evidence Gathering**: Use the `hks audit-logs` CLI and SIEM integration to automate the collection of evidence required for audits.
+3.  **Automate Evidence Gathering**: Use the `hb audit-logs` CLI and SIEM integration to automate the collection of evidence required for audits.
 4.  **Least Privilege**: Apply the principle of least privilege not just to users, but to all resources. Use strict network policies and pod security standards.
 5.  **Stay Updated**: Regularly review and apply updates to your applications and the HKS platform to patch vulnerabilities.
 6.  **Documentation**: Keep internal documentation that maps each compliance requirement to the specific control or policy you have implemented in Hexabase.AI.

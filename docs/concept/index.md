@@ -32,7 +32,7 @@ Hexabase.AI is built on several key concepts that work together to provide a pow
 
   Deployable units that contain your applications and configurations
 
-  [:octicons-arrow-right-24: Learn about Projects](core-concepts.md)
+  [:octicons-arrow-right-24: Learn about Projects](multi-tenancy.md)
 
 - :material-kubernetes:{ .lg .middle } **Clusters**
 
@@ -43,6 +43,20 @@ Hexabase.AI is built on several key concepts that work together to provide a pow
   [:octicons-arrow-right-24: Learn about Clusters](technology-stack.md)
 
 </div>
+
+## Hexabase.AI Concept Mapping
+
+Understanding how Hexabase.AI concepts map to Kubernetes is essential for users and administrators:
+
+| Hexabase Concept      | Kubernetes Equivalent | Scope     | Description                               |
+| --------------------- | --------------------- | --------- | ----------------------------------------- |
+| **Organization**      | N/A                   | Platform  | Billing and user management unit          |
+| **Workspace**         | vCluster              | Host K3s  | Isolated Kubernetes environment           |
+| **Workspace Plan**    | ResourceQuota/Nodes   | vCluster  | Resource limits and node allocation       |
+| **Organization User** | N/A                   | Platform  | Billing/admin personnel                   |
+| **Workspace Member**  | OIDC Subject          | vCluster  | Technical users with kubectl access       |
+| **Workspace Group**   | OIDC Claim            | vCluster  | Permission assignment unit (hierarchical) |
+| **Project**           | Namespace             | vCluster  | Resource isolation within workspace       |
 
 ## Multi-tenancy Model
 
@@ -86,11 +100,11 @@ This structure provides:
 
 - **New to Hexabase.AI?** Start with [Organizations](multi-tenancy.md) to understand the top-level structure
 - **Setting up a team?** Learn about [Workspaces](multi-tenancy.md) and how to organize your environments
-- **Ready to deploy?** Understand [Projects](core-concepts.md) and how to package your applications
+- **Ready to deploy?** Understand Projects and how to package your applications
 - **Managing infrastructure?** Explore [Clusters](technology-stack.md) and their capabilities
 
 ## Related Documentation
 
 - [Overview](overview.md)
 - [Architecture Overview](../architecture/index.md)
-- [API Reference](../api/index.md)
+- [API Reference](https://api.hexabase.ai/docs)

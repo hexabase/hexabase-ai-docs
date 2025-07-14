@@ -17,8 +17,8 @@ The primary interface for developers is a dedicated CLI tool:
 
 **Sample Workflow**:
 ```bash
-$ hks login
-$ hks project select my-serverless-project
+$ hb login
+$ hb project select my-serverless-project
 $ hks-func create -l node my-function
 # ... edit function code ...
 $ hks-func deploy

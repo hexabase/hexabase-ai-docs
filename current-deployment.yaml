@@ -1,0 +1,117 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "6"
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"labels":{"app":"hexabase-docs","component":"documentation","environment":"production","version":"v1.0.0"},"name":"hexabase-docs","namespace":"hexabase-ai"},"spec":{"replicas":5,"selector":{"matchLabels":{"app":"hexabase-docs","environment":"production","version":"v1.0.0"}},"template":{"metadata":{"labels":{"app":"hexabase-docs","component":"documentation","environment":"production","version":"v1.0.0"}},"spec":{"containers":[{"env":[{"name":"ENVIRONMENT","value":"production"},{"name":"NGINX_PORT","value":"80"}],"image":"nginx:alpine","imagePullPolicy":"IfNotPresent","livenessProbe":{"httpGet":{"path":"/","port":80},"initialDelaySeconds":10,"periodSeconds":30},"name":"docs","ports":[{"containerPort":80,"name":"http"}],"readinessProbe":{"httpGet":{"path":"/","port":80},"initialDelaySeconds":5,"periodSeconds":10},"resources":{"limits":{"cpu":"1000m","memory":"512Mi"},"requests":{"cpu":"200m","memory":"128Mi"}},"volumeMounts":[{"mountPath":"/usr/share/nginx/html","name":"docs-content"}]}],"volumes":[{"configMap":{"name":"hexabase-docs-content"},"name":"docs-content"}]}}}}
+  creationTimestamp: "2025-07-01T06:57:46Z"
+  generation: 10
+  labels:
+    app: hexabase-docs
+    component: documentation
+    environment: production
+    version: v1.0.0
+  name: hexabase-docs
+  namespace: hexabase-ai
+  resourceVersion: "1576845"
+  uid: fddb8be7-80b6-4875-b679-8ade015ed65c
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 2
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: hexabase-docs
+      environment: production
+      version: v1.0.0
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        kubectl.kubernetes.io/restartedAt: "2025-07-06T22:16:03+09:00"
+      creationTimestamp: null
+      labels:
+        app: hexabase-docs
+        component: documentation
+        environment: production
+        version: v1.0.0
+    spec:
+      containers:
+      - env:
+        - name: ENVIRONMENT
+          value: production
+        - name: NGINX_PORT
+          value: "80"
+        image: nginx:alpine
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /
+            port: 80
+            scheme: HTTP
+          initialDelaySeconds: 10
+          periodSeconds: 30
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: docs
+        ports:
+        - containerPort: 80
+          name: http
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /
+            port: 80
+            scheme: HTTP
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        resources:
+          limits:
+            cpu: "1"
+            memory: 512Mi
+          requests:
+            cpu: 200m
+            memory: 128Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /usr/share/nginx/html
+          name: docs-content
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - configMap:
+          defaultMode: 420
+          name: hexabase-docs-content
+        name: docs-content
+status:
+  availableReplicas: 2
+  conditions:
+  - lastTransitionTime: "2025-07-01T07:32:24Z"
+    lastUpdateTime: "2025-07-01T07:32:24Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  - lastTransitionTime: "2025-07-01T07:31:54Z"
+    lastUpdateTime: "2025-07-06T13:25:56Z"
+    message: ReplicaSet "hexabase-docs-56b6dcd757" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    status: "True"
+    type: Progressing
+  observedGeneration: 10
+  readyReplicas: 2
+  replicas: 2
+  updatedReplicas: 2
